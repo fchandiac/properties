@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 
 export default function UserAppHeader() {
   return (
-    <AppBar position="static">
+    <AppBar position="fixed"> {/* Cambié 'static' a 'fixed' */}
       <Toolbar>
         {/* Logo como fondo */}
         <Box
@@ -37,9 +37,6 @@ export default function UserAppHeader() {
             <MenuIcon />
           </IconButton>
         </Box>
-
-
-
       </Toolbar>
     </AppBar>
   );
