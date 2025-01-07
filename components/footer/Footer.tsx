@@ -10,7 +10,6 @@ export default function Footer() {
       component="footer"
       sx={{
         backgroundColor: 'white',
-
         position: 'fixed', // Hace que el footer sea flotante
         bottom: 0, // Se coloca siempre en la parte inferior
         left: 0,
@@ -21,12 +20,12 @@ export default function Footer() {
     >
 
       {/* Íconos de redes sociales */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, marginTop: '5px' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, marginTop: '5px', marginBottom: '5px' }}>
         <IconButton
           aria-label="Facebook"
           href="https://www.facebook.com"
           target="_blank"
-          sx={{ color: '#1D1D1D', '&:hover': { color: '#4267B2' } }}
+          sx={{ color: '#212121', '&:hover': { color: '#4267B2' } }}
         >
           <FacebookIcon />
         </IconButton>
@@ -34,7 +33,7 @@ export default function Footer() {
           aria-label="Instagram"
           href="https://www.instagram.com"
           target="_blank"
-          sx={{ color: '##1D1D1D', '&:hover': { color: '#E1306C' } }}
+          sx={{ color: '#212121', '&:hover': { color: '#E1306C' } }}
         >
           <InstagramIcon />
         </IconButton>
@@ -42,7 +41,7 @@ export default function Footer() {
           aria-label="WhatsApp"
           href="https://wa.me/123456789"
           target="_blank"
-          sx={{ color: '##1D1D1D', '&:hover': { color: '#25D366' } }}
+          sx={{ color: '#212121', '&:hover': { color: '#25D366' } }}
         >
           <WhatsAppIcon />
         </IconButton>

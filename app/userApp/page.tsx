@@ -9,30 +9,15 @@ export default function UserPage() {
       {/* Slider */}
       <SliderImages images={imagesList} />
       {/* Navbar */}
-      <nav style={styles.navbar}>
+      <Box sx={styles.navbar}>
         <ul style={styles.navList}>
-          <li style={styles.navItem}>
-            <a href="#home" style={styles.navLink}>
-              Blog
-            </a>
-          </li>
-          <li style={styles.navItem}>
-            <a href="#about" style={styles.navLink}>
-              Vender
-            </a>
-          </li>
-          <li style={styles.navItem}>
-            <a href="#services" style={styles.navLink}>
-              Arrendar
-            </a>
-          </li>
-          <li style={styles.navItem}>
-            <a href="#contact" style={styles.navLink}>
-              Propiedades
-            </a>
-          </li>
+          <li style={styles.navItem}>HOME</li>
+          <li style={styles.navItem}>BLOG</li>
+          <li style={styles.navItem}>VENDER</li>
+          <li style={styles.navItem}>COMPRAR</li>
+          <li style={styles.navItem}>PROPIEDADES</li>
         </ul>
-      </nav>
+      </Box>
 
       <Container>
         <Grid direction={"row"} container spacing={2} mt={2}>
@@ -68,9 +53,10 @@ const styles: { [key: string]: CSSProperties } = {
     backgroundColor: "white",
     padding: "10px 20px",
     position: "sticky",
-    top: 60,
+    top: 34,
     zIndex: 1000,
-    boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.2)",
+  
   },
   navList: {
     display: "flex",
@@ -78,19 +64,14 @@ const styles: { [key: string]: CSSProperties } = {
     margin: 0,
     padding: 0,
     justifyContent: "center",
+
   },
   navItem: {
     margin: "0 15px",
+    color: "#212121",
   },
-  navLink: {
-    color: "#1D1D1D",
-    textDecoration: "none",
-    fontSize: "15px",
-    transition: "color 0.3s",
-  },
-  navLinkHover: {
-    color: "#00BFFF",
-  },
+
+
 };
 
 const imagesList = [

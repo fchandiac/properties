@@ -79,7 +79,9 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
           {/* Property Details */}
 
           <Box display="flex" justifyContent={"space-between"}>
-            <BathtubIcon />
+            <BathtubIcon 
+            fontSize="inherit"
+            />
 
             <Typography
               fontSize={12}
@@ -92,7 +94,7 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
           </Box>
 
           <Box display="flex" justifyContent={"space-between"}>
-            <KingBedIcon />
+            <KingBedIcon fontSize="inherit"/>
 
             <Typography
               fontSize={12}
@@ -105,7 +107,7 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
           </Box>
 
           <Box display="flex" justifyContent={"space-between"}>
-            <HomeIcon />
+            <HomeIcon fontSize="inherit"/>
 
             <Typography
               fontSize={12}
@@ -118,7 +120,7 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
           </Box>
 
           <Box display="flex" justifyContent={"space-between"}>
-            <TerrainIcon />
+            <TerrainIcon fontSize="inherit"/>
 
             <Typography
               fontSize={12}
@@ -131,7 +133,7 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
           </Box>
 
           <Box display="flex" justifyContent={"space-between"}>
-            <GarageIcon />
+            <GarageIcon fontSize="inherit"/>
 
             <Typography
               fontSize={12}
