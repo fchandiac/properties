@@ -1,53 +1,93 @@
-import SliderImages from '@/components/slider/SliderImages'
-import React from 'react'
-
-const imagesList = [
-  {
-    imageUrl: "https://via.placeholder.com/600x300/87CEEB/FFFFFF?text=Mountain+Landscape",
-    linkUrl: "https://example.com/mountain"
-  },
-  {
-    imageUrl: "https://placehold.co/600x400/FF6347/FFFFFF?text=Flower+Field",
-    linkUrl: "https://example.com/flower-field"
-  },
-  {
-    imageUrl: "https://via.placeholder.com/600x300/00BFFF/FFFFFF?text=Beach+Sunset",
-    linkUrl: "https://example.com/beach"
-  },
-  {
-    imageUrl: "https://via.placeholder.com/600x300/228B22/FFFFFF?text=Forest+Landscape",
-    linkUrl: "https://example.com/forest"
-  },
-  {
-    imageUrl: "https://via.placeholder.com/600x300/FFD700/FFFFFF?text=Desert+Landscape",
-    linkUrl: "https://example.com/desert"
-  },
-  {
-    imageUrl: "https://via.placeholder.com/600x300/800080/FFFFFF?text=Lavender+Field",
-    linkUrl: "https://example.com/lavender"
-  },
-  {
-    imageUrl: "https://via.placeholder.com/600x300/FF4500/FFFFFF?text=Volcanic+Region",
-    linkUrl: "https://example.com/volcanic"
-  },
-  {
-    imageUrl: "https://via.placeholder.com/600x300/32CD32/FFFFFF?text=Tropical+Rainforest",
-    linkUrl: "https://example.com/rainforest"
-  },
-  {
-    imageUrl: "https://via.placeholder.com/600x300/DAA520/FFFFFF?text=Golden+Fields",
-    linkUrl: "https://example.com/golden-fields"
-  },
-  {
-    imageUrl: "https://via.placeholder.com/600x300/FF1493/FFFFFF?text=Pink+Lagoon",
-    linkUrl: "https://example.com/pink-lagoon"
-  }
-];
+import PropertyUserCard from '@/components/property/PropertyUserCard';
+import SliderImages from '@/components/slider/SliderImages';
+import { Box } from '@mui/material';
+import React from 'react';
 
 
 
 export default function UserPage() {
   return (
-   <SliderImages images={imagesList} />
-  )
+    <div>
+
+      {/* Slider */}
+      <SliderImages images={imagesList} />
+       {/* Navbar */}
+       <nav style={styles.navbar}>
+        <ul style={styles.navList}>
+          <li style={styles.navItem}><a href="#home" style={styles.navLink}>Blog</a></li>
+          <li style={styles.navItem}><a href="#about" style={styles.navLink}>Vender</a></li>
+          <li style={styles.navItem}><a href="#services" style={styles.navLink}>Arrendar</a></li>
+          <li style={styles.navItem}><a href="#contact" style={styles.navLink}>Propiedades</a></li>
+        </ul>
+      </nav>
+      <Box
+        sx={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 1
+        }}
+      >
+      <PropertyUserCard  />
+      <PropertyUserCard  />
+      <PropertyUserCard  />
+      <PropertyUserCard  />
+      </Box>
+    </div>
+  );
 }
+
+// Estilos en línea
+import { CSSProperties } from 'react';
+
+const styles: { [key: string]: CSSProperties } = {
+  navbar: {
+    backgroundColor: 'white',
+    padding: '10px 20px',
+    position: 'sticky',
+    top: 0,
+    zIndex: 1000
+  },
+  navList: {
+    display: 'flex',
+    listStyle: 'none',
+    margin: 0,
+    padding: 0,
+    justifyContent: 'center',
+  },
+  navItem: {
+    margin: '0 15px',
+  },
+  navLink: {
+    color: '#1D1D1D',
+    textDecoration: 'none',
+    fontSize: '15px',
+    transition: 'color 0.3s',
+  },
+  navLinkHover: {
+    color: '#00BFFF',
+  }
+};
+
+
+const imagesList = [
+  {
+    imageUrl: "https://www.vinasconstructora.com/wp-content/uploads/2024/06/casa-modernas-minimalistas.jpg",
+    linkUrl: "https://example.com/mountain"
+  },
+  {
+    imageUrl: "https://panelyacanalados.com/wp-content/uploads/2021/10/casa-de-arquitectura-moderna.jpg",
+    linkUrl: "https://example.com/flower-field"
+  },
+  {
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4mu_Qr9zzVQd3_G61rJmYfUFUDNWbGmWbUA&s",
+    linkUrl: "https://example.com/beach"
+  },
+  {
+    imageUrl: "https://quees.mobi/wp-content/uploads/2021/06/arquitectura-moderna.jpg",
+    linkUrl: "https://example.com/forest"
+  },
+  {
+    imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi9q4VfaMlU525iSyBZmEyFx9pAubnuoetxGQhvDcUKf6jv3m5LIUOFF6wGeyPrSUldoA4cMW99NzZ1iTb23aNK-fvjhGZA8LO8PhzsFgeEhBmK55eEQQfoccFmE5x87uF4oR6Q8WeC8EI/s1600/1297697521-davemendelsohn.jpg",
+    linkUrl: "https://example.com/lavender"
+  }
+];
