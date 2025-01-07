@@ -14,6 +14,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import BathtubIcon from "@mui/icons-material/Bathtub";
 import KingBedIcon from "@mui/icons-material/KingBed";
 import GarageIcon from "@mui/icons-material/Garage";
+import HomeIcon from "@mui/icons-material/Home";
 
 interface PropertyUserCardProps {
   type?: 0 | 1; // Property type
@@ -104,14 +105,18 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
             </Typography>
           </Box>
 
-          <Typography
-            fontSize={12}
-            sx={{
-              marginLeft: 1,
-            }}
-          >
-            {builtArea} m²
-          </Typography>
+          <Box display="flex" justifyContent={"space-between"}>
+            <HomeIcon />
+
+            <Typography
+              fontSize={12}
+              sx={{
+                marginLeft: 1,
+              }}
+            >
+              {builtArea} m²
+            </Typography>
+          </Box>
 
           <Typography
             fontSize={12}

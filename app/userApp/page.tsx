@@ -67,8 +67,11 @@ const styles: { [key: string]: CSSProperties } = {
     backgroundColor: "white",
     padding: "10px 20px",
     position: "sticky",
-    top: 0,
+    top: 60,
     zIndex: 1000,
+    boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
+  
+
   },
   navList: {
     display: "flex",
