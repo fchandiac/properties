@@ -15,6 +15,7 @@ import BathtubIcon from "@mui/icons-material/Bathtub";
 import KingBedIcon from "@mui/icons-material/KingBed";
 import GarageIcon from "@mui/icons-material/Garage";
 import HomeIcon from "@mui/icons-material/Home";
+import TerrainIcon from "@mui/icons-material/Terrain";
 
 interface PropertyUserCardProps {
   type?: 0 | 1; // Property type
@@ -56,7 +57,6 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
         borderRadius: "10px",
         overflow: "hidden",
         boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
-        maxWidth: 400,
         margin: "auto",
         backgroundColor: "white",
         mb: 2,
@@ -66,7 +66,6 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
       <Box
         component="img"
         src={image}
-        alt={category}
         sx={{
           width: "100%",
           height: 200,
@@ -76,7 +75,7 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
 
       {/* Details Section */}
       <Box p={2}>
-        <Box display="flex" justifyContent={"space-between"}>
+        <Box display="flex" justifyContent={"space-between"} color={"#9e9e9e"}>
           {/* Property Details */}
 
           <Box display="flex" justifyContent={"space-between"}>
@@ -118,14 +117,18 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
             </Typography>
           </Box>
 
-          <Typography
-            fontSize={12}
-            sx={{
-              marginLeft: 1,
-            }}
-          >
-            {landArea} m²
-          </Typography>
+          <Box display="flex" justifyContent={"space-between"}>
+            <TerrainIcon />
+
+            <Typography
+              fontSize={12}
+              sx={{
+                marginLeft: 1,
+              }}
+            >
+              {landArea} m²
+            </Typography>
+          </Box>
 
           <Box display="flex" justifyContent={"space-between"}>
             <GarageIcon />
@@ -146,7 +149,13 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
         </Box>
 
         {/* Price Section */}
-        <Typography variant="h6" fontWeight="bold" mt={1} textAlign="center">
+        <Typography
+          fontSize={20}
+          fontWeight="bold"
+          mt={1}
+          textAlign="center"
+          color="#212121"
+        >
           {"(UF"} {uf} {")"}
           {price.toLocaleString("es-Cl", {
             currency: "CLP",
@@ -160,30 +169,24 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
         </Typography>
 
         {/* Buttons Section */}
-        <Stack direction="row" spacing={2} justifyContent="center">
+        <Box display="flex" justifyContent="center" mt={2}>
           {googleMapLink && (
             <IconButton>
-              <a href={googleMapLink} target="_blank">
-                <LocationOnIcon />
-              </a>
+              <LocationOnIcon />
             </IconButton>
           )}
 
           {youtubeLink && (
             <IconButton>
-              <a href={youtubeLink} target="_blank">
-                <YouTubeIcon />
-              </a>
+              <YouTubeIcon />
             </IconButton>
           )}
           {ticToLink && (
             <IconButton>
-              <a href={ticToLink} target="_blank">
-                <InstagramIcon />
-              </a>
+              <InstagramIcon />
             </IconButton>
           )}
-        </Stack>
+        </Box>
       </Box>
     </Box>
   );

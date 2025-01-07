@@ -24,9 +24,9 @@ export default function UserAppHeader() {
 
         {/* Título o nombre de la app */}
         <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-          <Typography variant="h6" sx={{ marginRight: 2 }}>
+          {/* <Typography  sx={{ marginRight: 2 }}>
             UserApp
-          </Typography>
+          </Typography> */}
 
           {/* Icono de menú alineado a la derecha */}
           <IconButton

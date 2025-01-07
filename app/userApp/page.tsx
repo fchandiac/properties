@@ -1,6 +1,6 @@
 import PropertyUserCard from "@/components/property/PropertyUserCard";
 import SliderImages from "@/components/slider/SliderImages";
-import { Box, Grid } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import React from "react";
 
 export default function UserPage() {
@@ -33,7 +33,8 @@ export default function UserPage() {
           </li>
         </ul>
       </nav>
-    
+
+      <Container>
         <Grid direction={"row"} container spacing={2} mt={2}>
           <Grid item xs={12} sm={6} md={4}>
             <PropertyUserCard />
@@ -54,7 +55,7 @@ export default function UserPage() {
             <PropertyUserCard />
           </Grid>
         </Grid>
-
+      </Container>
     </div>
   );
 }
@@ -70,8 +71,6 @@ const styles: { [key: string]: CSSProperties } = {
     top: 60,
     zIndex: 1000,
     boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
-  
-
   },
   navList: {
     display: "flex",
