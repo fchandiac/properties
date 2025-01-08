@@ -27,9 +27,27 @@ const Navbar = () => {
             <div style={styles.activeIndicator}></div>
           )}
         </li>
-        <li style={styles.navItem}>VENDER</li>
-        <li style={styles.navItem}>ARRENDAR</li>
-        <li style={styles.navItem}>PROPIEDADES</li>
+        <li style={styles.navItem} onClick={() => router.push("/userApp/sell")}>
+          VENDER
+          {pathname === "/userApp/sell" && (
+            <div style={styles.activeIndicator}></div>
+          )}
+        </li>
+        <li style={styles.navItem} onClick={() => router.push("/userApp/rent")}>
+          ARRENDAR
+          {pathname === "/userApp/rent" && (
+            <div style={styles.activeIndicator}></div>
+          )}
+        </li>
+        <li
+          style={styles.navItem}
+          onClick={() => router.push("/userApp/properties")}
+        >
+          PROPIEDADES
+          {pathname === "/userApp/properties" && (
+            <div style={styles.activeIndicator}></div>
+          )}
+        </li>
       </ul>
     </Box>
   );
@@ -68,7 +86,7 @@ const styles: { [key: string]: CSSProperties } = {
     bottom: -10,
     left: "50%",
     transform: "translateX(-50%)",
-    width: '100%',
+    width: "100%",
     height: 5,
     background: "linear-gradient( #F2E1A1, #DBBD75, #C9A65E)",
   },
