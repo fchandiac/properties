@@ -36,6 +36,7 @@ const SliderImages: React.FC<SliderImagesProps> = ({ images }) => {
   }, [activeStep]); // Se ejecuta cuando activeStep cambia
 
   return (
+    
     <Box
       sx={{
         position: "relative",

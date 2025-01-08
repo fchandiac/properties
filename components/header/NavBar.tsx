@@ -44,7 +44,7 @@ const Navbar = () => {
           onClick={() => router.push("/userApp/properties")}
         >
           PROPIEDADES
-          {pathname === "/userApp/properties" && (
+          {pathname.startsWith("/userApp/properties") && (
             <div style={styles.activeIndicator}></div>
           )}
         </li>

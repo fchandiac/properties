@@ -1,3 +1,4 @@
+'use client';
 import React from "react";
 import {
   Box,
@@ -16,6 +17,7 @@ import KingBedIcon from "@mui/icons-material/KingBed";
 import GarageIcon from "@mui/icons-material/Garage";
 import HomeIcon from "@mui/icons-material/Home";
 import TerrainIcon from "@mui/icons-material/Terrain";
+import { useRouter } from "next/navigation";
 
 interface PropertyUserCardProps {
   type?: 0 | 1; // Property type
@@ -50,6 +52,7 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
   youtubeLink = "https://www.youtube.com",
   ticToLink = "https://www.tiktok.com",
 }) => {
+    const router = useRouter();
   return (
     <Box
       sx={{
@@ -237,6 +240,9 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
                   backgroundColor: "#DBBD75",
                 },
               }}
+              onClick={() => {
+                router.push("/userApp/properties/property");
+                }}
             >
               Más info
             </Box>
