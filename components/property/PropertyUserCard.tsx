@@ -158,7 +158,7 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
           textAlign="center"
           color="#212121"
         >
-          {"(UF"} {uf} {")"}
+          {"(UF"} {uf.toLocaleString("es-CL")} {") "}
           {price.toLocaleString("es-Cl", {
             currency: "CLP",
             style: "currency",
