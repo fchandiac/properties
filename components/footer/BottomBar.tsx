@@ -16,6 +16,7 @@ export default function BottomBar() {
         width: '100%', // Ocupa todo el ancho de la pantalla
         zIndex: 1000, // Se asegura de estar por encima de otros elementos
         textAlign: 'center',
+        boxShadow: "0px -3px 4px rgba(0,0,0,0.1)",
       }}
     >
 

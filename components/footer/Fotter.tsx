@@ -15,7 +15,6 @@ export default function Footer() {
         paddingX: { xs: 2, sm: 4, md: 6, lg: 8 },
         paddingTop: 4,
         paddingBottom: 20,
-        textAlign: "center",
         marginTop: 15,
       }}
     >
@@ -26,8 +25,8 @@ export default function Footer() {
       <Stack
         spacing={2}
         direction="column"
-        alignItems="center"
-        sx={{ maxWidth: 400, margin: "0 auto" }}
+        alignItems="right"
+ 
       >
         {/* Phone */}
         <Stack direction="row" spacing={1} alignItems="center">

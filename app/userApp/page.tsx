@@ -7,19 +7,6 @@ import React from "react";
 export default function UserPage() {
   return (
     <div>
-      {/* Slider */}
-      <SliderImages images={imagesList} />
-      {/* Navbar */}
-      <Box sx={styles.navbar}>
-        <ul style={styles.navList}>
-          <li style={styles.navItem}>HOME</li>
-          <li style={styles.navItem}>BLOG</li>
-          <li style={styles.navItem}>VENDER</li>
-          <li style={styles.navItem}>COMPRAR</li>
-          <li style={styles.navItem}>PROPIEDADES</li>
-        </ul>
-      </Box>
-
       <Container>
         <Grid direction={"row"} container spacing={2} mt={2}>
           <Grid item xs={12} sm={6} md={4}>
@@ -92,30 +79,4 @@ const styles: { [key: string]: CSSProperties } = {
   },
 };
 
-const imagesList = [
-  {
-    imageUrl:
-      "https://www.vinasconstructora.com/wp-content/uploads/2024/06/casa-modernas-minimalistas.jpg",
-    linkUrl: "https://example.com/mountain",
-  },
-  {
-    imageUrl:
-      "https://panelyacanalados.com/wp-content/uploads/2021/10/casa-de-arquitectura-moderna.jpg",
-    linkUrl: "https://example.com/flower-field",
-  },
-  {
-    imageUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4mu_Qr9zzVQd3_G61rJmYfUFUDNWbGmWbUA&s",
-    linkUrl: "https://example.com/beach",
-  },
-  {
-    imageUrl:
-      "https://quees.mobi/wp-content/uploads/2021/06/arquitectura-moderna.jpg",
-    linkUrl: "https://example.com/forest",
-  },
-  {
-    imageUrl:
-      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi9q4VfaMlU525iSyBZmEyFx9pAubnuoetxGQhvDcUKf6jv3m5LIUOFF6wGeyPrSUldoA4cMW99NzZ1iTb23aNK-fvjhGZA8LO8PhzsFgeEhBmK55eEQQfoccFmE5x87uF4oR6Q8WeC8EI/s1600/1297697521-davemendelsohn.jpg",
-    linkUrl: "https://example.com/lavender",
-  },
-];
+

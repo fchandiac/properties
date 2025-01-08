@@ -39,7 +39,7 @@ const SliderImages: React.FC<SliderImagesProps> = ({ images }) => {
     <Box
       sx={{
         position: "relative",
-        height: { xs: 280, sm: 400, md: 580 }, // Altura variable según el tamaño de la pantalla
+        height: { xs: 280, sm: 400, md: 500 }, // Altura variable según el tamaño de la pantalla
         backgroundImage: `url(${images[activeStep].imageUrl})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
