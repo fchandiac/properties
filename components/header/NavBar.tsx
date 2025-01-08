@@ -20,7 +20,7 @@ const Navbar = () => {
           BLOG
         </li>
         <li style={styles.navItem}>VENDER</li>
-        <li style={styles.navItem}>COMPRAR</li>
+        <li style={styles.navItem}>ARRENDAR</li>
         <li style={styles.navItem}>PROPIEDADES</li>
       </ul>
     </Box>

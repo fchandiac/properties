@@ -41,12 +41,12 @@ const imagesList = [
   },
   {
     imageUrl:
-      "https://panelyacanalados.com/wp-content/uploads/2021/10/casa-de-arquitectura-moderna.jpg",
+      "https://soyarquitectura.mx/wp-content/uploads/2024/06/portada-despacho-arquitectos-render-14.webp",
     linkUrl: "https://example.com/flower-field",
   },
   {
     imageUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4mu_Qr9zzVQd3_G61rJmYfUFUDNWbGmWbUA&s",
+      "https://img.freepik.com/fotos-premium/casa-moderna-grandes-ventanales-e-iluminacion-natural-ia-generativa_410516-70480.jpg",
     linkUrl: "https://example.com/beach",
   },
   {
@@ -56,7 +56,7 @@ const imagesList = [
   },
   {
     imageUrl:
-      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi9q4VfaMlU525iSyBZmEyFx9pAubnuoetxGQhvDcUKf6jv3m5LIUOFF6wGeyPrSUldoA4cMW99NzZ1iTb23aNK-fvjhGZA8LO8PhzsFgeEhBmK55eEQQfoccFmE5x87uF4oR6Q8WeC8EI/s1600/1297697521-davemendelsohn.jpg",
+      "https://img.freepik.com/fotos-premium/visualizacion-3d-casa-moderna-colores-brillantes-diseno-fachada-casa-arquitectura-moderna_839035-148698.jpg",
     linkUrl: "https://example.com/lavender",
   },
 ];
