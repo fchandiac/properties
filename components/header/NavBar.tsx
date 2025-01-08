@@ -24,6 +24,7 @@ const styles: { [key: string]: CSSProperties } = {
     position: "sticky",
     top: 34,
     zIndex: 1000,
+    fontSize: "0.8rem",
     boxShadow: "0px 4px 4px rgba(0,0,0,0.1)",
   },
   navList: {
