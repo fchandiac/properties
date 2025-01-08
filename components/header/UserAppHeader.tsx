@@ -30,9 +30,10 @@ export default function UserAppHeader() {
           backgroundImage: "url(/logo-long.png)",
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
-          width: 100, // Ancho del logo
-          height: 40, // Altura del logo
-          marginRight: 2, // Espacio entre el logo y el título
+          height: 70,
+          width: 200,
+          objectFit: "contain", // Ajusta el tamaño sin distorsionar la imagen
+          marginRight: "16px", // Espacio entre el logo y el título
         }}
       />
 

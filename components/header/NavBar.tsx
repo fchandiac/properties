@@ -2,9 +2,11 @@ import React from "react";
 import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
 import HomeIcon from "@mui/icons-material/Home"; // Importa el ícono de inicio
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <Box sx={styles.navbar}>
@@ -15,9 +17,15 @@ const Navbar = () => {
           title="Home"
         >
           <HomeIcon sx={{ fontSize: "1.5rem", cursor: "pointer" }} />
+          {pathname === "/userApp" && (
+            <div style={styles.activeIndicator}></div>
+          )}
         </li>
         <li style={styles.navItem} onClick={() => router.push("/userApp/blog")}>
           BLOG
+          {pathname === "/userApp/blog" && (
+            <div style={styles.activeIndicator}></div>
+          )}
         </li>
         <li style={styles.navItem}>VENDER</li>
         <li style={styles.navItem}>ARRENDAR</li>
@@ -35,10 +43,11 @@ const styles: { [key: string]: CSSProperties } = {
     backgroundColor: "white",
     padding: "10px 20px",
     position: "sticky",
-    top: 34,
+    top: 59,
     zIndex: 1000,
     fontSize: "0.8rem",
     boxShadow: "0px 4px 4px rgba(0,0,0,0.1)",
+    paddingBottom: 2,
   },
   navList: {
     display: "flex",
@@ -52,6 +61,16 @@ const styles: { [key: string]: CSSProperties } = {
     margin: "0 10px",
     color: "#212121",
     cursor: "pointer",
+    position: "relative",
+  },
+  activeIndicator: {
+    position: "absolute",
+    bottom: -10,
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: '100%',
+    height: 5,
+    background: "linear-gradient( #F2E1A1, #DBBD75, #C9A65E)",
   },
 };
 

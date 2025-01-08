@@ -30,7 +30,7 @@ interface PropertyUserCardProps {
   bedrooms?: number; // Number of bedrooms
   parkingSpaces?: number; // Number of parking spaces
   price?: number; // Property price
-  uf?: number; // Property price in
+  uf?: number; // Property price in UF
   address?: string; // Property address
   description?: string; // Property description
 }
@@ -59,9 +59,41 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
         boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
         margin: "auto",
         backgroundColor: "white",
+        position: "relative", // Necesario para colocar la banda en la esquina
         mb: 2,
+        "&:hover": {
+            boxShadow: "0px 8px 16px rgba(0,0,0,0.5)",
+        },
       }}
     >
+      {/* Banda destacada en la esquina superior izquierda */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: 90,
+          left: -40,
+          width: 300,
+          //backgroundColor: "#DBBD75", // Fondo metálico dorado
+           background: "linear-gradient( #F2E1A1, #DBBD75, #C9A65E)",
+          color: "white",
+          padding: "4px 10px",
+          fontWeight: "bold",
+          fontSize: "14px",
+          transform: "rotate(-45deg)", // Rotación de la banda
+          transformOrigin: "top left",
+          zIndex: 1,
+        }}
+      >
+        <Typography
+          fontSize={12}
+          sx={{
+            marginLeft: 6,
+          }}
+        >
+          DESTACADA
+        </Typography>
+      </Box>
+
       {/* Image Section */}
       <Box
         component="img"
@@ -77,77 +109,40 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
       <Box p={2}>
         <Box display="flex" justifyContent={"space-between"} color={"#9e9e9e"}>
           {/* Property Details */}
-
           <Box display="flex" justifyContent={"space-between"}>
-            <BathtubIcon 
-            fontSize="inherit"
-            />
-
-            <Typography
-              fontSize={12}
-              sx={{
-                marginLeft: 1,
-              }}
-            >
+            <BathtubIcon fontSize="inherit" />
+            <Typography fontSize={12} sx={{ marginLeft: 1 }}>
               {bathrooms}
             </Typography>
           </Box>
 
           <Box display="flex" justifyContent={"space-between"}>
-            <KingBedIcon fontSize="inherit"/>
-
-            <Typography
-              fontSize={12}
-              sx={{
-                marginLeft: 1,
-              }}
-            >
+            <KingBedIcon fontSize="inherit" />
+            <Typography fontSize={12} sx={{ marginLeft: 1 }}>
               {bedrooms}
             </Typography>
           </Box>
 
           <Box display="flex" justifyContent={"space-between"}>
-            <HomeIcon fontSize="inherit"/>
-
-            <Typography
-              fontSize={12}
-              sx={{
-                marginLeft: 1,
-              }}
-            >
+            <HomeIcon fontSize="inherit" />
+            <Typography fontSize={12} sx={{ marginLeft: 1 }}>
               {builtArea} m²
             </Typography>
           </Box>
 
           <Box display="flex" justifyContent={"space-between"}>
-            <TerrainIcon fontSize="inherit"/>
-
-            <Typography
-              fontSize={12}
-              sx={{
-                marginLeft: 1,
-              }}
-            >
+            <TerrainIcon fontSize="inherit" />
+            <Typography fontSize={12} sx={{ marginLeft: 1 }}>
               {landArea} m²
             </Typography>
           </Box>
 
           <Box display="flex" justifyContent={"space-between"}>
-            <GarageIcon fontSize="inherit"/>
-
-            <Typography
-              fontSize={12}
-              sx={{
-                marginLeft: 1,
-              }}
-            >
+            <GarageIcon fontSize="inherit" />
+            <Typography fontSize={12} sx={{ marginLeft: 1 }}>
               {parkingSpaces}
             </Typography>
           </Box>
-          {/* 
-          <Typography fontSize={12}>
-            {category}
-          </Typography> */}
         </Box>
 
         {/* Price Section */}
@@ -172,6 +167,35 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
 
         {/* Buttons Section */}
         <Box display="flex" justifyContent="center" mt={2}>
+          <Box
+            sx={{
+              color: "white",
+              alignContent: "center",
+            }}
+          >
+            <Box
+              sx={{
+                backgroundColor: "#9e9e9e",
+                color: "white",
+                padding: "6px 12px",
+                height: "10px",
+                borderRadius: "20px",
+                fontWeight: "bold",
+                fontSize: "10px",
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center", // Centra el contenido horizontalmente
+                alignItems: "center", // Centra el contenido verticalmente
+                cursor: "pointer",
+                "&:hover": {
+                  backgroundColor: "#DBBD75",
+                },
+              }}
+            >
+              Agenda tu visita
+            </Box>
+          </Box>
+
           {googleMapLink && (
             <IconButton>
               <LocationOnIcon />
@@ -188,6 +212,35 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
               <InstagramIcon />
             </IconButton>
           )}
+
+          <Box
+            sx={{
+              color: "white",
+              alignContent: "center",
+            }}
+          >
+            <Box
+              sx={{
+                backgroundColor: "#9e9e9e",
+                color: "white",
+                padding: "6px 12px",
+                height: "10px",
+                borderRadius: "20px",
+                fontWeight: "bold",
+                fontSize: "10px",
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center", // Centra el contenido horizontalmente
+                alignItems: "center", // Centra el contenido verticalmente
+                cursor: "pointer",
+                "&:hover": {
+                  backgroundColor: "#DBBD75",
+                },
+              }}
+            >
+              Más info
+            </Box>
+          </Box>
         </Box>
       </Box>
     </Box>
