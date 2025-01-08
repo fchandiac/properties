@@ -47,19 +47,20 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           }}
         />
         {/* Message */}
-        <Box sx={{ flexGrow: 1, textAlign: "center" }}>
+        <Box sx={{ flexGrow: 1, textAlign: 'justify', padding: 2, marginLeft: 2 }}>
           <Typography 
            sx={{
-            fontSize: 16,
+            fontSize: 14,
             fontStyle: 'italic',
             fontWeight: '300', // Para hacer la letra delgada
+            marginBottom: 4,
           }}
           >{message}</Typography>
-          <Typography variant="h6" fontWeight="bold" sx={{ marginBottom: 1 }}>
+          <Typography  fontWeight={600} lineHeight={.7} textAlign={'right'}>
             {name}
           </Typography>
           {/* Date */}
-          <Typography variant="body2" color="textSecondary">
+          <Typography variant="body2" color="textSecondary" textAlign={'right'}>
             {date}
           </Typography>
         </Box>

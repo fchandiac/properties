@@ -1,18 +1,31 @@
+'use client';
 import React from "react";
 import UserAppHeader from "../../components/header/UserAppHeader";
 import BottomBar from "@/components/footer/BottomBar";
 import Footer from "@/components/footer/Fotter";
 import SliderImages from "@/components/slider/SliderImages";
 import Navbar from "@/components/header/NavBar";
+import { usePathname } from "next/navigation";
 
 export default function layout({ children }: { children: React.ReactNode }) {
+
+  const pathname = usePathname();
+  const isHome = pathname === "/userApp";
+
+
+
   return (
     <>
       <UserAppHeader />
-      <SliderImages 
-        images={imagesList}
-    
-      />
+      {
+        isHome && (
+          <SliderImages 
+          images={imagesList}
+      
+        />
+        )
+      }
+   
       <Navbar />
       {children}
       <Footer />

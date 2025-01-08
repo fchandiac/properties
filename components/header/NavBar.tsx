@@ -1,11 +1,24 @@
 import React from "react";
 import { Box } from "@mui/material";
+import { useRouter } from "next/navigation";
+import HomeIcon from "@mui/icons-material/Home"; // Importa el ícono de inicio
 
 const Navbar = () => {
+  const router = useRouter();
+
   return (
     <Box sx={styles.navbar}>
       <ul style={styles.navList}>
-        <li style={styles.navItem}>BLOG</li>
+        <li
+          style={styles.navItem}
+          onClick={() => router.push("/userApp")}
+          title="Home"
+        >
+          <HomeIcon sx={{ fontSize: "1.5rem", cursor: "pointer" }} />
+        </li>
+        <li style={styles.navItem} onClick={() => router.push("/userApp/blog")}>
+          BLOG
+        </li>
         <li style={styles.navItem}>VENDER</li>
         <li style={styles.navItem}>COMPRAR</li>
         <li style={styles.navItem}>PROPIEDADES</li>
@@ -33,10 +46,12 @@ const styles: { [key: string]: CSSProperties } = {
     margin: 0,
     padding: 0,
     justifyContent: "center",
+    alignItems: "center",
   },
   navItem: {
-    margin: "0 15px",
+    margin: "0 10px",
     color: "#212121",
+    cursor: "pointer",
   },
 };
 
