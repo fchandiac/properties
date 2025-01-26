@@ -123,8 +123,8 @@ const theme = createTheme({
 
   palette: {
     primary: {
-      main: '#ffffff',
-      contrastText: '#212121',
+      main: '#212121',
+      contrastText: '#ffffff',
     },
     
     secondary: {
@@ -135,8 +135,6 @@ const theme = createTheme({
     background: {
       default: '#88C200',
     },
-
-    
   },
 });
 

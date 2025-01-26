@@ -1,13 +1,19 @@
-import React from "react";
+'use client'
+import React, {useState} from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
+import SideBar from "./SideBar";
 
 export default function UserAppHeader() {
+  const [openSideBar, setOpenSideBar] = useState(false);
+
   return (
+    <>
+
     <Box
       component="header"
       sx={{
@@ -51,10 +57,16 @@ export default function UserAppHeader() {
           </Typography> */}
 
         {/* Icono de menú alineado a la derecha */}
-        <IconButton edge="end" color="inherit" aria-label="menu">
+        <IconButton edge="end" color="inherit" aria-label="menu"
+          onClick={() => setOpenSideBar(true)}
+        >
           <MenuIcon />
         </IconButton>
       </Box>
     </Box>
+
+    <SideBar open={openSideBar} toggleDrawer={setOpenSideBar} />
+
+    </>
   );
 }

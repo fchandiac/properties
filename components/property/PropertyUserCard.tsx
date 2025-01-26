@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React from "react";
 import {
   Box,
@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 
 interface PropertyUserCardProps {
   type?: 0 | 1; // Property type
+  featured: boolean; // Property featured
   googleMapLink?: string | null; // Link to Google Maps
   youtubeLink?: string | null; // Link to a YouTube video
   ticToLink?: string | null; // Link to a TikTok video
@@ -38,6 +39,8 @@ interface PropertyUserCardProps {
 }
 
 const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
+  type = 0,
+  featured = false,
   image = "https://hips.hearstapps.com/hmg-prod/images/230504-voluar-la-casa-que-se-bifurca-019-662229a00e335.jpg?crop=1xw:0.84375xh;center,top&resize=1200:*",
   category = "House",
   builtArea = 120,
@@ -52,7 +55,7 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
   youtubeLink = "https://www.youtube.com",
   ticToLink = "https://www.tiktok.com",
 }) => {
-    const router = useRouter();
+  const router = useRouter();
   return (
     <Box
       sx={{
@@ -65,37 +68,116 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
         position: "relative", // Necesario para colocar la banda en la esquina
         mb: 2,
         "&:hover": {
-            boxShadow: "0px 8px 16px rgba(0,0,0,0.5)",
+          boxShadow: "0px 8px 16px rgba(0,0,0,0.5)",
         },
       }}
     >
-      {/* Banda destacada en la esquina superior izquierda */}
       <Box
         sx={{
           position: "absolute",
-          top: 90,
-          left: -40,
-          width: 300,
-          //backgroundColor: "#DBBD75", // Fondo metálico dorado
-           background: "linear-gradient( #F2E1A1, #DBBD75, #C9A65E)",
-          color: "white",
-          padding: "4px 10px",
-          fontWeight: "bold",
-          fontSize: "14px",
-          transform: "rotate(-45deg)", // Rotación de la banda
-          transformOrigin: "top left",
-          zIndex: 1,
+          top: 0,
+          right: 0, // Alinea la banda a la derecha
+          width: "100%",
+          height: "100%",
+          cursor: "pointer",
+          opacity: 0, // Inicialmente no visible
+          backgroundColor: "rgba(0,0,0,0.5)", //
+          transition: "opacity 0.3s ease", // Para una transición suave
+          "&:hover": {
+            opacity: 1, // Aparece cuando el mouse pasa por encima
+          },
+          zIndex: 3, // Asegura que la banda se muestre por encima de otros elementos
         }}
       >
-        <Typography
-          fontSize={12}
+        <Box
           sx={{
-            marginLeft: 6,
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            textAlign: "center",
           }}
         >
-          DESTACADA
-        </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() =>
+              router.push(`/userApp/properties/property`)
+            }
+          >
+            Ver Detalles
+          </Button>
+        </Box>
       </Box>
+
+      {/* Banda destacada en la esquina superior derecha */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          right: 0, // Alinea la banda a la derecha
+          width: "100%",
+          height: "100%",
+          cursor: "pointer",
+        }}
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: 10,
+            right: 10, // Mueve la banda hacia la esquina superior derecha
+            padding: "1px 8px",
+            borderRadius: "12px", // Redondea las esquinas del badge
+            backgroundColor: "#212121", // Fondo negro
+            display: "flex",
+            fontWeight: "bold",
+            color: "white", // Texto blanco
+            fontSize: "12px",
+            zIndex: 2, // Asegura que el badge se muestre por encima de otros elementos
+          }}
+        >
+          <Typography
+            fontSize={12}
+            sx={{
+              color: "white",
+              padding: 0.2,
+              textAlign: "center",
+            }}
+          >
+            {type === 0 ? "en Venta" : "en Arriendo"}
+          </Typography>
+        </Box>
+      </Box>
+
+      {/* Banda destacada en la esquina superior izquierda */}
+      {featured && (
+        <Box
+          sx={{
+            position: "absolute",
+            top: 90,
+            left: -40,
+            width: 300,
+            //backgroundColor: "#DBBD75", // Fondo metálico dorado
+            background: "linear-gradient( #F2E1A1, #DBBD75, #C9A65E)",
+            color: "white",
+            padding: "4px 10px",
+            fontWeight: "bold",
+            fontSize: "14px",
+            transform: "rotate(-45deg)", // Rotación de la banda
+            transformOrigin: "top left",
+            zIndex: 1,
+          }}
+        >
+          <Typography
+            fontSize={12}
+            sx={{
+              marginLeft: 6,
+            }}
+          >
+            DESTACADA
+          </Typography>
+        </Box>
+      )}
 
       {/* Image Section */}
       <Box
@@ -167,87 +249,6 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
         <Typography fontSize={10} color="textSecondary" textAlign="center">
           {address}
         </Typography>
-
-        {/* Buttons Section */}
-        <Box display="flex" justifyContent="center" mt={2}>
-          <Box
-            sx={{
-              color: "white",
-              alignContent: "center",
-            }}
-          >
-            <Box
-              sx={{
-                backgroundColor: "#9e9e9e",
-                color: "white",
-                padding: "6px 12px",
-                height: "10px",
-                borderRadius: "20px",
-                fontWeight: "bold",
-                fontSize: "10px",
-                textAlign: "center",
-                display: "flex",
-                justifyContent: "center", // Centra el contenido horizontalmente
-                alignItems: "center", // Centra el contenido verticalmente
-                cursor: "pointer",
-                "&:hover": {
-                  backgroundColor: "#DBBD75",
-                },
-              }}
-            >
-              Agenda tu visita
-            </Box>
-          </Box>
-
-          {googleMapLink && (
-            <IconButton>
-              <LocationOnIcon />
-            </IconButton>
-          )}
-
-          {youtubeLink && (
-            <IconButton>
-              <YouTubeIcon />
-            </IconButton>
-          )}
-          {ticToLink && (
-            <IconButton>
-              <InstagramIcon />
-            </IconButton>
-          )}
-
-          <Box
-            sx={{
-              color: "white",
-              alignContent: "center",
-            }}
-          >
-            <Box
-              sx={{
-                backgroundColor: "#9e9e9e",
-                color: "white",
-                padding: "6px 12px",
-                height: "10px",
-                borderRadius: "20px",
-                fontWeight: "bold",
-                fontSize: "10px",
-                textAlign: "center",
-                display: "flex",
-                justifyContent: "center", // Centra el contenido horizontalmente
-                alignItems: "center", // Centra el contenido verticalmente
-                cursor: "pointer",
-                "&:hover": {
-                  backgroundColor: "#DBBD75",
-                },
-              }}
-              onClick={() => {
-                router.push("/userApp/properties/property");
-                }}
-            >
-              Más info
-            </Box>
-          </Box>
-        </Box>
       </Box>
     </Box>
   );

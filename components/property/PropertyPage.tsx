@@ -1,18 +1,25 @@
 import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import BathtubIcon from "@mui/icons-material/Bathtub";
 import KingBedIcon from "@mui/icons-material/KingBed";
 import GarageIcon from "@mui/icons-material/Garage";
 import HomeIcon from "@mui/icons-material/Home";
 import TerrainIcon from "@mui/icons-material/Terrain";
+import PlaceIcon from '@mui/icons-material/Place';
 
 interface PropertyPageProps {
+  type?: 0 | 1; // Property type
+  category?: string; // Property category (e.g., "House", "Apartment", etc.)
   images: string[]; // Array de imágenes
   builtArea?: number; // Built area in square meters
   landArea?: number; // Land area in square meters
   bathrooms?: number; // Number of bathrooms
   bedrooms?: number; // Number of bedrooms
   parkingSpaces?: number; // Number of parking spaces
+  price?: number; // Property price
+  uf?: number; // Property price in UF
+  address?: string; // Property address
+  
 }
 
 const PropertyPage: React.FC<PropertyPageProps> = ({
@@ -22,9 +29,31 @@ const PropertyPage: React.FC<PropertyPageProps> = ({
   bathrooms = 2,
   bedrooms = 3,
   parkingSpaces = 1,
+  category = "Casa",
+  type = 0,
 }) => {
   return (
     <>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="column"
+        mt={4}
+      >
+        <Typography variant="h4" fontWeight={300} mb={2}>
+          {category} en {type === 0 ? "venta" : "arriendo"}
+        </Typography>
+        <Button variant="contained" color="primary">
+          Agendar visita
+        </Button>
+      </Box>
+
+      <Box>
+
+
+      </Box>
+
       <Box
         sx={{
           marginTop: 4,
