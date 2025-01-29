@@ -5,7 +5,7 @@ import KingBedIcon from "@mui/icons-material/KingBed";
 import GarageIcon from "@mui/icons-material/Garage";
 import HomeIcon from "@mui/icons-material/Home";
 import TerrainIcon from "@mui/icons-material/Terrain";
-import PlaceIcon from '@mui/icons-material/Place';
+import PlaceIcon from "@mui/icons-material/Place";
 
 interface PropertyPageProps {
   type?: 0 | 1; // Property type
@@ -19,7 +19,6 @@ interface PropertyPageProps {
   price?: number; // Property price
   uf?: number; // Property price in UF
   address?: string; // Property address
-  
 }
 
 const PropertyPage: React.FC<PropertyPageProps> = ({
@@ -49,10 +48,7 @@ const PropertyPage: React.FC<PropertyPageProps> = ({
         </Button>
       </Box>
 
-      <Box>
-
-
-      </Box>
+      <Box></Box>
 
       <Box
         sx={{
@@ -121,49 +117,79 @@ const PropertyPage: React.FC<PropertyPageProps> = ({
         </Box>
       </Box>
 
-      <Box
-        justifyContent={"space-between"}
-        display={"flex"}
-        color={"#212121"}
-        marginX={10}
-        marginBottom={4}
-      >
+      <Grid container spacing={1} mt={2} mb={2} alignItems={'center'} justifyContent={'center'}>
         {/* Property Details */}
-        <Box display="flex" justifyContent={"space-between"}>
-          <BathtubIcon fontSize="inherit" />
-          <Typography fontSize={14} sx={{ marginLeft: 1 }}>
-            {bathrooms} baños
-          </Typography>
-        </Box>
-
-        <Box display="flex" justifyContent={"space-between"}>
-          <KingBedIcon fontSize="inherit" />
-          <Typography fontSize={14} sx={{ marginLeft: 1 }}>
-            {bedrooms} dormitorios
-          </Typography>
-        </Box>
-
-        <Box display="flex" justifyContent={"space-between"}>
-          <HomeIcon fontSize="inherit" />
-          <Typography fontSize={14} sx={{ marginLeft: 1 }}>
-            {builtArea} m² construidos
-          </Typography>
-        </Box>
-
-        <Box display="flex" justifyContent={"space-between"}>
-          <TerrainIcon fontSize="inherit" />
-          <Typography fontSize={14} sx={{ marginLeft: 1 }}>
-            {landArea} m² terreno
-          </Typography>
-        </Box>
-
-        <Box display="flex" justifyContent={"space-between"}>
-          <GarageIcon fontSize="inherit" />
-          <Typography fontSize={14} sx={{ marginLeft: 1 }}>
-            {parkingSpaces} estacionamientos
-          </Typography>
-        </Box>
-      </Box>
+        <Grid item>
+          <Box sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center", // Centra los elementos horizontalmente
+              gap: "2px", // Espacio reducido entre los elementos
+            }}>
+            <BathtubIcon fontSize="inherit" />
+            <Typography fontSize={14} sx={{ marginLeft: 1 }}>
+              {bathrooms} baños
+            </Typography>
+          </Box>
+        </Grid>
+        <Grid item>
+          <Box sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center", // Centra los elementos horizontalmente
+              gap: "2px", // Espacio reducido entre los elementos
+            }}>
+            <KingBedIcon fontSize="inherit" />
+            <Typography fontSize={14} sx={{ marginLeft: 1 }}>
+              {bedrooms} dormitorios
+            </Typography>
+          </Box>
+        </Grid>
+        <Grid item>
+          <Box sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center", // Centra los elementos horizontalmente
+              gap: "2px", // Espacio reducido entre los elementos
+            }}>
+            <HomeIcon fontSize="inherit" />
+            <Typography fontSize={14} sx={{ marginLeft: 1 }}>
+              {builtArea} m² construidos
+            </Typography>
+          </Box>
+        </Grid>
+        <Grid item>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center", // Centra los elementos horizontalmente
+              gap: "2px", // Espacio reducido entre los elementos
+            }}
+          >
+            <TerrainIcon fontSize="inherit" />
+            <Typography fontSize={14}>{landArea} m² terreno</Typography>
+          </Box>
+        </Grid>
+        <Grid item>
+          <Box sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center", // Centra los elementos horizontalmente
+              gap: "2px", // Espacio reducido entre los elementos
+            }}>
+            <GarageIcon fontSize="inherit" />
+            <Typography fontSize={14} sx={{ marginLeft: 1 }}>
+              {parkingSpaces} estacionamientos
+            </Typography>
+          </Box>
+        </Grid>
+      </Grid>
 
       <Typography variant="h5" fontWeight={300} mb={2}>
         Descripción
