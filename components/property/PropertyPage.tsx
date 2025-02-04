@@ -1,28 +1,26 @@
-import React from "react";
-import { Box, Button, Grid, Typography } from "@mui/material";
+'use client'
+import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  TextField,
+  DialogActions,
+  Avatar,
+} from "@mui/material";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import BathtubIcon from "@mui/icons-material/Bathtub";
 import KingBedIcon from "@mui/icons-material/KingBed";
 import GarageIcon from "@mui/icons-material/Garage";
 import HomeIcon from "@mui/icons-material/Home";
 import TerrainIcon from "@mui/icons-material/Terrain";
-import PlaceIcon from "@mui/icons-material/Place";
 
-interface PropertyPageProps {
-  type?: 0 | 1; // Property type
-  category?: string; // Property category (e.g., "House", "Apartment", etc.)
-  images: string[]; // Array de imágenes
-  builtArea?: number; // Built area in square meters
-  landArea?: number; // Land area in square meters
-  bathrooms?: number; // Number of bathrooms
-  bedrooms?: number; // Number of bedrooms
-  parkingSpaces?: number; // Number of parking spaces
-  price?: number; // Property price
-  uf?: number; // Property price in UF
-  address?: string; // Property address
-}
-
-const PropertyPage: React.FC<PropertyPageProps> = ({
-  images,
+const PropertyPage = ({
   builtArea = 120,
   landArea = 200,
   bathrooms = 2,
@@ -31,192 +29,103 @@ const PropertyPage: React.FC<PropertyPageProps> = ({
   category = "Casa",
   type = 0,
 }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  // Imágenes por defecto
+  const defaultImages = [
+    "https://source.unsplash.com/600x400/?house",
+    "https://source.unsplash.com/600x400/?livingroom",
+    "https://source.unsplash.com/600x400/?kitchen",
+  ];
+
   return (
-    <>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        flexDirection="column"
-        mt={4}
-      >
+    <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={2} mt={4}>
+      {/* Contenido principal */}
+      <Box flex={2}>
         <Typography variant="h4" fontWeight={300} mb={2}>
           {category} en {type === 0 ? "venta" : "arriendo"}
         </Typography>
-        <Button variant="contained" color="primary">
-          Agendar visita
-        </Button>
-      </Box>
 
-      <Box></Box>
+        {/* Galería de imágenes */}
+        <Box height={{ xs: 300, md: 400 }} display="flex" gap={1}>
+          <Box flex={2} sx={{ backgroundImage: `url(${defaultImages[0]})`, backgroundSize: "cover", borderRadius: 2 }} />
+          <Box flex={1} display="flex" flexDirection="column" gap={1}>
+            <Box flex={1} sx={{ backgroundImage: `url(${defaultImages[1]})`, backgroundSize: "cover", borderRadius: 2 }} />
+            <Box flex={1} sx={{ backgroundImage: `url(${defaultImages[2]})`, backgroundSize: "cover", borderRadius: 2 }} />
+          </Box>
+        </Box>
 
-      <Box
-        sx={{
-          marginTop: 4,
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
+        {/* Características */}
+        <Grid container spacing={2} mt={2}>
+          {[{ icon: <BathtubIcon />, label: `${bathrooms} baños` },
+            { icon: <KingBedIcon />, label: `${bedrooms} dormitorios` },
+            { icon: <HomeIcon />, label: `${builtArea} m² construidos` },
+            { icon: <TerrainIcon />, label: `${landArea} m² terreno` },
+            { icon: <GarageIcon />, label: `${parkingSpaces} estacionamientos` }].map((item, index) => (
+            <Grid item key={index} xs={6} md={4} lg={2}>
+              <Box display="flex" alignItems="center" gap={1}>
+                {item.icon}
+                <Typography fontSize={14}>{item.label}</Typography>
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
 
-          height: { xs: 200, sm: 300, md: 400 },
-          padding: 2,
-        }}
-      >
-        <Box
-          sx={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "50%",
-            height: "100%",
-            border: "1px solid #ccc",
-            backgroundImage: `url(${images[0]})`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-            borderBottomLeftRadius: "30px",
-            borderTopLeftRadius: "30px",
-            marginRight: 2,
-          }}
-        />
-
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "50%",
-            height: "100%",
-          }}
-        >
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              border: "1px solid #ccc",
-              borderTopRightRadius: "30px",
-              marginBottom: 1,
-              backgroundImage: `url(${images[1]})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
-
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              border: "1px solid #ccc",
-              borderBottomRightRadius: "30px",
-              marginTop: 1,
-              backgroundImage: `url(${images[2]})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
+        {/* Mapa */}
+        <Box mt={4} height={400} sx={{ border: "1px solid #ccc", borderRadius: 2, overflow: "hidden" }}>
+          <iframe
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-70.6506,-33.4372,-70.6406,-33.4272&layer=mapnik"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            loading="lazy"
+          ></iframe>
         </Box>
       </Box>
 
-      <Grid container spacing={1} mt={2} mb={2} alignItems={'center'} justifyContent={'center'}>
-        {/* Property Details */}
-        <Grid item>
-          <Box sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center", // Centra los elementos horizontalmente
-              gap: "2px", // Espacio reducido entre los elementos
-            }}>
-            <BathtubIcon fontSize="inherit" />
-            <Typography fontSize={14} sx={{ marginLeft: 1 }}>
-              {bathrooms} baños
-            </Typography>
+      {/* Contacto (Solo en desktop) */}
+      <Box display={{ xs: "none", md: "block" }} flex={1} p={2} sx={{ backgroundColor: "white", borderRadius: 3, boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)" }}>
+        <Box display="flex" alignItems="center" gap={2} mb={2}>
+          <Avatar src="https://randomuser.me/api/portraits/men/50.jpg" sx={{ width: 64, height: 64 }} />
+          <Box>
+            <Typography variant="h6" fontWeight={500}>Juan Pérez</Typography>
+            <Typography variant="body2">Agente Inmobiliario</Typography>
           </Box>
-        </Grid>
-        <Grid item>
-          <Box sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center", // Centra los elementos horizontalmente
-              gap: "2px", // Espacio reducido entre los elementos
-            }}>
-            <KingBedIcon fontSize="inherit" />
-            <Typography fontSize={14} sx={{ marginLeft: 1 }}>
-              {bedrooms} dormitorios
-            </Typography>
-          </Box>
-        </Grid>
-        <Grid item>
-          <Box sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center", // Centra los elementos horizontalmente
-              gap: "2px", // Espacio reducido entre los elementos
-            }}>
-            <HomeIcon fontSize="inherit" />
-            <Typography fontSize={14} sx={{ marginLeft: 1 }}>
-              {builtArea} m² construidos
-            </Typography>
-          </Box>
-        </Grid>
-        <Grid item>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center", // Centra los elementos horizontalmente
-              gap: "2px", // Espacio reducido entre los elementos
-            }}
-          >
-            <TerrainIcon fontSize="inherit" />
-            <Typography fontSize={14}>{landArea} m² terreno</Typography>
-          </Box>
-        </Grid>
-        <Grid item>
-          <Box sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center", // Centra los elementos horizontalmente
-              gap: "2px", // Espacio reducido entre los elementos
-            }}>
-            <GarageIcon fontSize="inherit" />
-            <Typography fontSize={14} sx={{ marginLeft: 1 }}>
-              {parkingSpaces} estacionamientos
-            </Typography>
-          </Box>
-        </Grid>
-      </Grid>
+        </Box>
+        <Typography variant="body1"><strong>WhatsApp:</strong> +56 9 1234 5678</Typography>
+        <Typography variant="body1"><strong>Correo:</strong> juan.perez@email.com</Typography>
+        <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }} onClick={handleOpen}>
+          Agendar Visita
+        </Button>
+      </Box>
 
-      <Typography variant="h5" fontWeight={300} mb={2}>
-        Descripción
-      </Typography>
-      <Typography variant="body1" textAlign={"justify"}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-        consectetur, nisl et scelerisque fermentum, nunc arcu ultricies libero,
-        nec ultricies ligula metus nec sapien. Nullam eget eros elementum,
-        faucibus augue sit amet, ultricies nunc. Nullam auctor interdum orci,
-        nec tempus odio. Nullam ac ipsum nec elit ultrices aliquet. Nulla
-        facilisi. Nullam nec arcu
-      </Typography>
-    </>
+      {/* Diálogo de contacto */}
+      <Dialog open={open} onClose={handleClose} fullWidth>
+        <DialogTitle>Agendar Visita</DialogTitle>
+        <DialogContent>
+          <TextField fullWidth label="Nombre" margin="dense" />
+          <TextField fullWidth label="Correo Electrónico" margin="dense" type="email" />
+          <TextField fullWidth label="Teléfono" margin="dense" type="tel" />
+          <TextField fullWidth label="WhatsApp" margin="dense" type="tel" />
+          <TextField
+            fullWidth
+            label="Mensaje"
+            margin="dense"
+            multiline
+            rows={4}
+            defaultValue="Deseo realizar una visita a la propiedad ubicada en ..."
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="secondary">Cancelar</Button>
+          <Button variant="contained" color="primary">Enviar</Button>
+        </DialogActions>
+      </Dialog>
+    </Box>
   );
 };
 
-// Componente de prueba con valores por defecto
-const PropertyPageTest = () => {
-  const images = [
-    "https://hips.hearstapps.com/hmg-prod/images/230504-voluar-la-casa-que-se-bifurca-019-662229a00e335.jpg?crop=1xw:0.84375xh;center,top&resize=1200:*",
-    "https://www.vinasconstructora.com/wp-content/uploads/2024/06/casa-modernas-minimalistas.jpg",
-    "https://img.freepik.com/fotos-premium/casa-moderna-grandes-ventanales-e-iluminacion-natural-ia-generativa_410516-70480.jpg",
-    "https://www.airbnb.com/images/landing/hero_5.jpg",
-    "https://www.airbnb.com/images/landing/hero_2.jpg",
-  ];
-
-  return <PropertyPage images={images} />;
-};
-
-export default PropertyPageTest;
+export default PropertyPage;

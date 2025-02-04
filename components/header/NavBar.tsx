@@ -21,20 +21,23 @@ const Navbar = () => {
             <div style={styles.activeIndicator}></div>
           )}
         </li>
-        <li style={styles.navItem} onClick={() => router.push("/userApp/blog")}>
-          BLOG
-          {pathname === "/userApp/blog" && (
+        <li
+          style={styles.navItem}
+          onClick={() => router.push("/userApp/aboutUs")}
+        >
+          NOSOTROS
+          {pathname.startsWith("/userApp/aboutUs") && (
             <div style={styles.activeIndicator}></div>
           )}
         </li>
         <li style={styles.navItem} onClick={() => router.push("/userApp/sell")}>
-          VENDER
+          VENDE CON NOSOTROS
           {pathname === "/userApp/sell" && (
             <div style={styles.activeIndicator}></div>
           )}
         </li>
         <li style={styles.navItem} onClick={() => router.push("/userApp/rent")}>
-          ARRENDAR
+          ARRIENDA TU PROPIEDAD
           {pathname === "/userApp/rent" && (
             <div style={styles.activeIndicator}></div>
           )}
@@ -45,6 +48,24 @@ const Navbar = () => {
         >
           PROPIEDADES
           {pathname.startsWith("/userApp/properties") && (
+            <div style={styles.activeIndicator}></div>
+          )}
+        </li>
+        <li
+          style={styles.navItem}
+          onClick={() => router.push("/userApp/testimonials")}
+        >
+          TESTIMONIOS
+          {pathname.startsWith("/userApp/testimonials") && (
+            <div style={styles.activeIndicator}></div>
+          )}
+        </li>
+        <li
+          style={styles.navItem}
+          onClick={() => router.push("/userApp/blog")}
+        >
+          BLOG
+          {pathname.startsWith("/userApp/blog") && (
             <div style={styles.activeIndicator}></div>
           )}
         </li>

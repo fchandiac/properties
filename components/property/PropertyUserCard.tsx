@@ -105,7 +105,7 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
               router.push(`/userApp/properties/property`)
             }
           >
-            Ver Detalles
+            Ver Propiedad
           </Button>
         </Box>
       </Box>
@@ -128,7 +128,7 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
             right: 10, // Mueve la banda hacia la esquina superior derecha
             padding: "1px 8px",
             borderRadius: "12px", // Redondea las esquinas del badge
-            backgroundColor: "#212121", // Fondo negro
+            backgroundColor: "#026330", // Fondo negro
             display: "flex",
             fontWeight: "bold",
             color: "white", // Texto blanco
@@ -144,7 +144,7 @@ const PropertyUserCard: React.FC<PropertyUserCardProps> = ({
               textAlign: "center",
             }}
           >
-            {type === 0 ? "en Venta" : "en Arriendo"}
+            {type === 0 ? "EN VENTA" : "EN ARRIENDO"}
           </Typography>
         </Box>
       </Box>

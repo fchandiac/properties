@@ -1,42 +1,121 @@
 import React from "react";
-import { Box, Typography, Container, Card, CardContent } from "@mui/material";
+import { Box, Typography, Grid, Card, CardMedia } from "@mui/material";
 
-export default function AboutUsPage() {
+const teamMembers = [
+  {
+    name: "Juan Pérez",
+    img: "https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg",
+  },
+  {
+    name: "María González",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeMhvCmuhXzaHHS9vP_zmtn3muM5N1j34OhTCvtEMvUQrUqcaiQSWUpL9DQQRWxJ088kc&usqp=CAU",
+  },
+  {
+    name: "Carlos López",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIzg9A5gpzykDBpzJ_gdLTD2TTyWKAnNQsqG9hKKvy_aLospIEuOrUaInujdERXvTG9Wg&usqp=CAU",
+  },
+  {
+    name: "Ana Martínez",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeMhvCmuhXzaHHS9vP_zmtn3muM5N1j34OhTCvtEMvUQrUqcaiQSWUpL9DQQRWxJ088kc&usqp=CAU",
+  },
+  {
+    name: "José Ramírez",
+    img: "https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg",
+  },
+  {
+    name: "Sofía Herrera",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeMhvCmuhXzaHHS9vP_zmtn3muM5N1j34OhTCvtEMvUQrUqcaiQSWUpL9DQQRWxJ088kc&usqp=CAU",
+  },
+];
+
+const AboutUs = () => {
   return (
-    <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
-      <Box>
-        <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold" }}>
-          About Us
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          Welcome to <strong>Álvaro Bravo Propiedades</strong>, where your dream home becomes a reality. 
-          Founded with a passion for connecting people to their ideal spaces, we have been a trusted name 
-          in real estate for over a decade.
-        </Typography>
-        <Card sx={{ mt: 3, backgroundColor: "#f5f5f5" }}>
-          <CardContent>
-            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-              Our Story
-            </Typography>
-            <Typography variant="body2">
-              Álvaro Bravo, a visionary in the real estate industry, started this company with a simple 
-              mission: to provide personalized, transparent, and efficient property solutions. Over the years, 
-              we have grown into a team of dedicated professionals committed to guiding our clients every 
-              step of the way.
-            </Typography>
-          </CardContent>
-        </Card>
-        <Box sx={{ mt: 3 }}>
-          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            Why Choose Us?
+    <Box sx={{ width: "100%", padding: 4 }}>
+      {/* Sección Principal */}
+      <Grid container spacing={4} alignItems="center">
+        {/* Información a la izquierda */}
+        <Grid item xs={12} md={6}>
+          <Typography variant="h4" fontWeight={600} mb={2}>
+            Sobre Nosotros
           </Typography>
-          <Typography variant="body2">
-            At Álvaro Bravo Propiedades, we pride ourselves on our deep understanding of the market and 
-            our ability to match clients with properties that fit their needs and lifestyle. Whether you're 
-            buying, selling, or renting, we are here to ensure a smooth and successful experience.
+          <Typography variant="body1" textAlign="justify">
+            Somos un equipo apasionado dedicado a crear experiencias únicas.
+            Nuestra misión es brindar soluciones innovadoras y efectivas que
+            marquen la diferencia.
           </Typography>
-        </Box>
-      </Box>
-    </Container>
+        </Grid>
+
+        {/* Video a la derecha */}
+        <Grid item xs={12} md={6}>
+          <Box
+            sx={{
+              width: "100%",
+              borderRadius: 2,
+              overflow: "hidden",
+              boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
+            }}
+          >
+            <video width="100%" autoPlay loop muted playsInline controls>
+              <source
+                src="/video.mp4"
+                type="video/mp4"
+              />
+              Tu navegador no soporta videos.
+            </video>
+          </Box>
+        </Grid>
+      </Grid>
+
+      {/* Sección: Nuestro Equipo */}
+      <Typography
+        variant="h5"
+        fontWeight={600}
+        mt={6}
+        mb={3}
+        textAlign="center"
+      >
+        Nuestro Equipo
+      </Typography>
+
+      {/* Galería de imágenes con efecto hover */}
+      <Grid container spacing={2} justifyContent="center">
+        {teamMembers.map((member, index) => (
+          <Grid item xs={6} sm={4} md={2} key={index}>
+            <Card
+              sx={{
+                borderRadius: 2,
+                overflow: "hidden",
+                position: "relative",
+                "&:hover img": { filter: "none" }, // Quita el B&W en hover
+              }}
+            >
+              <CardMedia
+                component="img"
+                image={member.img}
+                alt={member.name}
+                sx={{
+                  filter: "grayscale(100%)", // Blanco y negro por defecto
+                  transition: "0.3s ease-in-out",
+                  width: "100%",
+                  height: 120,
+                }}
+              />
+            </Card>
+
+            <Typography fontSize={18} fontWeight={"bold"}>
+              Nombre integrante
+            </Typography>
+            <Typography fontSize={14} fontWeight={300}>
+              Cargo
+            </Typography>
+            <Typography fontSize={14} fontWeight={300}>
+              correo@mail.com
+            </Typography>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
-}
+};
+
+export default AboutUs;
