@@ -8,7 +8,7 @@ export default function BlogPage() {
         {/* Primera fila: Título y bajada */}
         <Grid item xs={12} md={6}>
           <Typography variant="h4" fontWeight="bold" gutterBottom>
-            Blog: Seguridad en los Barrios y Compra de Casas
+           Seguridad en los Barrios y Compra de Casas
           </Typography>
           <Typography variant="body1">
             Antes de comprar una propiedad, es esencial investigar la seguridad del barrio. Factores como la iluminación pública, presencia de cámaras de vigilancia y la proximidad a estaciones de policía son determinantes. También es útil hablar con los vecinos para obtener información de primera mano sobre la situación de seguridad en la zona.
@@ -19,7 +19,7 @@ export default function BlogPage() {
         <Grid item xs={12} md={6}>
           <Box sx={{ width: "100%" }}>
             <img
-              src="https://www.homeurbano.com/content/multimedia/lugares/chile/seguridad/seguridad-barrios.jpg"
+              src="https://quees.mobi/wp-content/uploads/2021/06/arquitectura-moderna.jpg"
               alt="blog"
               style={{ width: "100%", height: "auto", objectFit: "cover" }}
             />

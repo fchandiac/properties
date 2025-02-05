@@ -36,9 +36,9 @@ const PropertyPage = ({
 
   // Imágenes por defecto
   const defaultImages = [
-    "https://source.unsplash.com/600x400/?house",
-    "https://source.unsplash.com/600x400/?livingroom",
-    "https://source.unsplash.com/600x400/?kitchen",
+    "https://www.vinasconstructora.com/wp-content/uploads/2024/06/casa-modernas-minimalistas.jpg",
+    "https://soyarquitectura.mx/wp-content/uploads/2024/06/portada-despacho-arquitectos-render-14.webp",
+    "https://quees.mobi/wp-content/uploads/2021/06/arquitectura-moderna.jpg",
   ];
 
   return (
