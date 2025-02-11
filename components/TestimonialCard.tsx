@@ -46,7 +46,8 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
             margin: "0 auto 16px",
             borderStyle: "solid",
             borderWidth: 10,
-            borderColor: "#DBBD75",
+            //borderColor: "#DBBD75",
+            borderColor: "#01C442",
           }}
         />
         {/* Message */}

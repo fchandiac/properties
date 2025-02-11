@@ -1,52 +1,97 @@
 import React from "react";
-import { Box, Container, Typography, Grid } from "@mui/material";
+import { Box, Container } from "@mui/material";
+import BlogPost from "../../../components/blog/BlogPost";
+import BlogMiniCard from "@/components/blog/BlogMiniCard";
+
+const blogMiniCards = [
+  {
+    title: "Cómo Evaluar un Barrio Antes de Comprar",
+    image: "https://i0.wp.com/www.householdpm.com.au/wp-content/uploads/2019/08/hppost-how-to-switch-to-household-propertiest-01.jpg?fit=1920%2C1080&ssl=1",
+  },
+  {
+    title: "Consejos para Invertir en Bienes Raíces",
+    image: "https://s7d9.scene7.com/is/image/ledcor/Belmont%20Reunion%2003?qlt=85&wid=480&ts=1691085180535&dpr=on,2.625",
+  },
+  {
+    title: "Errores Comunes al Comprar una Casa",
+    image: "https://i0.wp.com/www.householdpm.com.au/wp-content/uploads/2019/08/hppost-how-to-switch-to-household-propertiest-01.jpg?fit=1920%2C1080&ssl=1",
+  },
+  {
+    title: "Cómo Aumentar el Valor de tu Propiedad",
+    image: "https://s7d9.scene7.com/is/image/ledcor/Belmont%20Reunion%2003?qlt=85&wid=480&ts=1691085180535&dpr=on,2.625",
+  },
+  {
+    title: "Documentos Necesarios para Comprar una Vivienda",
+    image: "https://s7d9.scene7.com/is/image/ledcor/Belmont%20Reunion%2003?qlt=85&wid=480&ts=1691085180535&dpr=on,2.625",
+  },
+  {
+    title: "Tendencias en el Mercado Inmobiliario 2025",
+    image: "https://i0.wp.com/www.householdpm.com.au/wp-content/uploads/2019/08/hppost-how-to-switch-to-household-propertiest-01.jpg?fit=1920%2C1080&ssl=1",
+  },
+  {
+    title: "¿Comprar o Alquilar? Pros y Contras",
+    image: "https://source.unsplash.com/300x200/?house,rent,buy",
+  },
+  {
+    title: "La Importancia de un Buen Agente Inmobiliario",
+    image: "https://i0.wp.com/www.householdpm.com.au/wp-content/uploads/2019/08/hppost-how-to-switch-to-household-propertiest-01.jpg?fit=1920%2C1080&ssl=1",
+  },
+  {
+    title: "Cómo Negociar el Precio de una Casa",
+    image: "https://source.unsplash.com/300x200/?realestate,negotiation",
+  },
+  {
+    title: "Financiamiento Hipotecario: Lo que Debes Saber",
+    image: "https://source.unsplash.com/300x200/?mortgage,finance",
+  },
+  {
+    title: "Factores Claves para Comprar en Preventa",
+    image: "https://source.unsplash.com/300x200/?construction,building",
+  },
+  {
+    title: "Cómo Detectar Fraudes Inmobiliarios",
+    image: "https://source.unsplash.com/300x200/?realestate,scam",
+  },
+];
 
 export default function BlogPage() {
+  const blogData = {
+    title: "Seguridad en los Barrios y Compra de Casas",
+    summary:
+      "Antes de comprar una propiedad, es esencial investigar la seguridad del barrio. Factores como la iluminación pública, presencia de cámaras de vigilancia y la proximidad a estaciones de policía son determinantes. También es útil hablar con los vecinos para obtener información de primera mano sobre la situación de seguridad en la zona.",
+    image:
+      "https://quees.mobi/wp-content/uploads/2021/06/arquitectura-moderna.jpg",
+    content: [
+      "La seguridad es uno de los aspectos más importantes a tener en cuenta a la hora de comprar una propiedad...",
+      "Evaluar la seguridad en una zona requiere de un enfoque integral...",
+      "La proximidad a servicios como estaciones de policía, bomberos y centros médicos también juega un papel clave...",
+      "Además de la seguridad general del barrio, la seguridad en la vivienda misma es otro factor relevante...",
+      "En conclusión, la seguridad en los barrios es un factor decisivo al comprar una casa...",
+    ],
+  };
+
   return (
     <Container maxWidth="md" sx={{ marginTop: 4 }}>
-      <Grid container spacing={4}>
-        {/* Primera fila: Título y bajada */}
-        <Grid item xs={12} md={6}>
-          <Typography variant="h4" fontWeight="bold" gutterBottom>
-           Seguridad en los Barrios y Compra de Casas
-          </Typography>
-          <Typography variant="body1">
-            Antes de comprar una propiedad, es esencial investigar la seguridad del barrio. Factores como la iluminación pública, presencia de cámaras de vigilancia y la proximidad a estaciones de policía son determinantes. También es útil hablar con los vecinos para obtener información de primera mano sobre la situación de seguridad en la zona.
-          </Typography>
-        </Grid>
-        
-        {/* Segunda columna: Imagen */}
-        <Grid item xs={12} md={6}>
-          <Box sx={{ width: "100%" }}>
-            <img
-              src="https://quees.mobi/wp-content/uploads/2021/06/arquitectura-moderna.jpg"
-              alt="blog"
-              style={{ width: "100%", height: "auto", objectFit: "cover" }}
-            />
+      <BlogPost {...blogData} />
+
+      <Box
+        sx={{
+          display: "flex",
+          overflowX: "auto",
+          gap: 2,
+          padding: 2,
+          width: "100%", // Ocupa todo el ancho disponible
+          flexWrap: "nowrap", // No permite que las tarjetas se bajen de línea
+          scrollbarWidth: "none", // Oculta la barra en Firefox
+          "&::-webkit-scrollbar": { display: "none" }, // Oculta la barra en Chrome y Edge
+        }}
+      >
+        {blogMiniCards.map((card, index) => (
+          <Box key={index} sx={{ minWidth: 250 }}>
+            <BlogMiniCard title={card.title} image={card.image} />
           </Box>
-        </Grid>
-      </Grid>
-      
-      {/* Segunda fila: Contenido del artículo */}
-      <Grid container spacing={4} marginTop={4}>
-        <Grid item xs={12}>
-          <Typography variant="body2" textAlign="justify" marginBottom={2}>
-            La seguridad es uno de los aspectos más importantes a tener en cuenta a la hora de comprar una propiedad. Un barrio seguro proporciona una sensación de tranquilidad a los residentes, lo cual no solo impacta en su calidad de vida, sino también en el valor de la propiedad. Un barrio con bajos índices de criminalidad atrae tanto a compradores como a inquilinos, lo que hace que las propiedades en esas áreas sean más deseables y, por lo tanto, más costosas.
-          </Typography>
-          <Typography variant="body2" textAlign="justify" marginBottom={2}>
-            Evaluar la seguridad en una zona requiere de un enfoque integral. En primer lugar, es importante investigar las estadísticas de criminalidad en el área. Muchos municipios y organizaciones locales publican datos sobre crímenes y delitos, lo que puede dar una idea clara del nivel de seguridad en un vecindario. También es fundamental observar la infraestructura del barrio: calles bien iluminadas, presencia de cámaras de seguridad y el mantenimiento de las zonas comunes son señales de que el lugar se toma en serio la seguridad.
-          </Typography>
-          <Typography variant="body2" textAlign="justify" marginBottom={2}>
-            La proximidad a servicios como estaciones de policía, bomberos y centros médicos también juega un papel clave en la percepción de seguridad de los compradores. Las zonas con fácil acceso a estos servicios tienden a ser más valoradas, ya que ofrecen respuestas rápidas ante cualquier emergencia. Además, el testimonio de los residentes actuales es invaluable. Hablar con los vecinos y conocer su experiencia en cuanto a seguridad puede proporcionar información útil que no se encuentra en las estadísticas oficiales.
-          </Typography>
-          <Typography variant="body2" textAlign="justify" marginBottom={2}>
-            Además de la seguridad general del barrio, la seguridad en la vivienda misma es otro factor relevante. Las viviendas que cuentan con sistemas de seguridad adicionales, como alarmas, cámaras de vigilancia o portones automáticos, pueden ofrecer mayor protección a los residentes. A menudo, los compradores están dispuestos a pagar un poco más por una propiedad que cuente con estas medidas adicionales de seguridad.
-          </Typography>
-          <Typography variant="body2" textAlign="justify">
-            En conclusión, la seguridad en los barrios es un factor decisivo al comprar una casa. No solo influye en la calidad de vida de los residentes, sino también en el valor de la propiedad. Es importante considerar una serie de factores, desde la seguridad en las calles hasta las características de la vivienda, para tomar una decisión informada y segura a la hora de invertir en una nueva propiedad.
-          </Typography>
-        </Grid>
-      </Grid>
+        ))}
+      </Box>
     </Container>
   );
 }

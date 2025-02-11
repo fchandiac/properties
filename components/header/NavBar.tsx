@@ -21,27 +21,61 @@ const Navbar = () => {
             <div style={styles.activeIndicator}></div>
           )}
         </li>
-        <li
-          style={styles.navItem}
-          onClick={() => router.push("/userApp/aboutUs")}
+        <Box
+          sx={{
+            display: {
+              xs: "none",
+              sm: "block",
+            },
+          }}
         >
-          NOSOTROS
-          {pathname.startsWith("/userApp/aboutUs") && (
-            <div style={styles.activeIndicator}></div>
-          )}
-        </li>
-        <li style={styles.navItem} onClick={() => router.push("/userApp/sell")}>
-          VENDE CON NOSOTROS
-          {pathname === "/userApp/sell" && (
-            <div style={styles.activeIndicator}></div>
-          )}
-        </li>
-        <li style={styles.navItem} onClick={() => router.push("/userApp/rent")}>
-          ARRIENDA TU PROPIEDAD
-          {pathname === "/userApp/rent" && (
-            <div style={styles.activeIndicator}></div>
-          )}
-        </li>
+          <li
+            style={styles.navItem}
+            onClick={() => router.push("/userApp/aboutUs")}
+          >
+            NOSOTROS
+            {pathname.startsWith("/userApp/aboutUs") && (
+              <div style={styles.activeIndicator}></div>
+            )}
+          </li>
+        </Box>
+        <Box
+          sx={{
+            display: {
+              xs: "none",
+              sm: "block",
+            },
+          }}
+        >
+          <li
+            style={styles.navItem}
+            onClick={() => router.push("/userApp/sell")}
+          >
+            VENDE CON NOSOTROS
+            {pathname === "/userApp/sell" && (
+              <div style={styles.activeIndicator}></div>
+            )}
+          </li>
+        </Box>
+        <Box
+          sx={{
+            display: {
+              xs: "none",
+              sm: "block",
+            },
+          }}
+        >
+          <li
+            style={styles.navItem}
+            onClick={() => router.push("/userApp/rent")}
+          >
+            ARRIENDA TU PROPIEDAD
+            {pathname === "/userApp/rent" && (
+              <div style={styles.activeIndicator}></div>
+            )}
+          </li>
+        </Box>
+
         <li
           style={styles.navItem}
           onClick={() => router.push("/userApp/properties")}
@@ -51,6 +85,7 @@ const Navbar = () => {
             <div style={styles.activeIndicator}></div>
           )}
         </li>
+
         <li
           style={styles.navItem}
           onClick={() => router.push("/userApp/testimonials")}
@@ -60,10 +95,7 @@ const Navbar = () => {
             <div style={styles.activeIndicator}></div>
           )}
         </li>
-        <li
-          style={styles.navItem}
-          onClick={() => router.push("/userApp/blog")}
-        >
+        <li style={styles.navItem} onClick={() => router.push("/userApp/blog")}>
           BLOG
           {pathname.startsWith("/userApp/blog") && (
             <div style={styles.activeIndicator}></div>
@@ -109,7 +141,8 @@ const styles: { [key: string]: CSSProperties } = {
     transform: "translateX(-50%)",
     width: "100%",
     height: 5,
-    background: "linear-gradient( #F2E1A1, #DBBD75, #C9A65E)",
+    //background: "linear-gradient( #F2E1A1, #DBBD75, #C9A65E)",
+    background: '#01C442',
   },
 };
 

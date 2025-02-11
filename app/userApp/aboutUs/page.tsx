@@ -30,18 +30,23 @@ const teamMembers = [
 
 const AboutUs = () => {
   return (
-    <Box sx={{ width: "100%", padding: 4 }}>
+    <Box sx={{ width: "100%", marginTop: 4 }}>
       {/* Sección Principal */}
-      <Grid container spacing={4} alignItems="center">
+      <Grid container alignItems="center" spacing={2}>
         {/* Información a la izquierda */}
         <Grid item xs={12} md={6}>
           <Typography variant="h4" fontWeight={600} mb={2}>
             Sobre Nosotros
           </Typography>
           <Typography variant="body1" textAlign="justify">
-            Somos un equipo apasionado dedicado a crear experiencias únicas.
-            Nuestra misión es brindar soluciones innovadoras y efectivas que
-            marquen la diferencia.
+            Somos un equipo apasionado dedicado a crear experiencias únicas,
+            combinando creatividad y tecnología para ofrecer soluciones
+            innovadoras y efectivas. Nos inspira el espíritu emprendedor y la
+            resiliencia de Chile, un país donde la naturaleza desafiante y la
+            historia de superación nos enseñan a reinventarnos constantemente.
+            Así como el pueblo chileno ha sabido enfrentar terremotos y
+            construir un futuro sólido, nosotros trabajamos con la misma
+            determinación para marcar la diferencia en cada proyecto.
           </Typography>
         </Grid>
 
@@ -56,10 +61,7 @@ const AboutUs = () => {
             }}
           >
             <video width="100%" autoPlay loop muted playsInline controls>
-              <source
-                src="/video.mp4"
-                type="video/mp4"
-              />
+              <source src="/video.mp4" type="video/mp4" />
               Tu navegador no soporta videos.
             </video>
           </Box>

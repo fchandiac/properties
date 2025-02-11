@@ -47,7 +47,7 @@ export default function BottomBar() {
         </IconButton>
         <IconButton
           aria-label="WhatsApp"
-          href="https://wa.me/123456789"
+          href="https://wa.me/56966072774"
           target="_blank"
           sx={{ color: "#212121", "&:hover": { color: "#25D366" } }}
         >

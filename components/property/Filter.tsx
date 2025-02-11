@@ -55,7 +55,7 @@ const regionsAndCommunes = [
 const propertyTypes = ["Casa", "Departamento", "Oficina", "Local", "Terreno"];
 
 export default function Filter() {
-  const [openFilter, setOpenFilter] = useState(false);
+  const [openFilter, setOpenFilter] = useState(true);
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCommune, setSelectedCommune] = useState("");
   const [selectedPropertyType, setSelectedPropertyType] = useState("");
