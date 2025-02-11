@@ -54,40 +54,40 @@ export default function BlogPost({
         </Grid>
       </Grid>
 
-      <ShareCard />
+      {/* <ShareCard /> */}
     </Container>
   );
 }
 
-import {
-  FacebookShareButton,
-  FacebookIcon,
-  TwitterShareButton,
-  TwitterIcon,
-  InstapaperIcon,
-  InstapaperShareButton,
-} from "react-share";
+// import {
+//   FacebookShareButton,
+//   FacebookIcon,
+//   TwitterShareButton,
+//   TwitterIcon,
+//   InstapaperIcon,
+//   InstapaperShareButton,
+// } from "react-share";
 
-const ShareCard = () => {
-  const shareUrl = window.location.href; // O la URL que quieras compartir
-  const title = "Mi Publicación Genial";
-  const imageUrl =
-    "https://akm-img-a-in.tosshub.com/businesstoday/images/story/202403/65ee8897a0986-i-want-to-sell-my-house-and-buy-two-other-residential-properties-the-capital-gain-on-it-will-be-aro-112910279-16x9.jpg?size=948:533";
+// const ShareCard = () => {
+//   const shareUrl = window.location.href; // O la URL que quieras compartir
+//   const title = "Mi Publicación Genial";
+//   const imageUrl =
+//     "https://akm-img-a-in.tosshub.com/businesstoday/images/story/202403/65ee8897a0986-i-want-to-sell-my-house-and-buy-two-other-residential-properties-the-capital-gain-on-it-will-be-aro-112910279-16x9.jpg?size=948:533";
 
-  return (
-    <div>
-      <img src={imageUrl} alt="Imagen para compartir" width="100" />
-      <div>
-        <FacebookShareButton url={shareUrl} hashtag="#MiHashtag">
-          <FacebookIcon size={32} round />
-        </FacebookShareButton>
-        <TwitterShareButton url={shareUrl} title={title}>
-          <TwitterIcon size={32} round />
-        </TwitterShareButton>
-        <InstapaperShareButton url={shareUrl} title={title}>
-          <InstapaperIcon size={32} round />
-        </InstapaperShareButton>
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <img src={imageUrl} alt="Imagen para compartir" width="100" />
+//       <div>
+//         <FacebookShareButton url={shareUrl} hashtag="#MiHashtag">
+//           <FacebookIcon size={32} round />
+//         </FacebookShareButton>
+//         <TwitterShareButton url={shareUrl} title={title}>
+//           <TwitterIcon size={32} round />
+//         </TwitterShareButton>
+//         <InstapaperShareButton url={shareUrl} title={title}>
+//           <InstapaperIcon size={32} round />
+//         </InstapaperShareButton>
+//       </div>
+//     </div>
+//   );
+// };
