@@ -1,5 +1,5 @@
 'use client'
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -7,9 +7,25 @@ import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
 import SideBar from "./SideBar";
+import { getUf } from "@/app/actions/uf";
+import moment from "moment";
 
 export default function UserAppHeader() {
   const [openSideBar, setOpenSideBar] = useState(false);
+  const [uf, setUf] = useState(0);
+
+  const fetchUf = async () => {
+    const data = await getUf();
+    const series = data.serie;
+
+    const today = moment();
+    const uf = series.find((item: { fecha: moment.MomentInput; }) => moment(item.fecha).isSame(today, 'day'));
+    setUf(uf.valor);
+  }
+
+  useEffect(() => {
+    fetchUf();
+  }, []);
 
   return (
     <>
@@ -52,9 +68,9 @@ export default function UserAppHeader() {
           justifyContent: "flex-end",
         }}
       >
-        {/* <Typography  sx={{ marginRight: 2 }}>
-            UserApp
-          </Typography> */}
+        <Typography  sx={{ marginRight: 2, fontSize: ".8rem", fontWeight: 200 }}>
+          UF hoy: {uf.toLocaleString("es-CL", { style: "currency", currency: "CLP" })}
+          </Typography>
 
         {/* Icono de menú alineado a la derecha */}
         <IconButton edge="end" color="inherit" aria-label="menu"

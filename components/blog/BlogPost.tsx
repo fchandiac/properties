@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Box, Container, Typography, Grid, Button } from "@mui/material";
+import { Box, Container, Typography, Grid } from "@mui/material";
 
 interface BlogPostProps {
   title: string;
@@ -28,13 +28,19 @@ export default function BlogPost({
 
         {/* Segunda columna: Imagen */}
         <Grid item xs={12} md={6}>
-          <Box sx={{ width: "100%" }}>
-            <img
-              src={image}
-              alt="blog"
-              style={{ width: "100%", height: "auto", objectFit: "cover" }}
-            />
-          </Box>
+          <Box
+            sx={{
+              width: "100%",
+              borderRadius: "15px", // Bordes redondeados
+              overflow: "hidden", // Evita bordes cuadrados visibles
+              boxShadow: "0px 4px 10px rgba(0,0,0,0.2)", // Sombra elegante
+              backgroundImage: `url(${image})`, // Imagen de fondo
+              backgroundSize: "cover", // Ajusta la imagen sin distorsionarla
+              backgroundPosition: "center", // Centra la imagen
+              backgroundRepeat: "no-repeat", // Evita que la imagen se repita
+              minHeight: "250px", // Altura mínima para que la imagen sea visible
+            }}
+          />
         </Grid>
       </Grid>
 
@@ -53,41 +59,6 @@ export default function BlogPost({
           ))}
         </Grid>
       </Grid>
-
-      {/* <ShareCard /> */}
     </Container>
   );
 }
-
-// import {
-//   FacebookShareButton,
-//   FacebookIcon,
-//   TwitterShareButton,
-//   TwitterIcon,
-//   InstapaperIcon,
-//   InstapaperShareButton,
-// } from "react-share";
-
-// const ShareCard = () => {
-//   const shareUrl = window.location.href; // O la URL que quieras compartir
-//   const title = "Mi Publicación Genial";
-//   const imageUrl =
-//     "https://akm-img-a-in.tosshub.com/businesstoday/images/story/202403/65ee8897a0986-i-want-to-sell-my-house-and-buy-two-other-residential-properties-the-capital-gain-on-it-will-be-aro-112910279-16x9.jpg?size=948:533";
-
-//   return (
-//     <div>
-//       <img src={imageUrl} alt="Imagen para compartir" width="100" />
-//       <div>
-//         <FacebookShareButton url={shareUrl} hashtag="#MiHashtag">
-//           <FacebookIcon size={32} round />
-//         </FacebookShareButton>
-//         <TwitterShareButton url={shareUrl} title={title}>
-//           <TwitterIcon size={32} round />
-//         </TwitterShareButton>
-//         <InstapaperShareButton url={shareUrl} title={title}>
-//           <InstapaperIcon size={32} round />
-//         </InstapaperShareButton>
-//       </div>
-//     </div>
-//   );
-// };

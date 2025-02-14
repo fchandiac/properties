@@ -8,6 +8,7 @@ import {
   FormControl,
   InputLabel,
   Grid,
+  Slider,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -16,23 +17,11 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 const regionsAndCommunes = [
   {
     region: "Región Metropolitana",
-    communes: [
-      "Santiago",
-      "Providencia",
-      "Las Condes",
-      "La Florida",
-      "Puente Alto",
-    ],
+    communes: ["Santiago", "Providencia", "Las Condes", "La Florida", "Puente Alto"],
   },
   {
     region: "Valparaíso",
-    communes: [
-      "Valparaíso",
-      "Viña del Mar",
-      "Quilpué",
-      "Villa Alemana",
-      "Concón",
-    ],
+    communes: ["Valparaíso", "Viña del Mar", "Quilpué", "Villa Alemana", "Concón"],
   },
   {
     region: "Biobío",
@@ -40,18 +29,11 @@ const regionsAndCommunes = [
   },
   {
     region: "Maule",
-    communes: [
-      "Talca",
-      "Curicó",
-      "Linares",
-      "Constitución",
-      "San Javier",
-      "Parral",
-    ],
+    communes: ["Talca", "Curicó", "Linares", "Constitución", "San Javier", "Parral"],
   },
 ];
 
-// lista de tipos de propiedad
+// Lista de tipos de propiedad
 const propertyTypes = ["Casa", "Departamento", "Oficina", "Local", "Terreno"];
 
 export default function Filter() {
@@ -60,11 +42,16 @@ export default function Filter() {
   const [selectedCommune, setSelectedCommune] = useState("");
   const [selectedPropertyType, setSelectedPropertyType] = useState("");
   const [selectedSaleRent, setSelectedSaleRent] = useState("");
+  const [priceRange, setPriceRange] = useState([50000000, 300000000]); // Rango inicial en CLP
 
   // Obtener comunas filtradas según la región seleccionada
   const communes =
-    regionsAndCommunes.find((region) => region.region === selectedRegion)
-      ?.communes || [];
+    regionsAndCommunes.find((region) => region.region === selectedRegion)?.communes || [];
+
+  // Manejar cambio en el slider
+  const handlePriceChange = (event: Event, newValue: number | number[]) => {
+    setPriceRange(newValue as number[]);
+  };
 
   return (
     <Box
@@ -85,68 +72,45 @@ export default function Filter() {
         },
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          color: "#9e9e9e",
-        }}
-      >
-        <Typography
-          fontSize={16}
-          sx={{
-            flexGrow: 1,
-          }}
-        >
+      <Box sx={{ display: "flex", justifyContent: "space-between", color: "#9e9e9e" }}>
+        <Typography fontSize={16} sx={{ flexGrow: 1 }}>
           Filtros
         </Typography>
-
         {openFilter ? (
           <ExpandLessIcon onClick={() => setOpenFilter(false)} />
         ) : (
           <ExpandMoreIcon onClick={() => setOpenFilter(true)} />
         )}
       </Box>
+
       {openFilter && (
         <Box sx={{ mt: 2 }}>
           <Grid container spacing={2}>
             <Grid item xs={6} md={4} lg={3} xl={2}>
-              {/* Filtro tipo de propiedad */}
+              {/* Filtro Venta / Arriendo */}
               <FormControl fullWidth size="small">
-                <InputLabel
-                  sx={{
-                    backgroundColor: "white",
-                    padding: "3px 5px",
-                  
-                  }}
-                >Venta / Arriendo </InputLabel>
+                <InputLabel sx={{ backgroundColor: "white", padding: "3px 5px" }}>
+                  Venta / Arriendo
+                </InputLabel>
                 <Select
                   value={selectedSaleRent}
-                  onChange={(e) => {
-                    setSelectedSaleRent(e.target.value);
-                  }}
+                  onChange={(e) => setSelectedSaleRent(e.target.value)}
                 >
                   <MenuItem value="Venta">Venta</MenuItem>
                   <MenuItem value="Arriendo">Arriendo</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
+
             <Grid item xs={6} md={4} lg={3} xl={2}>
               {/* Filtro tipo de propiedad */}
               <FormControl fullWidth size="small">
-                <InputLabel
-                  sx={{
-                    backgroundColor: "white",
-                    padding: "3px 5px",
-                  
-                  }}
-                >Tipo de propiedad</InputLabel>
+                <InputLabel sx={{ backgroundColor: "white", padding: "3px 5px" }}>
+                  Tipo de propiedad
+                </InputLabel>
                 <Select
                   value={selectedPropertyType}
-                  onChange={(e) => {
-                    setSelectedPropertyType(e.target.value);
-               
-                  }}
+                  onChange={(e) => setSelectedPropertyType(e.target.value)}
                 >
                   {propertyTypes.map((type) => (
                     <MenuItem key={type} value={type}>
@@ -156,16 +120,13 @@ export default function Filter() {
                 </Select>
               </FormControl>
             </Grid>
+
             <Grid item xs={6} md={4} lg={3} xl={2}>
               {/* Filtro por Región */}
               <FormControl fullWidth size="small">
-                <InputLabel
-                  sx={{
-                    backgroundColor: "white",
-                    padding: "3px 5px",
-                  
-                  }}
-                >Región</InputLabel>
+                <InputLabel sx={{ backgroundColor: "white", padding: "3px 5px" }}>
+                  Región
+                </InputLabel>
                 <Select
                   value={selectedRegion}
                   onChange={(e) => {
@@ -181,16 +142,13 @@ export default function Filter() {
                 </Select>
               </FormControl>
             </Grid>
+
             <Grid item xs={6} md={4} lg={3} xl={2}>
               {/* Filtro por Comuna */}
               <FormControl fullWidth size="small" disabled={!selectedRegion}>
-                <InputLabel
-                  sx={{
-                    backgroundColor: "white",
-                    padding: "3px 5px",
-                  
-                  }}
-                >Comuna</InputLabel>
+                <InputLabel sx={{ backgroundColor: "white", padding: "3px 5px" }}>
+                  Comuna
+                </InputLabel>
                 <Select
                   value={selectedCommune}
                   onChange={(e) => setSelectedCommune(e.target.value)}
@@ -202,6 +160,32 @@ export default function Filter() {
                   ))}
                 </Select>
               </FormControl>
+            </Grid>
+
+            <Grid item xs={12} md={8} lg={6} xl={4}>
+              {/* Filtro de Rango de Precios */}
+              <Typography variant="body2" sx={{ mt: 1, fontWeight: "bold" }}>
+                Rango de Precios (CLP)
+              </Typography>
+              <Slider
+                value={priceRange}
+                onChange={handlePriceChange}
+                valueLabelDisplay="auto"
+                min={10000000} // 10M CLP
+                max={1000000000} // 1B CLP
+                step={5000000} // Incremento de 5M CLP
+              />
+              <Typography variant="caption">
+                {new Intl.NumberFormat("es-CL", {
+                  style: "currency",
+                  currency: "CLP",
+                }).format(priceRange[0])}{" "}
+                -{" "}
+                {new Intl.NumberFormat("es-CL", {
+                  style: "currency",
+                  currency: "CLP",
+                }).format(priceRange[1])}
+              </Typography>
             </Grid>
           </Grid>
         </Box>

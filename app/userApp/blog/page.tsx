@@ -2,31 +2,38 @@ import React from "react";
 import { Box, Container } from "@mui/material";
 import BlogPost from "../../../components/blog/BlogPost";
 import BlogMiniCard from "@/components/blog/BlogMiniCard";
+import BlogCarousel from "@/components/blog/BlogCarousel";
 
 const blogMiniCards = [
   {
     title: "Cómo Evaluar un Barrio Antes de Comprar",
-    image: "https://i0.wp.com/www.householdpm.com.au/wp-content/uploads/2019/08/hppost-how-to-switch-to-household-propertiest-01.jpg?fit=1920%2C1080&ssl=1",
+    image:
+      "https://i0.wp.com/www.householdpm.com.au/wp-content/uploads/2019/08/hppost-how-to-switch-to-household-propertiest-01.jpg?fit=1920%2C1080&ssl=1",
   },
   {
     title: "Consejos para Invertir en Bienes Raíces",
-    image: "https://s7d9.scene7.com/is/image/ledcor/Belmont%20Reunion%2003?qlt=85&wid=480&ts=1691085180535&dpr=on,2.625",
+    image:
+      "https://s7d9.scene7.com/is/image/ledcor/Belmont%20Reunion%2003?qlt=85&wid=480&ts=1691085180535&dpr=on,2.625",
   },
   {
     title: "Errores Comunes al Comprar una Casa",
-    image: "https://i0.wp.com/www.householdpm.com.au/wp-content/uploads/2019/08/hppost-how-to-switch-to-household-propertiest-01.jpg?fit=1920%2C1080&ssl=1",
+    image:
+      "https://i0.wp.com/www.householdpm.com.au/wp-content/uploads/2019/08/hppost-how-to-switch-to-household-propertiest-01.jpg?fit=1920%2C1080&ssl=1",
   },
   {
     title: "Cómo Aumentar el Valor de tu Propiedad",
-    image: "https://s7d9.scene7.com/is/image/ledcor/Belmont%20Reunion%2003?qlt=85&wid=480&ts=1691085180535&dpr=on,2.625",
+    image:
+      "https://s7d9.scene7.com/is/image/ledcor/Belmont%20Reunion%2003?qlt=85&wid=480&ts=1691085180535&dpr=on,2.625",
   },
   {
     title: "Documentos Necesarios para Comprar una Vivienda",
-    image: "https://s7d9.scene7.com/is/image/ledcor/Belmont%20Reunion%2003?qlt=85&wid=480&ts=1691085180535&dpr=on,2.625",
+    image:
+      "https://s7d9.scene7.com/is/image/ledcor/Belmont%20Reunion%2003?qlt=85&wid=480&ts=1691085180535&dpr=on,2.625",
   },
   {
     title: "Tendencias en el Mercado Inmobiliario 2025",
-    image: "https://i0.wp.com/www.householdpm.com.au/wp-content/uploads/2019/08/hppost-how-to-switch-to-household-propertiest-01.jpg?fit=1920%2C1080&ssl=1",
+    image:
+      "https://i0.wp.com/www.householdpm.com.au/wp-content/uploads/2019/08/hppost-how-to-switch-to-household-propertiest-01.jpg?fit=1920%2C1080&ssl=1",
   },
   {
     title: "¿Comprar o Alquilar? Pros y Contras",
@@ -34,7 +41,8 @@ const blogMiniCards = [
   },
   {
     title: "La Importancia de un Buen Agente Inmobiliario",
-    image: "https://i0.wp.com/www.householdpm.com.au/wp-content/uploads/2019/08/hppost-how-to-switch-to-household-propertiest-01.jpg?fit=1920%2C1080&ssl=1",
+    image:
+      "https://i0.wp.com/www.householdpm.com.au/wp-content/uploads/2019/08/hppost-how-to-switch-to-household-propertiest-01.jpg?fit=1920%2C1080&ssl=1",
   },
   {
     title: "Cómo Negociar el Precio de una Casa",
@@ -86,14 +94,15 @@ export default function BlogPage() {
           "&::-webkit-scrollbar": { display: "none" }, // Oculta la barra en Chrome y Edge
         }}
       >
-        {blogMiniCards.map((card, index) => (
+        {/* {blogMiniCards.map((card, index) => (
           <Box key={index} sx={{ minWidth: 250 }}>
             <BlogMiniCard title={card.title} image={card.image} />
           </Box>
-        ))}
+        ))} */}
+         <BlogCarousel />
       </Box>
 
-      
+     
     </Container>
   );
 }

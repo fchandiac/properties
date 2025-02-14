@@ -1,8 +1,8 @@
-import React from "react";
 import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
 import HomeIcon from "@mui/icons-material/Home"; // Importa el ícono de inicio
 import { usePathname } from "next/navigation";
+
 
 const Navbar = () => {
   const router = useRouter();
@@ -143,6 +143,7 @@ const styles: { [key: string]: CSSProperties } = {
     height: 5,
     //background: "linear-gradient( #F2E1A1, #DBBD75, #C9A65E)",
     background: '#01C442',
+    //backgroundColor: "#016330",
   },
 };
 

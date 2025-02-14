@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -19,6 +19,17 @@ import KingBedIcon from "@mui/icons-material/KingBed";
 import GarageIcon from "@mui/icons-material/Garage";
 import HomeIcon from "@mui/icons-material/Home";
 import TerrainIcon from "@mui/icons-material/Terrain";
+import InputAdornment from "@mui/material/InputAdornment";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  LinkedinShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappIcon,
+  LinkedinIcon,
+} from "react-share";
 
 const PropertyPage = ({
   builtArea = 120,
@@ -29,17 +40,17 @@ const PropertyPage = ({
   category = "Casa",
   type = 0,
 }) => {
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
   // Imágenes por defecto
   const defaultImages = [
     "https://www.vinasconstructora.com/wp-content/uploads/2024/06/casa-modernas-minimalistas.jpg",
     "https://soyarquitectura.mx/wp-content/uploads/2024/06/portada-despacho-arquitectos-render-14.webp",
     "https://quees.mobi/wp-content/uploads/2021/06/arquitectura-moderna.jpg",
   ];
+
+  const [url, setUrl] = useState("");
+  useEffect(() => {
+    setUrl(window.location.href);
+  }, []);
 
   return (
     <Box
@@ -158,8 +169,18 @@ const PropertyPage = ({
           margin="dense"
           type="email"
         />
-        <TextField fullWidth label="Teléfono" margin="dense" type="tel" />
-        <TextField fullWidth label="WhatsApp" margin="dense" type="tel" />
+        <TextField
+          fullWidth
+          label="Teléfono"
+          margin="dense"
+          type="tel"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">+56</InputAdornment>
+            ),
+          }}
+        />
+
         <TextField
           fullWidth
           label="Mensaje"
@@ -171,6 +192,24 @@ const PropertyPage = ({
         <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
           Agendar Visita
         </Button>
+
+ 
+          <FacebookShareButton url={url}>
+            <FacebookIcon size={32} round />
+          </FacebookShareButton>
+
+          <TwitterShareButton url={url} title="Mira esta propiedad en CasaMia">
+            <TwitterIcon size={32} round />
+          </TwitterShareButton>
+
+          <WhatsappShareButton url={url} title="Mira esta propiedad en CasaMia">
+            <WhatsappIcon size={32} round />
+          </WhatsappShareButton>
+
+          <LinkedinShareButton url={url}>
+            <LinkedinIcon size={32} round />
+          </LinkedinShareButton>
+     
       </Box>
     </Box>
   );
