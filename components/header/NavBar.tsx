@@ -1,3 +1,4 @@
+import React from "react";
 import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
 import HomeIcon from "@mui/icons-material/Home"; // Importa el ícono de inicio

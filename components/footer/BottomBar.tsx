@@ -3,6 +3,7 @@ import { Box, Typography, IconButton } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import YouTubeIcon from '@mui/icons-material/YouTube';
 
 export default function BottomBar() {
   return (
@@ -45,13 +46,22 @@ export default function BottomBar() {
         >
           <InstagramIcon fontSize="large" />
         </IconButton>
-        <IconButton
+        {/* <IconButton
           aria-label="WhatsApp"
           href="https://wa.me/56966072774"
           target="_blank"
           sx={{ color: "#212121", "&:hover": { color: "#25D366" } }}
         >
           <WhatsAppIcon fontSize="large" />
+        </IconButton> */}
+
+        <IconButton
+          aria-label="YouTube"
+          href="https://www.youtube.com"
+          target="_blank"
+          sx={{ color: "#212121", "&:hover": { color: "#FF0000" } }}
+        >
+          <YouTubeIcon fontSize="large" />
         </IconButton>
       </Box>
     </Box>
