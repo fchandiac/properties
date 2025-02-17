@@ -7,8 +7,8 @@ const teamMembers = [
     img: "https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg",
   },
   {
-    name: "María González",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeMhvCmuhXzaHHS9vP_zmtn3muM5N1j34OhTCvtEMvUQrUqcaiQSWUpL9DQQRWxJ088kc&usqp=CAU",
+    name: "",
+    img: "/logo-long.png",
   },
   {
     name: "Carlos López",
@@ -27,6 +27,8 @@ const teamMembers = [
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeMhvCmuhXzaHHS9vP_zmtn3muM5N1j34OhTCvtEMvUQrUqcaiQSWUpL9DQQRWxJ088kc&usqp=CAU",
   },
 ];
+
+const sizeMap = [6, 3, 6, 3, 3, 3]; // Define el tamaño de cada elemento
 
 const AboutUs = () => {
   return (
@@ -79,88 +81,29 @@ const AboutUs = () => {
         Nuestro Equipo
       </Typography>
 
-      {/* Galería de imágenes con efecto hover */}
       <Grid container spacing={2} justifyContent="center">
         {teamMembers.map((member, index) => (
-          // <Grid item xs={6} sm={4} md={2} key={index}>
-          //   <Card
-          //     sx={{
-          //       borderRadius: 2,
-          //       overflow: "hidden",
-          //       position: "relative",
-          //       "&:hover img": { filter: "none" }, // Quita el B&W en hover
-          //     }}
-          //   >
-          //     <CardMedia
-          //       component="img"
-          //       image={member.img}
-          //       alt={member.name}
-          //       sx={{
-          //         filter: "grayscale(100%)", // Blanco y negro por defecto
-          //         transition: "0.3s ease-in-out",
-          //         width: "100%",
-          //         height: 120,
-          //       }}
-          //     />
-          //   </Card>
+          <Box
+            sx={{
+              width: "20vw",
 
-          //   <Typography fontSize={18} fontWeight={"bold"}>
-          //     Nombre integrante
-          //   </Typography>
-          //   <Typography fontSize={14} fontWeight={300}>
-          //     Cargo
-          //   </Typography>
-          //   <Typography fontSize={14} fontWeight={300}>
-          //     correo@mail.com
-          //   </Typography>
-          // </Grid>
-          <Grid item xs={6} sm={4} lg={4} key={index}>
-          {/* Si es la posición central, mostrar el logo */}
-          {index === 4 ? (
-            <Box display={{ xs: "none", md: "block" }} textAlign="center">
-              <CardMedia
-                component="img"
-                src="/logo-long.png"
-                alt="Logo"
-                sx={{
-                  width: 120,
-                  height: 120,
-                  mx: "auto",
-                  objectFit: "contain",
-                
-                }}
-              />
-            </Box>
-          ) : (
-            <Box textAlign="center">
-              <Card
-                sx={{
-                  borderRadius: 2,
-                  overflow: "hidden",
-                  position: "relative",
-                  "&:hover img": { filter: "none" }, // Quita el B&W en hover
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  image={member.img}
-                  alt={member.name}
-                  sx={{
-                    filter: "grayscale(100%)", // Blanco y negro por defecto
-                    transition: "0.3s ease-in-out",
-                    width: "100%",
-                    height: 120,
-                  }}
-                />
-              </Card>
-
-              <Typography fontSize={18} fontWeight={"bold"}>
-                {member.name}
-              </Typography>
-      
-            </Box>
-          )}
-        </Grid>
+              height: sizeMap[index] * 40, // Doble de altura si es grande
+              backgroundImage: `url(${member.img})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              borderRadius: 2,
+              margin: 1,
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "center",
+              p: 1,
+              color: "white",
+              fontWeight: "bold",
+              textShadow: "1px 1px 3px rgba(0,0,0,0.7)",
+            }}
+          >
+            <Typography variant="body1">{member.name}</Typography>
+          </Box>
         ))}
       </Grid>
     </Box>
@@ -168,6 +111,3 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
-
-
-
