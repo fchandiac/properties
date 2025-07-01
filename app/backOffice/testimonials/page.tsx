@@ -137,7 +137,9 @@ export default function TestimonialsManagement() {
     serviceType: "Compra",
     propertyTitle: "",
     agent: "",
+    image: null as File | null, // Nuevo campo para la imagen
   });
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const filteredTestimonials = mockTestimonials.filter((testimonial) =>
     testimonial.clientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -154,6 +156,7 @@ export default function TestimonialsManagement() {
       serviceType: "Compra",
       propertyTitle: "",
       agent: "",
+      image: null,
     });
     setActionType("add");
     setOpenDialog(true);
@@ -168,6 +171,7 @@ export default function TestimonialsManagement() {
       serviceType: testimonial.serviceType,
       propertyTitle: testimonial.propertyTitle,
       agent: testimonial.agent,
+      image: null,
     });
     setActionType("edit");
     setOpenDialog(true);
@@ -199,6 +203,18 @@ export default function TestimonialsManagement() {
   const handleSave = () => {
     console.log("Saving testimonial:", formData);
     handleCloseDialog();
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
+    if (file) {
+      setFormData({ ...formData, image: file });
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const approvedCount = mockTestimonials.filter(t => t.status === "Aprobado").length;
@@ -554,6 +570,31 @@ export default function TestimonialsManagement() {
                   value={formData.comment}
                   onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
                 />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Button
+                  variant="outlined"
+                  component="label"
+                  fullWidth
+                >
+                  {formData.image ? "Cambiar Imagen" : "Agregar Imagen"}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    hidden
+                    onChange={handleImageChange}
+                  />
+                </Button>
+                {(imagePreview || (actionType === "edit" && selectedTestimonial?.image)) && (
+                  <Box mt={2}>
+                    <Typography variant="caption">Vista previa:</Typography>
+                    <img
+                      src={imagePreview || selectedTestimonial?.image}
+                      alt="preview"
+                      style={{ width: 120, height: 120, objectFit: "cover", borderRadius: 8 }}
+                    />
+                  </Box>
+                )}
               </Grid>
             </Grid>
           )}

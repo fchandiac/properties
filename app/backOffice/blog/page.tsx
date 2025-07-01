@@ -62,6 +62,8 @@ const mockArticles = [
     status: "Publicado",
     views: 1250,
     likes: 89,
+    comments: 12, // Simulado
+    avgTime: 180, // segundos, simulado
     featured: true,
   },
   {
@@ -80,6 +82,8 @@ const mockArticles = [
     status: "Publicado",
     views: 892,
     likes: 45,
+    comments: 7, // Simulado
+    avgTime: 120, // segundos, simulado
     featured: false,
   },
   {
@@ -98,6 +102,8 @@ const mockArticles = [
     status: "Programado",
     views: 0,
     likes: 0,
+    comments: 0, // Simulado
+    avgTime: 0, // segundos, simulado
     featured: false,
   },
   {
@@ -116,6 +122,8 @@ const mockArticles = [
     status: "Borrador",
     views: 0,
     likes: 0,
+    comments: 0, // Simulado
+    avgTime: 0, // segundos, simulado
     featured: false,
   },
 ];
@@ -410,17 +418,20 @@ export default function BlogManagement() {
                       }}
                     />
                     <Box>
-                      <Typography variant="body2" fontWeight="medium">
-                        {article.title}
+                      <span style={{ display: 'flex', alignItems: 'center' }}>
+                        <Typography variant="body2" fontWeight="medium" component="span">
+                          {article.title}
+                        </Typography>
                         {article.featured && (
                           <Chip
                             label="DESTACADO"
                             color="warning"
                             size="small"
                             sx={{ ml: 1 }}
+                            component="span"
                           />
                         )}
-                      </Typography>
+                      </span>
                       <Typography variant="caption" color="textSecondary">
                         {article.excerpt.substring(0, 80)}...
                       </Typography>
@@ -474,13 +485,25 @@ export default function BlogManagement() {
                     <Stack direction="row" spacing={1} alignItems="center">
                       <ViewIcon fontSize="small" color="action" />
                       <Typography variant="caption">
-                        {article.views.toLocaleString()}
+                        {article.views.toLocaleString()} vistas
                       </Typography>
                     </Stack>
                     <Stack direction="row" spacing={1} alignItems="center">
                       <ThumbUp fontSize="small" color="action" />
                       <Typography variant="caption">
-                        {article.likes}
+                        {article.likes} likes
+                      </Typography>
+                    </Stack>
+                    <Stack direction="row" spacing={1} alignItems="center">
+                      <Person fontSize="small" color="action" />
+                      <Typography variant="caption">
+                        {article.comments} comentarios
+                      </Typography>
+                    </Stack>
+                    <Stack direction="row" spacing={1} alignItems="center">
+                      <Schedule fontSize="small" color="action" />
+                      <Typography variant="caption">
+                        {article.avgTime ? `${article.avgTime} seg. promedio` : '—'}
                       </Typography>
                     </Stack>
                   </Stack>

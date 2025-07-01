@@ -46,6 +46,7 @@ const menuItems = [
   { text: "Slider", icon: <ViewCarousel />, path: "/backOffice/slider" },
   { text: "Tipos Propiedad", icon: <Category />, path: "/backOffice/categories" },
   { text: "Reportes", icon: <Analytics />, path: "/backOffice/reports" },
+  { text: "Sobre Nosotros", icon: <Description />, path: "/backOffice/aboutUs" }, // NUEVO
   { text: "Configuración", icon: <Settings />, path: "/backOffice/settings" },
 ];
 

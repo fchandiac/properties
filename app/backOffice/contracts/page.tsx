@@ -41,6 +41,7 @@ import {
   CalendarToday,
   Person,
   Description,
+  Delete,
 } from "@mui/icons-material";
 
 // Mock data for contracts
@@ -61,6 +62,10 @@ const mockSalesContracts = [
       { date: "2024-01-15", amount: 15000000, type: "Pie" },
       { date: "2024-02-15", amount: 135000000, type: "Crédito" },
     ],
+    documents: [
+      { name: "Título de propiedad.pdf", type: "Título", url: "/public/prop.png" },
+      { name: "Plano casa.pdf", type: "Plano", url: "/public/prop.png" },
+    ],
   },
   {
     id: 2,
@@ -77,6 +82,7 @@ const mockSalesContracts = [
     payments: [
       { date: "2024-01-10", amount: 9500000, type: "Pie" },
     ],
+    documents: [],
   },
 ];
 
@@ -100,6 +106,9 @@ const mockRentalContracts = [
       { date: "2024-02-01", amount: 800000, type: "Mes 2", status: "Pagado" },
       { date: "2024-03-01", amount: 800000, type: "Mes 3", status: "Pendiente" },
     ],
+    documents: [
+      { name: "Contrato arriendo.pdf", type: "Contrato", url: "/public/prop.png" },
+    ],
   },
   {
     id: 2,
@@ -119,6 +128,7 @@ const mockRentalContracts = [
       { date: "2024-02-01", amount: 1200000, type: "Mes 1", status: "Pagado" },
       { date: "2024-03-01", amount: 1200000, type: "Mes 2", status: "Atrasado" },
     ],
+    documents: [],
   },
 ];
 
@@ -184,6 +194,7 @@ export default function ContractsManagement() {
     date: new Date().toISOString().split('T')[0],
     commission: "",
   });
+  const [docPreviews, setDocPreviews] = useState<{ name: string; type: string; url: string }[]>([]);
 
   // Mock data for dropdowns
   const mockProperties = [
@@ -229,6 +240,7 @@ export default function ContractsManagement() {
         date: contract.date,
         commission: contract.commission?.toString() || "",
       });
+      setDocPreviews(contract.documents || []);
     } else {
       setEditingContract(null);
       setContractType(type || "venta");
@@ -250,6 +262,7 @@ export default function ContractsManagement() {
         date: new Date().toISOString().split('T')[0],
         commission: "",
       });
+      setDocPreviews([]);
     }
     setOpenDialog(true);
   };
@@ -294,6 +307,23 @@ export default function ContractsManagement() {
   const pendingPayments = mockRentalContracts.reduce((acc, contract) => 
     acc + contract.payments.filter(p => p.status === "Pendiente" || p.status === "Atrasado").length, 0
   );
+
+  const handleAddDocument = (e: React.ChangeEvent<HTMLInputElement>, docType: string) => {
+    const files = e.target.files ? Array.from(e.target.files) : [];
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setDocPreviews((prev) => [
+          ...prev,
+          { name: file.name, type: docType, url: reader.result as string },
+        ]);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+  const handleRemoveDocument = (idx: number) => {
+    setDocPreviews((prev) => prev.filter((_, i) => i !== idx));
+  };
 
   return (
     <Box>
@@ -756,6 +786,67 @@ export default function ContractsManagement() {
               }}
               required
             />
+
+            <Box>
+              <Typography variant="subtitle1" sx={{ mb: 1 }}>
+                Documentos asociados
+              </Typography>
+              <Stack direction="row" spacing={2} flexWrap="wrap" sx={{ mb: 2 }}>
+                {docPreviews.length === 0 && (
+                  <Typography variant="caption" color="textSecondary">
+                    No hay documentos cargados.
+                  </Typography>
+                )}
+                {docPreviews.map((doc, idx) => (
+                  <Box key={idx} sx={{ position: 'relative', display: 'inline-block', minWidth: 120 }}>
+                    <img
+                      src={doc.url}
+                      alt={doc.name}
+                      style={{ width: 60, height: 60, objectFit: 'cover', borderRadius: 4, border: '1px solid #ccc' }}
+                    />
+                    <Typography variant="caption" display="block">{doc.name}</Typography>
+                    <Typography variant="caption" color="textSecondary" display="block">{doc.type}</Typography>
+                    <IconButton
+                      size="small"
+                      color="error"
+                      sx={{ position: 'absolute', top: 0, right: 0 }}
+                      onClick={() => handleRemoveDocument(idx)}
+                    >
+                      <Delete fontSize="small" />
+                    </IconButton>
+                  </Box>
+                ))}
+              </Stack>
+              <Stack direction="row" spacing={2}>
+                <Button variant="outlined" component="label">
+                  Agregar Título
+                  <input
+                    type="file"
+                    accept="application/pdf,image/*"
+                    hidden
+                    onChange={(e) => handleAddDocument(e, "Título")}
+                  />
+                </Button>
+                <Button variant="outlined" component="label">
+                  Agregar Plano
+                  <input
+                    type="file"
+                    accept="application/pdf,image/*"
+                    hidden
+                    onChange={(e) => handleAddDocument(e, "Plano")}
+                  />
+                </Button>
+                <Button variant="outlined" component="label">
+                  Agregar Contrato
+                  <input
+                    type="file"
+                    accept="application/pdf,image/*"
+                    hidden
+                    onChange={(e) => handleAddDocument(e, "Contrato")}
+                  />
+                </Button>
+              </Stack>
+            </Box>
           </Stack>
         </DialogContent>
         <DialogActions>

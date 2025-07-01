@@ -34,6 +34,7 @@ import {
   Search,
   Add,
   FilterList,
+  Schedule,
 } from "@mui/icons-material";
 
 // Mock data for properties
@@ -42,6 +43,7 @@ const mockProperties = [
     id: 1,
     title: "Casa en Las Condes",
     type: "Casa",
+    operation: "Venta", // Nuevo campo
     status: "Activa",
     price: 150000000,
     uf: 3902,
@@ -51,11 +53,20 @@ const mockProperties = [
     area: 120,
     agent: "Juan Pérez",
     created: "2024-01-15",
+    photos: [
+      "/public/prop.png",
+      "/public/prop.png"
+    ],
+    history: [
+      { date: "2024-01-10", field: "precio", oldValue: 160000000, newValue: 150000000 },
+      { date: "2024-01-12", field: "estado", oldValue: "Pendiente", newValue: "Activa" },
+    ],
   },
   {
     id: 2,
     title: "Departamento en Providencia",
     type: "Departamento",
+    operation: "Arriendo", // Nuevo campo
     status: "Vendida",
     price: 95000000,
     uf: 2470,
@@ -65,11 +76,18 @@ const mockProperties = [
     area: 80,
     agent: "María González",
     created: "2024-01-10",
+    photos: [
+      "/public/prop.png"
+    ],
+    history: [
+      { date: "2024-01-05", field: "estado", oldValue: "Pendiente", newValue: "Vendida" },
+    ],
   },
   {
     id: 3,
     title: "Casa en Ñuñoa",
     type: "Casa",
+    operation: "Venta", // Nuevo campo
     status: "Pendiente",
     price: 120000000,
     uf: 3121,
@@ -79,6 +97,8 @@ const mockProperties = [
     area: 150,
     agent: "Carlos Rodríguez",
     created: "2024-01-08",
+    photos: [],
+    history: [],
   },
 ];
 
@@ -104,6 +124,7 @@ export default function PropertiesManagement() {
   const [formData, setFormData] = useState({
     title: "",
     type: "",
+    operation: "Venta", // Nuevo campo
     status: "Activa",
     price: "",
     uf: "",
@@ -112,8 +133,22 @@ export default function PropertiesManagement() {
     bathrooms: "",
     area: "",
     agent: "",
+    photos: [] as (string | File)[], // Nuevo campo
+  });
+  const [photoPreviews, setPhotoPreviews] = useState<string[]>([]);
+  const [filters, setFilters] = useState({
+    minPrice: '',
+    maxPrice: '',
+    operation: '',
+    address: '',
+    startDate: '',
+    endDate: '',
   });
   const [properties] = useState(mockProperties);
+  const [historyDialogOpen, setHistoryDialogOpen] = useState(false);
+  const [selectedHistory, setSelectedHistory] = useState<any[]>([]);
+  const [viewDialogOpen, setViewDialogOpen] = useState(false);
+  const [viewingProperty, setViewingProperty] = useState<any>(null);
 
   const handleOpenDialog = (property?: any) => {
     if (property) {
@@ -121,6 +156,7 @@ export default function PropertiesManagement() {
       setFormData({
         title: property.title,
         type: property.type,
+        operation: property.operation, // Nuevo campo
         status: property.status,
         price: property.price.toString(),
         uf: property.uf.toString(),
@@ -129,12 +165,15 @@ export default function PropertiesManagement() {
         bathrooms: property.bathrooms.toString(),
         area: property.area.toString(),
         agent: property.agent,
+        photos: property.photos || [],
       });
+      setPhotoPreviews(property.photos || []);
     } else {
       setEditingProperty(null);
       setFormData({
         title: "",
         type: "",
+        operation: "Venta", // Nuevo campo
         status: "Activa",
         price: "",
         uf: "",
@@ -143,7 +182,9 @@ export default function PropertiesManagement() {
         bathrooms: "",
         area: "",
         agent: "",
+        photos: [],
       });
+      setPhotoPreviews([]);
     }
     setOpenDialog(true);
   };
@@ -166,11 +207,73 @@ export default function PropertiesManagement() {
     }));
   };
 
-  const filteredProperties = properties.filter((property) =>
-    property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    property.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    property.agent.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleFilterChange = (field: string, value: string) => {
+    setFilters(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleAddPhotos = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files ? Array.from(e.target.files) : [];
+    const newPreviews: string[] = [];
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhotoPreviews((prev) => [...prev, reader.result as string]);
+      };
+      reader.readAsDataURL(file);
+    });
+    setFormData((prev) => ({
+      ...prev,
+      photos: [...prev.photos, ...files],
+    }));
+  };
+
+  const handleRemovePhoto = (idx: number) => {
+    setPhotoPreviews((prev) => prev.filter((_, i) => i !== idx));
+    setFormData((prev) => ({
+      ...prev,
+      photos: prev.photos.filter((_, i) => i !== idx),
+    }));
+  };
+
+  const handleOpenHistory = (property: any) => {
+    setSelectedHistory(property.history || []);
+    setHistoryDialogOpen(true);
+  };
+  const handleCloseHistory = () => {
+    setHistoryDialogOpen(false);
+    setSelectedHistory([]);
+  };
+
+  const handleViewProperty = (property: any) => {
+    setViewingProperty(property);
+    setViewDialogOpen(true);
+  };
+  const handleCloseView = () => {
+    setViewDialogOpen(false);
+    setViewingProperty(null);
+  };
+
+  const filteredProperties = properties.filter((property) => {
+    const matchesSearch =
+      property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      property.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      property.agent.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesOperation = filters.operation ? property.operation === filters.operation : true;
+    const matchesAddress = filters.address ? property.address.toLowerCase().includes(filters.address.toLowerCase()) : true;
+    const matchesMinPrice = filters.minPrice ? property.price >= parseInt(filters.minPrice) : true;
+    const matchesMaxPrice = filters.maxPrice ? property.price <= parseInt(filters.maxPrice) : true;
+    const matchesStartDate = filters.startDate ? property.created >= filters.startDate : true;
+    const matchesEndDate = filters.endDate ? property.created <= filters.endDate : true;
+    return (
+      matchesSearch &&
+      matchesOperation &&
+      matchesAddress &&
+      matchesMinPrice &&
+      matchesMaxPrice &&
+      matchesStartDate &&
+      matchesEndDate
+    );
+  });
 
   return (
     <Box>
@@ -195,7 +298,7 @@ export default function PropertiesManagement() {
 
       {/* Search and Filters */}
       <Paper sx={{ p: 2, mb: 3 }}>
-        <Stack direction="row" spacing={2} alignItems="center">
+        <Stack direction="column" spacing={2}>
           <TextField
             placeholder="Buscar propiedades..."
             variant="outlined"
@@ -209,14 +312,63 @@ export default function PropertiesManagement() {
                 </InputAdornment>
               ),
             }}
-            sx={{ flexGrow: 1 }}
+            sx={{ minWidth: 200 }}
           />
-          <Button
-            variant="outlined"
-            startIcon={<FilterList />}
-          >
-            Filtros
-          </Button>
+          <Stack direction="row" spacing={2} flexWrap="wrap">
+            <FormControl size="small" sx={{ minWidth: 120 }}>
+              <InputLabel>Operación</InputLabel>
+              <Select
+                value={filters.operation}
+                label="Operación"
+                onChange={(e) => handleFilterChange('operation', e.target.value)}
+              >
+                <MenuItem value="">Todas</MenuItem>
+                <MenuItem value="Venta">Venta</MenuItem>
+                <MenuItem value="Arriendo">Arriendo</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              label="Ubicación"
+              size="small"
+              value={filters.address}
+              onChange={(e) => handleFilterChange('address', e.target.value)}
+              sx={{ minWidth: 140 }}
+            />
+            <TextField
+              label="Precio mín."
+              size="small"
+              type="number"
+              value={filters.minPrice}
+              onChange={(e) => handleFilterChange('minPrice', e.target.value)}
+              sx={{ minWidth: 110 }}
+            />
+            <TextField
+              label="Precio máx."
+              size="small"
+              type="number"
+              value={filters.maxPrice}
+              onChange={(e) => handleFilterChange('maxPrice', e.target.value)}
+              sx={{ minWidth: 110 }}
+            />
+            <TextField
+              label="Fecha desde"
+              size="small"
+              type="date"
+              value={filters.startDate}
+              onChange={(e) => handleFilterChange('startDate', e.target.value)}
+              InputLabelProps={{ shrink: true }}
+              sx={{ minWidth: 140 }}
+            />
+            <TextField
+              label="Fecha hasta"
+              size="small"
+              type="date"
+              value={filters.endDate}
+              onChange={(e) => handleFilterChange('endDate', e.target.value)}
+              InputLabelProps={{ shrink: true }}
+              sx={{ minWidth: 140 }}
+            />
+          </Stack>
         </Stack>
       </Paper>
 
@@ -227,6 +379,7 @@ export default function PropertiesManagement() {
             <TableRow sx={{ backgroundColor: "#f5f5f5" }}>
               <TableCell><strong>Título</strong></TableCell>
               <TableCell><strong>Tipo</strong></TableCell>
+              <TableCell><strong>Operación</strong></TableCell>
               <TableCell><strong>Estado</strong></TableCell>
               <TableCell><strong>Precio</strong></TableCell>
               <TableCell><strong>Ubicación</strong></TableCell>
@@ -245,6 +398,7 @@ export default function PropertiesManagement() {
                   </Typography>
                 </TableCell>
                 <TableCell>{property.type}</TableCell>
+                <TableCell>{property.operation}</TableCell>
                 <TableCell>
                   <Chip
                     label={property.status}
@@ -270,7 +424,7 @@ export default function PropertiesManagement() {
                 <TableCell>{property.created}</TableCell>
                 <TableCell align="center">
                   <Stack direction="row" spacing={1}>
-                    <IconButton size="small" color="primary">
+                    <IconButton size="small" color="primary" onClick={() => handleViewProperty(property)}>
                       <Visibility fontSize="small" />
                     </IconButton>
                     <IconButton size="small" color="info" onClick={() => handleOpenDialog(property)}>
@@ -278,6 +432,9 @@ export default function PropertiesManagement() {
                     </IconButton>
                     <IconButton size="small" color="error">
                       <Delete fontSize="small" />
+                    </IconButton>
+                    <IconButton size="small" color="secondary" onClick={() => handleOpenHistory(property)}>
+                      <Schedule fontSize="small" />
                     </IconButton>
                   </Stack>
                 </TableCell>
@@ -334,6 +491,19 @@ export default function PropertiesManagement() {
                   <MenuItem value="Departamento">Departamento</MenuItem>
                   <MenuItem value="Oficina">Oficina</MenuItem>
                   <MenuItem value="Local Comercial">Local Comercial</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel>Operación</InputLabel>
+                <Select
+                  value={formData.operation}
+                  onChange={(e) => handleFormChange("operation", e.target.value)}
+                  label="Operación"
+                >
+                  <MenuItem value="Venta">Venta</MenuItem>
+                  <MenuItem value="Arriendo">Arriendo</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -418,6 +588,45 @@ export default function PropertiesManagement() {
                 onChange={(e) => handleFormChange("agent", e.target.value)}
               />
             </Grid>
+            <Grid item xs={12}>
+              <Typography variant="subtitle1" sx={{ mb: 1 }}>
+                Fotos de la propiedad
+              </Typography>
+              <Stack direction="row" spacing={2} flexWrap="wrap" sx={{ mb: 2 }}>
+                {photoPreviews.length === 0 && (
+                  <Typography variant="caption" color="textSecondary">
+                    No hay fotos cargadas.
+                  </Typography>
+                )}
+                {photoPreviews.map((src, idx) => (
+                  <Box key={idx} sx={{ position: 'relative', display: 'inline-block' }}>
+                    <img
+                      src={src}
+                      alt={`Foto ${idx + 1}`}
+                      style={{ width: 100, height: 70, objectFit: 'cover', borderRadius: 4, border: '1px solid #ccc' }}
+                    />
+                    <IconButton
+                      size="small"
+                      color="error"
+                      sx={{ position: 'absolute', top: 0, right: 0 }}
+                      onClick={() => handleRemovePhoto(idx)}
+                    >
+                      <Delete fontSize="small" />
+                    </IconButton>
+                  </Box>
+                ))}
+              </Stack>
+              <Button variant="outlined" component="label">
+                Agregar fotos
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  hidden
+                  onChange={handleAddPhotos}
+                />
+              </Button>
+            </Grid>
           </Grid>
         </DialogContent>
         <DialogActions>
@@ -427,6 +636,83 @@ export default function PropertiesManagement() {
           <Button onClick={handleSaveProperty} color="primary">
             {editingProperty ? "Guardar Cambios" : "Crear Propiedad"}
           </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Historial de cambios Dialog */}
+      <Dialog open={historyDialogOpen} onClose={handleCloseHistory} maxWidth="sm" fullWidth>
+        <DialogTitle>Historial de Cambios</DialogTitle>
+        <DialogContent>
+          {selectedHistory.length === 0 ? (
+            <Typography variant="body2" color="textSecondary">No hay historial para esta propiedad.</Typography>
+          ) : (
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell><strong>Fecha</strong></TableCell>
+                  <TableCell><strong>Campo</strong></TableCell>
+                  <TableCell><strong>Valor Anterior</strong></TableCell>
+                  <TableCell><strong>Valor Nuevo</strong></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {selectedHistory.map((h, idx) => (
+                  <TableRow key={idx}>
+                    <TableCell>{h.date}</TableCell>
+                    <TableCell>{h.field}</TableCell>
+                    <TableCell>{h.oldValue}</TableCell>
+                    <TableCell>{h.newValue}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseHistory}>Cerrar</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Visualización de Propiedad Dialog */}
+      <Dialog open={viewDialogOpen} onClose={handleCloseView} maxWidth="md" fullWidth>
+        <DialogTitle>Detalle de la Propiedad</DialogTitle>
+        <DialogContent>
+          {viewingProperty && (
+            <Box>
+              <Typography variant="h6" sx={{ mb: 2 }}>{viewingProperty.title}</Typography>
+              <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
+                {(viewingProperty.photos && viewingProperty.photos.length > 0) ? (
+                  viewingProperty.photos.map((src: string, idx: number) => (
+                    <Box key={idx} sx={{ position: 'relative', display: 'inline-block' }}>
+                      <img
+                        src={src}
+                        alt={`Foto ${idx + 1}`}
+                        style={{ width: 120, height: 90, objectFit: 'cover', borderRadius: 4, border: '1px solid #ccc' }}
+                      />
+                    </Box>
+                  ))
+                ) : (
+                  <Typography variant="caption" color="textSecondary">
+                    No hay fotos para esta propiedad.
+                  </Typography>
+                )}
+              </Stack>
+              <Typography variant="body2"><strong>Tipo:</strong> {viewingProperty.type}</Typography>
+              <Typography variant="body2"><strong>Operación:</strong> {viewingProperty.operation}</Typography>
+              <Typography variant="body2"><strong>Estado:</strong> {viewingProperty.status}</Typography>
+              <Typography variant="body2"><strong>Precio:</strong> ${viewingProperty.price}</Typography>
+              <Typography variant="body2"><strong>UF:</strong> {viewingProperty.uf}</Typography>
+              <Typography variant="body2"><strong>Dirección:</strong> {viewingProperty.address}</Typography>
+              <Typography variant="body2"><strong>Dormitorios:</strong> {viewingProperty.bedrooms}</Typography>
+              <Typography variant="body2"><strong>Baños:</strong> {viewingProperty.bathrooms}</Typography>
+              <Typography variant="body2"><strong>Área:</strong> {viewingProperty.area} m²</Typography>
+              <Typography variant="body2"><strong>Agente:</strong> {viewingProperty.agent}</Typography>
+              <Typography variant="body2"><strong>Fecha:</strong> {viewingProperty.created}</Typography>
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseView}>Cerrar</Button>
         </DialogActions>
       </Dialog>
     </Box>
