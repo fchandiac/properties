@@ -1,0 +1,84 @@
+Propiedades:
+
+ 1.⁠ ⁠Agregar foto en TESTIMONIOS (editar)
+
+ 2.⁠ ⁠Agregar en la sección PROPIEDADES el campo si fue arriendo, o venta de propiedades.
+
+ 3.⁠ ⁠Poder realizar filtro (por precio, fecha, arriendo, venta, ubicación etc)
+
+ 4.⁠ ⁠Artículos más populares (vistas, tiempo de permanencia, comentarios). BLOG
+
+ 5.⁠ ⁠Carga masiva de propiedades (Arriendo o venta) ?????
+
+ 6.⁠ ⁠Ver detalles de fotos en la sección de PROPIEDADES y poder editar agregar/eliminar
+
+ 7.⁠ ⁠Historial de cambios de la propiedad (precio, estado).
+
+ 8.⁠ ⁠Agregar gestión de documentos (títulos, planos etc) - CONTRATOS
+
+ 9.⁠ ⁠Asignación de consultas y propiedades a los agentes - AGENTES
+
+10.Número de propiedades venta/arriendo (filtrar)
+
+11.Tiempo promedio de publicación hasta la venta/arriendo.
+
+12.Agregar sección SOBRE NOSOTROS Editor de texto enriquecido para modificar la descripción de la empresa.
+Gestión de videos: carga y reemplazo del video de la historia de la empresa.
+
+13.⁠ ⁠Formulario de contacto agregar. Listado de todos los mensajes recibidos a través del formulario de contacto.
+Estado del mensaje (pendiente, respondido, cerrado).
+
+14.⁠ ⁠Mi Cuenta
+Esta sección se centra en la gestión de los usuarios del sitio, no de los administradores del back-office:
+Gestión de Usuarios:
+Listado de todos los usuarios registrados.
+Información de contacto y actividad de los usuarios.
+Posibilidad de enviar mensajes a los usuarios.
+
+15.Propiedades Favoritas:
+Información sobre las propiedades que los usuarios han marcado como favoritas.
+Estadísticas sobre las propiedades favoritas.
+
+-------------> REPORTERIA
+
+16.Comparaciones:
+Datos sobre las propiedades que los usuarios han comparado.
+Estadísticas sobre las comparaciones realizadas.
+
+17.Valoriza tu Propiedad
+Solicitudes de Valorización:
+Listado de todas las solicitudes de valorización de propiedades.
+Información proporcionada por el usuario (ubicación, m2, características).
+Estado de la solicitud (pendiente, en proceso, completada).
+Historial de valorizaciones realizadas.
+Configuración del Modelo de Valorización:
+(Opcional) Si utilizas un modelo automatizado, una sección para configurar y actualizar los parámetros del modelo.
+
+18.Paga tu Arriendo
+Gestión de Pagos:
+Listado de todos los pagos de arriendo recibidos.
+Información del arrendatario, propiedad y monto del pago, fecha de vencimiento, notificación al email del arrendador.
+Estado del pago (pendiente, pagado, atrasado).
+
+19.Integración con la app de pagos: estado de la sincronización, registro de transacciones.
+Recordatorios de Pago:
+Configuración de recordatorios de pago automáticos.
+Historial de correos electrónicos enviados.
+Plantillas de correo electrónico para los recordatorios.
+
+20.Consideraciones Adicionales
+Roles y Permisos: Define roles de usuario para el back-office (administrador, agente, etc.) con diferentes niveles de acceso a la información y funcionalidades.
+
+21.Seguridad: Implementa medidas de seguridad robustas:
+Autenticación de dos factores.
+Registro de actividad (logs). (OK)
+Copias de seguridad periódicas.
+
+22.Diseño Responsivo: Asegúrate de que el dashboard se adapte a diferentes dispositivos (computadoras, tablets, móviles).
+
+23.Personalización: Permite a los usuarios personalizar su dashboard (widgets que se muestran, orden de los módulos). (OPCIONAL)
+
+24.Integración con Herramientas: Conexión con otras herramientas que utilices:
+CRM (para la gestión de clientes).
+Herramientas de email marketing.
+Google Analytics (para el seguimiento del tráfico del sitio).
