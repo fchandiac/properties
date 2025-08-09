@@ -4,26 +4,27 @@ Propiedades:
 
  2.⁠ ⁠Agregar en la sección PROPIEDADES el campo si fue arriendo, o venta de propiedades.
 
- 3.⁠ ⁠Poder realizar filtro (por precio, fecha, arriendo, venta, ubicación etc)
+ 3.⁠ ⁠Poder realizar filtro (por precio, fecha, arriendo, venta, ubicación etc) Filtro de echectariea.. 
 
  4.⁠ ⁠Artículos más populares (vistas, tiempo de permanencia, comentarios). BLOG
 
- 5.⁠ ⁠Carga masiva de propiedades (Arriendo o venta) ?????
+ 5.⁠ ⁠Carga masiva de propiedades (Arriendo o venta) ????? 
 
  6.⁠ ⁠Ver detalles de fotos en la sección de PROPIEDADES y poder editar agregar/eliminar
 
- 7.⁠ ⁠Historial de cambios de la propiedad (precio, estado).
+ 7.⁠ ⁠Historial de cambios de la propiedad (precio, estado).  NOTA : TRELLO STYLE 
 
  8.⁠ ⁠Agregar gestión de documentos (títulos, planos etc) - CONTRATOS
 
- 9.⁠ ⁠Asignación de consultas y propiedades a los agentes - AGENTES
+ 9.⁠ ⁠Asignación de consultas y propiedades a los agentes - AGENTES ----->  NOTA: ENVIO DE MAIL AL MOMENTO DE ASIGNAR PROPIEDAD
 
-10.Número de propiedades venta/arriendo (filtrar)
+10.Número de propiedades venta/arriendo (filtrar): OK 
 
-11.Tiempo promedio de publicación hasta la venta/arriendo.
+
+11.Tiempo promedio de publicación hasta la venta/arriendo. -----> REPORTE GENERAL 
 
 12.Agregar sección SOBRE NOSOTROS Editor de texto enriquecido para modificar la descripción de la empresa.
-Gestión de videos: carga y reemplazo del video de la historia de la empresa.
+Gestión de videos: carga y reemplazo del video de la historia de la empresa. ----> PODIDBILIDD DE ESITRAR  EUIPO (TEXTOP E INFO)
 
 13.⁠ ⁠Formulario de contacto agregar. Listado de todos los mensajes recibidos a través del formulario de contacto.
 Estado del mensaje (pendiente, respondido, cerrado).
@@ -43,7 +44,7 @@ Estadísticas sobre las propiedades favoritas.
 
 16.Comparaciones:
 Datos sobre las propiedades que los usuarios han comparado.
-Estadísticas sobre las comparaciones realizadas.
+Estadísticas sobre las comparaciones realizadas. ----> REPORTE 
 
 17.Valoriza tu Propiedad
 Solicitudes de Valorización:
@@ -53,6 +54,8 @@ Estado de la solicitud (pendiente, en proceso, completada).
 Historial de valorizaciones realizadas.
 Configuración del Modelo de Valorización:
 (Opcional) Si utilizas un modelo automatizado, una sección para configurar y actualizar los parámetros del modelo.
+
+_______________________________________________________________
 
 18.Paga tu Arriendo
 Gestión de Pagos:
@@ -70,15 +73,26 @@ Plantillas de correo electrónico para los recordatorios.
 Roles y Permisos: Define roles de usuario para el back-office (administrador, agente, etc.) con diferentes niveles de acceso a la información y funcionalidades.
 
 21.Seguridad: Implementa medidas de seguridad robustas:
-Autenticación de dos factores.
+Autenticación de dos factores. implenetecion Mensaje al Correo:::
 Registro de actividad (logs). (OK)
-Copias de seguridad periódicas.
+Copias de seguridad periódicas. (ok)
 
 22.Diseño Responsivo: Asegúrate de que el dashboard se adapte a diferentes dispositivos (computadoras, tablets, móviles).
 
 23.Personalización: Permite a los usuarios personalizar su dashboard (widgets que se muestran, orden de los módulos). (OPCIONAL)
+------ 
 
-24.Integración con Herramientas: Conexión con otras herramientas que utilices:
-CRM (para la gestión de clientes).
+24.Integración con Herramientas: 
+Conexión con otras herramientas que utilices:
+CRM (para la gestión de clientes). 
 Herramientas de email marketing.
 Google Analytics (para el seguimiento del tráfico del sitio).
+------ 
+
+CAMPOS EN PROPIEDADES: EVENTOS DE PROPUIEDADES.. 
+
+
+
+Alvaro Bravo
+8:22 p.m.
+https://www.leasity.cl/#pre-how-it-works
