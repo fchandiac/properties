@@ -8896,3 +8896,2581 @@ Table Management: MUI Table components
 3. Integración con sistemas bancarios
 4. Alertas automáticas por vencimientos
 5. Analytics avanzado con business intelligence
+
+===============================================
+ANÁLISIS TÉCNICO PARA DESARROLLO - PROYECTO PROPIEDADES
+RUTA: app/userApp (Página Principal)
+===============================================
+
+## 1. OBJETIVO PRINCIPAL DE LA SECCIÓN
+
+### Propósito Funcional:
+La ruta `/userApp` (página principal) implementa la página de inicio del portal público de la inmobiliaria, funcionando como el punto de entrada principal donde los usuarios pueden visualizar y filtrar propiedades disponibles en un formato atractivo tipo marketplace.
+
+### Alcance del Módulo:
+- Visualización de catálogo de propiedades en grid responsivo
+- Sistema de filtrado integrado para búsqueda de propiedades
+- Presentación de propiedades destacadas con información detallada
+- Interface pública optimizada para usuarios finales (no administrativos)
+- Integración de componentes reutilizables del sistema
+- Navegación principal hacia funcionalidades específicas
+
+## 2. COMPONENTES CLAVE Y ARQUITECTURA
+
+### 2.1 Componente Principal: UserPage
+```
+Tipo: React Functional Component (Client-side)
+Ubicación: /app/userApp/page.tsx
+Patrón: Marketplace + Grid Layout + Filtering Pattern
+Responsabilidad: Presentación de catálogo de propiedades para usuarios públicos
+```
+
+### 2.2 Estructura de Componentes UI:
+```
+UserPage
+├── div (Container externo)
+└── Container (MUI Container)
+    └── Grid (Layout principal - direction="row")
+        ├── Grid item xs={12} (Filtros)
+        │   └── Filter (Componente de filtrado)
+        └── Grid items (xs={12} sm={6} md={4}) [x6]
+            └── PropertyUserCard[] (Tarjetas de propiedades)
+```
+
+### 2.3 Modelo de Datos de Propiedad:
+```typescript
+interface Property {
+  type: 0 | 1;                       // 0: Venta, 1: Arriendo
+  featured: boolean;                 // Si es propiedad destacada
+  image: string;                     // URL de imagen principal
+  category: "House" | "Apartment";   // Tipo de propiedad
+  builtArea: number;                 // Metros cuadrados construidos
+  landArea: number;                  // Metros cuadrados de terreno
+  bathrooms: number;                 // Número de baños
+  bedrooms: number;                  // Número de dormitorios
+  parkingSpaces: number;             // Espacios de estacionamiento
+  price: number;                     // Precio en CLP
+  uf: number;                        // Precio en UF
+  address: string;                   // Dirección completa
+  googleMapLink: string;             // Link a Google Maps
+  youtubeLink: string;               // Link a video de YouTube
+  ticToLink: string;                 // Link a TikTok (redes sociales)
+}
+```
+
+### 2.4 Estilos CSS (No utilizados actualmente):
+```typescript
+interface StylesObject {
+  navbar: CSSProperties;             // Estilos para navbar (no renderizado)
+  navList: CSSProperties;            // Estilos para lista de navegación
+  navItem: CSSProperties;            // Estilos para items de navegación
+}
+```
+
+## 3. LÓGICA DE NEGOCIO Y FLUJOS CONDICIONALES
+
+### 3.1 Estados del Sistema:
+```typescript
+// No hay estados locales - Componente completamente estático
+propertiesList: Property[]           // Array estático de propiedades mock
+styles: StylesObject                 // Objeto de estilos (no aplicados)
+```
+
+### 3.2 Flujos Condicionales Implementados:
+
+#### Flujo A: Renderizado de Catálogo
+```
+Inicialización del componente →
+propertiesList.map() →
+Por cada propiedad: renderizar PropertyUserCard →
+Aplicar props específicas de cada propiedad →
+Grid responsivo automático (xs=12, sm=6, md=4)
+```
+
+#### Flujo B: Responsive Breakpoints
+```
+Pantalla móvil (xs): 1 columna por fila (12/12)
+Pantalla tablet (sm): 2 columnas por fila (6/12)
+Pantalla desktop (md+): 3 columnas por fila (4/12)
+```
+
+#### Flujo C: Integración de Filtros
+```
+Filter component renderizado →
+[PENDIENTE] Comunicación con parent component →
+[PENDIENTE] Filtrado de propertiesList →
+[PENDIENTE] Re-render de grid filtrado
+```
+
+### 3.3 Características de los Datos Mock:
+
+#### Distribución de Propiedades:
+```
+Total: 6 propiedades
+Ventas (type=0): 4 propiedades (66.7%)
+Arriendos (type=1): 2 propiedades (33.3%)
+Todas featured: true (100% destacadas)
+```
+
+#### Rangos de Precios:
+```
+Venta: CLP $90M - $450M (UF 28K - 115K)
+Tipos: 4 Casas, 2 Departamentos
+Ubicación: Todas en Santiago, Chile
+```
+
+#### Características Físicas:
+```
+Área construida: 80m² - 300m²
+Área terreno: 120m² - 600m²
+Dormitorios: 2 - 6
+Baños: 1 - 5
+Estacionamientos: 1 - 3
+```
+
+### 3.4 Algoritmos de Renderizado:
+
+#### Map Rendering Algorithm:
+```typescript
+propertiesList.map((property, index) => (
+  <Grid item xs={12} sm={6} md={4} key={index}>
+    <PropertyUserCard {...property} />
+  </Grid>
+))
+```
+
+**Características**:
+- **Simple iteration**: map() básico sin filtrado
+- **Static data**: No hay estado que modifique la lista
+- **Index-based keys**: Uso de index como key (anti-pattern)
+- **Prop spreading**: Paso de todas las propiedades via destructuring
+
+### 3.5 Limitaciones Actuales:
+
+#### Datos Estáticos:
+- **Hard-coded data**: 6 propiedades fijas en el código
+- **No API integration**: Sin conexión a backend
+- **No dynamic loading**: No carga de propiedades adicionales
+- **No pagination**: Todas las propiedades cargadas simultáneamente
+
+#### Funcionalidad Limitada:
+- **Sin filtrado funcional**: Filter component sin integración
+- **Sin búsqueda**: No hay capacidad de búsqueda
+- **Sin ordenamiento**: No hay opciones de ordenamiento
+- **Sin favoritos**: No hay gestión de propiedades favoritas
+
+## 4. GESTIÓN DEL ESTADO
+
+### 4.1 Patrón de Estado Utilizado:
+```typescript
+Hook: Ninguno (Stateless Component)
+Scope: N/A
+Persistencia: Static data only
+Complexity: None (completamente estático)
+```
+
+### 4.2 Estructura de Estado:
+```typescript
+// No hay estado local - Componente funcional puro
+interface ComponentState {
+  // Sin estados - componente completamente estático
+}
+```
+
+### 4.3 Flujo de Estado:
+```
+Inicialización: Propiedades estáticas cargadas
+↓
+Render: Grid renderizado con datos fijos
+↓
+No hay interacciones que cambien estado
+↓
+Re-render: Solo si props/parent cambían
+```
+
+### 4.4 Limitaciones de Estado Actual:
+- **Sin state management**: No hay useState, useReducer, etc.
+- **Sin comunicación con Filter**: Filter component aislado
+- **Sin loading states**: No hay indicadores de carga
+- **Sin error handling**: No hay manejo de errores
+- **Sin data fetching**: No hay llamadas a APIs
+
+## 5. APIS E INTERACCIONES EXTERNAS
+
+### 5.1 Estado Actual de APIs:
+```
+❌ NO IMPLEMENTADAS - APIs de Backend
+❌ NO IMPLEMENTADAS - Servicios de propiedades
+❌ NO IMPLEMENTADAS - APIs de filtrado
+❌ NO IMPLEMENTADAS - APIs de búsqueda
+❌ NO IMPLEMENTADAS - Integración con Filter component
+```
+
+### 5.2 APIs Requeridas para Funcionalidad Completa:
+
+#### API 1: Catálogo de Propiedades
+```typescript
+// GET - Obtener propiedades para homepage
+GET /api/properties/public
+Query: { 
+  featured?: boolean,
+  limit?: number,
+  offset?: number,
+  type?: 0 | 1,
+  minPrice?, maxPrice?,
+  category?, region?, comuna?
+}
+Response: {
+  properties: PublicProperty[],
+  total: number,
+  hasMore: boolean,
+  filters: AvailableFilters
+}
+
+// GET - Obtener propiedades destacadas
+GET /api/properties/featured
+Query: { limit?: number }
+Response: {
+  featuredProperties: PublicProperty[],
+  total: number
+}
+```
+
+#### API 2: Filtrado y Búsqueda
+```typescript
+// POST - Filtrar propiedades
+POST /api/properties/search
+Body: {
+  filters: PropertyFilters,
+  search?: string,
+  sortBy?: "price" | "date" | "area",
+  sortOrder?: "asc" | "desc",
+  page?: number,
+  limit?: number
+}
+Response: {
+  properties: PublicProperty[],
+  pagination: PaginationData,
+  appliedFilters: PropertyFilters,
+  suggestions?: SearchSuggestion[]
+}
+```
+
+#### API 3: Métricas y Analytics
+```typescript
+// POST - Registrar visualización de propiedad
+POST /api/analytics/property-view
+Body: { propertyId: string, source: "homepage" }
+Response: { success: boolean }
+
+// GET - Obtener propiedades trending
+GET /api/properties/trending
+Query: { period?: "week" | "month" }
+Response: { trendingProperties: PublicProperty[] }
+```
+
+### 5.3 Integración con Componentes:
+```
+useEffect() → Cargar propiedades iniciales
+Filter component → Comunicación bidireccional con parent
+PropertyUserCard → Click events para navegación a detalle
+Pagination → Carga lazy de más propiedades
+```
+
+## 6. DEPENDENCIAS Y TECNOLOGÍAS
+
+### 6.1 Stack Tecnológico:
+```
+Frontend Framework: Next.js 15.1.0 (App Router)
+UI Library: Material-UI 6.2.0
+Language: TypeScript 5.x (con @ts-ignore para props)
+State Management: None (componente estático)
+Layout: CSS Grid + Flexbox (MUI Grid System)
+```
+
+### 6.2 Dependencias Específicas Utilizadas:
+```typescript
+@mui/material: Container, Grid, Box
+@/components/property: Filter, PropertyUserCard
+@/components/slider: SliderImages (importado pero no usado)
+@/components: TestimonialCard (importado pero no usado)
+React: React (import básico)
+```
+
+### 6.3 Dependencias No Utilizadas:
+```typescript
+// Imports presentes pero no renderizados
+SliderImages        // Componente de slider no utilizado
+TestimonialCard     // Componente de testimonios no utilizado
+styles object       // Estilos CSS definidos pero no aplicados
+Box                 // Componente MUI importado pero no usado
+```
+
+### 6.4 Patrones de Diseño Implementados:
+- **Grid Layout Pattern**: Layout responsivo con breakpoints
+- **Card Catalog Pattern**: Visualización de productos en tarjetas
+- **Static Data Pattern**: Datos mock integrados en componente
+- **Component Composition Pattern**: Combinación de componentes reutilizables
+
+## 7. FUNCIONALIDADES ESPECIALES
+
+### 7.1 Grid Responsivo Avanzado:
+- **Breakpoints específicos**: xs=12, sm=6, md=4
+- **Espaciado consistente**: spacing={2} entre elementos
+- **Margin top aplicado**: mt={2} y marginTop={4} específicos
+- **Container MUI**: Márgenes automáticos y padding responsivo
+
+### 7.2 Datos Mock Ricos:
+- **Información completa**: Todos los campos necesarios por propiedad
+- **URLs externas**: Links a mapas, videos y redes sociales
+- **Precios duales**: Valores en CLP y UF
+- **Categorización**: Casas vs Departamentos
+
+### 7.3 Integración de Filtros:
+- **Posicionamiento estratégico**: Filtros en la parte superior
+- **Full width**: xs={12} para máxima visibilidad
+- **Separación visual**: marginTop para distinción
+
+### 7.4 Componentes Reutilizables:
+- **PropertyUserCard**: Componente especializado para vista pública
+- **Filter**: Componente de filtrado compartido
+- **Grid system**: Layout system de MUI
+
+### 7.5 Preparación para Funcionalidades Futuras:
+- **Estilos preparados**: Navbar styles definidos para futuro uso
+- **Componentes importados**: SliderImages y TestimonialCard listos
+- **Props completas**: Todas las propiedades necesarias pasadas a cards
+
+## 8. REQUISITOS FUNCIONALES
+
+### RF-UH-001: Visualización de Catálogo de Propiedades
+**Descripción**: Mostrar propiedades disponibles en formato grid responsivo
+**Criterios de Aceptación**:
+- Mostrar mínimo información: imagen, precio, características, ubicación
+- Layout responsivo: 1 columna (móvil), 2 columnas (tablet), 3 columnas (desktop)
+- Todas las propiedades cargadas al inicio
+- Información completa y actualizada por propiedad
+
+### RF-UH-002: Sistema de Filtrado Integrado
+**Descripción**: Permitir filtrado de propiedades por diferentes criterios
+**Criterios de Aceptación**:
+- Filtros visibles en la parte superior de la página
+- Filtrado por tipo (venta/arriendo), precio, ubicación, características
+- Resultados actualizados en tiempo real
+- Mantenimiento de filtros al navegar
+
+### RF-UH-003: Propiedades Destacadas
+**Descripción**: Resaltar propiedades premium o destacadas
+**Criterios de Aceptación**:
+- Identificación visual de propiedades featured
+- Posicionamiento preferencial de propiedades destacadas
+- Badge o indicador de "destacada"
+- Criterios claros para destacar propiedades
+
+### RF-UH-004: Información Completa por Propiedad
+**Descripción**: Mostrar datos relevantes para decisión de usuario
+**Criterios de Aceptación**:
+- Precio en CLP y UF
+- Características físicas (dormitorios, baños, m²)
+- Ubicación con acceso a mapa
+- Imagen principal atractiva
+- Links a contenido multimedia (videos, tours virtuales)
+
+### RF-UH-005: Navegación a Detalle de Propiedad
+**Descripción**: Permitir acceso a información detallada
+**Criterios de Aceptación**:
+- Click en tarjeta de propiedad lleva a página de detalle
+- Navegación fluida sin pérdida de contexto
+- Back navigation que mantiene filtros aplicados
+- URL amigable para cada propiedad
+
+### RF-UH-006: Performance y Carga Optimizada
+**Descripción**: Carga rápida y eficiente del catálogo
+**Criterios de Aceptación**:
+- Carga inicial de propiedades < 3 segundos
+- Lazy loading de imágenes
+- Paginación o scroll infinito para grandes volúmenes
+- Optimización de imágenes automática
+
+### RF-UH-007: Integración con Redes Sociales
+**Descripción**: Enlaces a contenido multimedia externo
+**Criterios de Aceptación**:
+- Links funcionales a Google Maps
+- Integración con videos de YouTube
+- Enlaces a redes sociales (TikTok, Instagram)
+- Compartir propiedades en redes sociales
+
+### RF-UH-008: Responsive Design Completo
+**Descripción**: Experiencia optimizada en todos los dispositivos
+**Criterios de Aceptación**:
+- Layout adaptativo móvil, tablet, desktop
+- Touch-friendly en dispositivos móviles
+- Imágenes responsivas con diferentes resoluciones
+- Navegación optimizada por dispositivo
+
+## 9. REQUISITOS NO FUNCIONALES
+
+### RNF-UH-001: Rendimiento de Carga
+**Descripción**: Tiempos de respuesta optimizados para usuarios públicos
+**Criterios**:
+- First Contentful Paint (FCP): < 1.5 segundos
+- Largest Contentful Paint (LCP): < 2.5 segundos
+- Carga de imágenes: < 3 segundos
+- Tiempo total de carga: < 5 segundos
+
+### RNF-UH-002: SEO y Discoverabilidad
+**Descripción**: Optimización para motores de búsqueda
+**Criterios**:
+- Meta tags dinámicos por página
+- URLs amigables y descriptivas
+- Structured data para propiedades (JSON-LD)
+- Sitemap XML actualizado automáticamente
+- Open Graph tags para redes sociales
+
+### RNF-UH-003: Experiencia de Usuario (UX)
+**Descripción**: Interface intuitiva y atractiva para usuarios finales
+**Criterios**:
+- Diseño limpio y profesional
+- Navegación intuitiva sin entrenamiento
+- Feedback visual en todas las interacciones
+- Accesibilidad WCAG 2.1 AA compliance
+
+### RNF-UH-004: Escalabilidad de Contenido
+**Descripción**: Capacidad de manejar gran volumen de propiedades
+**Criterios**:
+- Soporte para 1000+ propiedades sin degradación
+- Paginación eficiente en listados
+- Lazy loading de contenido e imágenes
+- CDN para optimización de imágenes
+
+### RNF-UH-005: Compatibilidad Multi-Dispositivo
+**Descripción**: Funcionalidad consistente en diferentes dispositivos
+**Criterios**:
+- Chrome 90+, Safari 14+, Firefox 88+, Edge 90+
+- iOS Safari, Chrome Mobile
+- Responsive design desde 320px hasta 1920px+
+- Touch gestures en dispositivos móviles
+
+### RNF-UH-006: Disponibilidad y Confiabilidad
+**Descripción**: Uptime alto para portal público
+**Criterios**:
+- Disponibilidad 99.9% mínimo
+- Tiempo de respuesta promedio < 2 segundos
+- Graceful degradation ante fallos de servicio
+- Cache agresivo para contenido estático
+
+### RNF-UH-007: Analytics y Métricas
+**Descripción**: Seguimiento de comportamiento de usuarios
+**Criterios**:
+- Google Analytics 4 integrado
+- Métricas de engagement por propiedad
+- Tracking de conversiones (leads, contactos)
+- Heatmaps de interacción de usuarios
+
+### RNF-UH-008: Seguridad y Privacidad
+**Descripción**: Protección de datos de usuarios
+**Criterios**:
+- HTTPS en todas las páginas
+- Protección contra XSS y CSRF
+- Cumplimiento con GDPR para datos europeos
+- Rate limiting para prevenir abuse
+
+## 10. DEUDA TÉCNICA IDENTIFICADA
+
+### Crítica:
+- **Datos estáticos**: Propiedades hardcodeadas, no hay backend
+- **Sin filtrado funcional**: Filter component no conectado
+- **@ts-ignore usage**: Supresión de errores TypeScript
+- **Index-based keys**: Anti-pattern en map rendering
+
+### Media:
+- **Componentes no utilizados**: SliderImages y TestimonialCard importados innecesariamente
+- **Estilos definidos no aplicados**: styles object sin uso
+- **Sin state management**: No hay gestión de estado para filtros
+- **Sin loading states**: No hay indicadores de carga
+
+### Baja:
+- **Sin testing**: No hay tests para el componente principal
+- **Sin error boundaries**: No hay manejo de errores de renderizado
+- **Sin analytics**: No hay tracking de interactions
+- **Props drilling potencial**: Estructura no escalable para estado
+
+## 11. ROADMAP DE DESARROLLO SUGERIDO
+
+### Fase 1 (Alta Prioridad - Funcionalidad Core):
+1. Implementar APIs de backend para catálogo de propiedades
+2. Conectar Filter component con estado del parent
+3. Reemplazar datos mock con llamadas a API reales
+4. Implementar paginación o lazy loading
+5. Agregar loading states y error handling
+
+### Fase 2 (Media Prioridad - UX y Performance):
+1. Implementar búsqueda y filtrado funcional
+2. Agregar navegación a páginas de detalle
+3. Optimizar imágenes con Next.js Image component
+4. Implementar SEO básico (meta tags, structured data)
+5. Agregar analytics tracking
+
+### Fase 3 (Baja Prioridad - Características Avanzadas):
+1. Desarrollar tests unitarios e integración
+2. Implementar favoritos y lista de guardados
+3. Agregar funcionalidad de compartir en redes sociales
+4. Implementar tours virtuales integrados
+5. Desarrollar PWA capabilities
+
+### Fase 4 (Mejoras Futuras - Funcionalidades Premium):
+1. Sistema de recomendaciones personalizadas
+2. Chat en vivo con agentes
+3. Calculadora de crédito hipotecario integrada
+4. Notificaciones push para nuevas propiedades
+5. Realidad aumentada para visualización de espacios
+
+
+===============================================
+ANÁLISIS TÉCNICO PARA DESARROLLO - PROYECTO PROPIEDADES
+RUTA: app/userApp/aboutUs
+===============================================
+
+## 1. OBJETIVO PRINCIPAL DE LA SECCIÓN
+
+### Propósito Funcional:
+La ruta `/userApp/aboutUs` implementa la página pública de presentación institucional de la inmobiliaria, mostrando la misión, visión, valores y equipo humano, junto a un video corporativo, para fortalecer la identidad de marca y generar confianza en los usuarios.
+
+### Alcance del Módulo:
+- Presentación de información institucional y valores
+- Sección multimedia con video corporativo
+- Visualización de equipo humano con fotos y nombres
+- Diseño visual atractivo y responsivo
+- Integración con el layout general del portal público
+
+## 2. COMPONENTES CLAVE Y ARQUITECTURA
+
+### 2.1 Componente Principal: AboutUs
+```
+Tipo: React Functional Component (Client-side)
+Ubicación: /app/userApp/aboutUs/page.tsx
+Patrón: Institutional Presentation + Team Showcase
+Responsabilidad: Renderizado de contenido institucional y equipo
+```
+
+### 2.2 Estructura de Componentes UI:
+```
+AboutUs
+├── Box (Container externo)
+│   ├── Grid (Sección principal: texto + video)
+│   │   ├── Grid (xs=12 md=6) → Información institucional
+│   │   └── Grid (xs=12 md=6) → Video corporativo
+│   └── Typography (Título "Nuestro Equipo")
+│   └── Grid (Team Members: fotos y nombres)
+```
+
+### 2.3 Modelo de Datos de Miembro de Equipo:
+```typescript
+interface TeamMember {
+  name: string;
+  img: string; // URL de la foto
+}
+```
+
+## 3. LÓGICA DE NEGOCIO Y FLUJOS CONDICIONALES
+
+### 3.1 Estados del Sistema:
+```typescript
+// No hay estados locales - Componente completamente estático
+teamMembers: TeamMember[] // Array estático de miembros
+sizeMap: number[]         // Array para tamaños de cards
+```
+
+### 3.2 Flujos Condicionales Implementados:
+
+#### Flujo A: Renderizado de Información Institucional
+```
+Render inicial → Typography con texto institucional
+```
+
+#### Flujo B: Renderizado de Video Corporativo
+```
+Render inicial → <video> con controls, autoplay, loop, muted
+```
+
+#### Flujo C: Renderizado de Equipo
+```
+teamMembers.map() → Box con imagen de fondo y nombre
+sizeMap[index] → Altura variable por miembro
+```
+
+### 3.3 Características de los Datos Mock:
+- 6 miembros de equipo, algunos con nombre y foto, otros solo imagen
+- Imágenes externas y locales (logo)
+- Altura de card variable según sizeMap
+
+### 3.4 Limitaciones Actuales:
+- Datos estáticos: miembros hardcodeados
+- Sin integración con backend ni edición dinámica
+- Sin validación de datos de miembros
+- Sin animaciones ni efectos avanzados
+
+## 4. GESTIÓN DEL ESTADO
+
+### 4.1 Patrón de Estado Utilizado:
+```
+Hook: Ninguno (Stateless Component)
+Scope: N/A
+Persistencia: Static data only
+Complexity: None (completamente estático)
+```
+
+### 4.2 Estructura de Estado:
+```typescript
+// No hay estado local - Componente funcional puro
+interface ComponentState {
+  // Sin estados - componente completamente estático
+}
+```
+
+### 4.3 Flujo de Estado:
+```
+Inicialización: Datos de equipo y texto institucional cargados
+↓
+Render: Sección institucional, video y equipo
+↓
+No hay interacciones que cambien estado
+↓
+Re-render: Solo si props/parent cambian
+```
+
+### 4.4 Limitaciones de Estado Actual:
+- Sin state management
+- Sin loading states ni error handling
+- Sin data fetching
+
+## 5. APIS E INTERACCIONES EXTERNAS
+
+### 5.1 Estado Actual de APIs:
+```
+❌ NO IMPLEMENTADAS - APIs de Backend
+❌ NO IMPLEMENTADAS - Servicios de equipo o contenido institucional
+❌ NO IMPLEMENTADAS - APIs de video o multimedia
+```
+
+### 5.2 APIs Requeridas para Funcionalidad Completa:
+
+#### API 1: Gestión de Contenido Institucional
+```typescript
+// GET - Obtener información institucional
+GET /api/aboutus/info
+Response: { description: string, videoUrl: string }
+
+// PUT - Actualizar información institucional
+PUT /api/aboutus/info
+Body: { description: string, videoUrl: string }
+Response: { success: boolean }
+```
+
+#### API 2: Gestión de Equipo
+```typescript
+// GET - Obtener miembros del equipo
+GET /api/aboutus/team
+Response: { team: TeamMember[] }
+
+// POST - Agregar/editar miembro
+POST /api/aboutus/team
+Body: TeamMember
+Response: { success: boolean, member: TeamMember }
+```
+
+### 5.3 Integración con Componentes:
+```
+useEffect() → [PENDIENTE] Cargar datos de equipo/institucional
+```
+
+## 6. DEPENDENCIAS Y TECNOLOGÍAS
+
+### 6.1 Stack Tecnológico:
+```
+Frontend Framework: Next.js 15.1.0 (App Router)
+UI Library: Material-UI 6.2.0
+Language: TypeScript 5.x
+State Management: None (componente estático)
+Layout: MUI Grid + Box
+Video: HTML5 <video>
+```
+
+### 6.2 Dependencias Específicas Utilizadas:
+```typescript
+@mui/material: Box, Typography, Grid, Card, CardMedia
+React: React (import básico)
+```
+
+### 6.3 Patrones de Diseño Implementados:
+- **Institutional Presentation Pattern**: Sección de misión/visión
+- **Team Showcase Pattern**: Visualización de equipo con fotos
+- **Responsive Grid Pattern**: Layout adaptable a dispositivos
+
+## 7. FUNCIONALIDADES ESPECIALES
+
+### 7.1 Sección Multimedia Integrada:
+- Video corporativo embebido con autoplay y controles
+- Diseño responsivo para video y texto
+
+### 7.2 Visualización de Equipo:
+- Cards con imagen de fondo y nombre
+- Altura variable para destacar miembros
+- Grid centralizado y adaptable
+
+### 7.3 Diseño Visual Atractivo:
+- Uso de imágenes de alta calidad
+- Tipografía destacada para títulos
+- Espaciado y márgenes consistentes
+
+## 8. REQUISITOS FUNCIONALES
+
+### RF-AU-001: Presentación Institucional
+**Descripción**: Mostrar misión, visión y valores de la empresa
+**Criterios de Aceptación**:
+- Texto institucional visible y legible
+- Diseño atractivo y profesional
+- Integración con layout general
+
+### RF-AU-002: Sección Multimedia
+**Descripción**: Incluir video corporativo
+**Criterios de Aceptación**:
+- Video visible, reproducible y responsivo
+- Controles de reproducción disponibles
+- Loop y mute por defecto
+
+### RF-AU-003: Visualización de Equipo
+**Descripción**: Mostrar miembros del equipo con foto y nombre
+**Criterios de Aceptación**:
+- Grid responsivo de miembros
+- Imágenes de calidad y nombres legibles
+- Altura variable para destacar miembros
+
+## 9. REQUISITOS NO FUNCIONALES
+
+### RNF-AU-001: Rendimiento de Carga
+**Descripción**: Página debe cargar en < 2 segundos
+**Criterios**:
+- Imágenes optimizadas
+- Video con carga progresiva
+- Layout responsivo sin saltos
+
+### RNF-AU-002: Accesibilidad
+**Descripción**: Cumplimiento de estándares WCAG 2.1 AA
+**Criterios**:
+- Contraste adecuado en texto sobre imágenes
+- Navegación por teclado
+- Etiquetas alt en imágenes (si aplica)
+
+### RNF-AU-003: SEO y Discoverabilidad
+**Descripción**: Página optimizada para motores de búsqueda
+**Criterios**:
+- Meta tags descriptivos
+- Título y descripción relevantes
+- Estructura semántica clara
+
+### RNF-AU-004: Escalabilidad de Contenido
+**Descripción**: Capacidad de agregar más miembros o secciones
+**Criterios**:
+- Layout adaptable a más miembros
+- Modularidad en componentes
+
+## 10. DEUDA TÉCNICA IDENTIFICADA
+
+### Crítica:
+- **Datos estáticos**: Miembros y texto hardcodeados
+- **Sin backend**: No hay APIs para contenido ni equipo
+- **Sin validación**: No hay validación de datos de miembros
+
+### Media:
+- **Sin animaciones**: No hay efectos visuales avanzados
+- **Sin loading states**: No hay indicadores de carga
+- **Sin edición**: No editable desde UI
+
+### Baja:
+- **Sin testing**: No hay tests para la sección
+- **Sin analytics**: No hay tracking de visualizaciones
+- **Sin internacionalización**: Solo en español
+
+## 11. ROADMAP DE DESARROLLO SUGERIDO
+
+### Fase 1 (Alta Prioridad - Funcionalidad Core):
+1. Implementar APIs de backend para contenido institucional y equipo
+2. Conectar frontend con servicios de contenido dinámico
+3. Agregar validación de datos de miembros
+4. Mejorar accesibilidad y SEO
+
+### Fase 2 (Media Prioridad - UX y Visual):
+1. Agregar animaciones y efectos visuales
+2. Implementar loading states
+3. Permitir edición de contenido desde UI (admin)
+4. Agregar analytics de visualización
+
+### Fase 3 (Baja Prioridad - Características Avanzadas):
+1. Desarrollar tests unitarios y de integración
+2. Implementar internacionalización
+3. Agregar secciones adicionales (historia, valores, etc.)
+4. Permitir agregar más miembros dinámicamente
+
+===============================================
+ANÁLISIS TÉCNICO PARA DESARROLLO - PROYECTO PROPIEDADES
+RUTA: app/userApp/blog
+===============================================
+
+## 1. OBJETIVO PRINCIPAL DE LA SECCIÓN
+
+### Propósito Funcional:
+La ruta `/userApp/blog` implementa la sección de blog público del portal inmobiliario, permitiendo a los usuarios acceder a artículos, consejos y tendencias del sector, con foco en educación y engagement, y visualización atractiva de posts destacados y recientes.
+
+### Alcance del Módulo:
+- Visualización de un post principal destacado
+- Carrusel horizontal de mini posts recientes o populares
+- Presentación de imágenes, títulos y resúmenes
+- Diseño responsivo y navegación amigable
+- Integración con componentes reutilizables de blog
+
+## 2. COMPONENTES CLAVE Y ARQUITECTURA
+
+### 2.1 Componente Principal: BlogPage
+```
+Tipo: React Functional Component (Client-side)
+Ubicación: /app/userApp/blog/page.tsx
+Patrón: Blog Main + Carousel + Card List
+Responsabilidad: Renderizado de post principal y carrusel de mini posts
+```
+
+### 2.2 Estructura de Componentes UI:
+```
+BlogPage
+├── Container (MUI)
+│   ├── BlogPost (Post principal)
+│   └── Box (Carrusel horizontal)
+│       └── BlogCarousel (Mini posts)
+```
+
+### 2.3 Modelo de Datos de Post:
+```typescript
+interface BlogPostData {
+  title: string;
+  summary: string;
+  image: string;
+  content: string[];
+}
+
+interface BlogMiniCardData {
+  title: string;
+  image: string;
+}
+```
+
+## 3. LÓGICA DE NEGOCIO Y FLUJOS CONDICIONALES
+
+### 3.1 Estados del Sistema:
+```typescript
+// No hay estados locales - Componente completamente estático
+blogData: BlogPostData // Post principal
+blogMiniCards: BlogMiniCardData[] // Mini posts
+```
+
+### 3.2 Flujos Condicionales Implementados:
+
+#### Flujo A: Renderizado de Post Principal
+```
+Render inicial → BlogPost con props de blogData
+```
+
+#### Flujo B: Renderizado de Carrusel de Mini Posts
+```
+Render inicial → BlogCarousel (con blogMiniCards)
+Scroll horizontal manual
+```
+
+### 3.3 Características de los Datos Mock:
+- 1 post principal con imagen, título, resumen y contenido
+- 12 mini posts con título e imagen
+- Imágenes externas de alta calidad
+
+### 3.4 Limitaciones Actuales:
+- Datos estáticos: posts hardcodeados
+- Sin integración con backend ni edición dinámica
+- Sin paginación ni carga incremental
+- Sin navegación a detalle de mini posts
+
+## 4. GESTIÓN DEL ESTADO
+
+### 4.1 Patrón de Estado Utilizado:
+```
+Hook: Ninguno (Stateless Component)
+Scope: N/A
+Persistencia: Static data only
+Complexity: None (completamente estático)
+```
+
+### 4.2 Estructura de Estado:
+```typescript
+// No hay estado local - Componente funcional puro
+interface ComponentState {
+  // Sin estados - componente completamente estático
+}
+```
+
+### 4.3 Flujo de Estado:
+```
+Inicialización: Datos de blog y mini posts cargados
+↓
+Render: Post principal y carrusel
+↓
+No hay interacciones que cambien estado
+↓
+Re-render: Solo si props/parent cambian
+```
+
+### 4.4 Limitaciones de Estado Actual:
+- Sin state management
+- Sin loading states ni error handling
+- Sin data fetching
+
+## 5. APIS E INTERACCIONES EXTERNAS
+
+### 5.1 Estado Actual de APIs:
+```
+❌ NO IMPLEMENTADAS - APIs de Backend
+❌ NO IMPLEMENTADAS - Servicios de blog o posts
+❌ NO IMPLEMENTADAS - APIs de mini posts
+```
+
+### 5.2 APIs Requeridas para Funcionalidad Completa:
+
+#### API 1: Gestión de Posts
+```typescript
+// GET - Obtener posts principales
+GET /api/blog/posts
+Response: { posts: BlogPostData[] }
+
+// GET - Obtener mini posts
+GET /api/blog/mini-posts
+Response: { miniPosts: BlogMiniCardData[] }
+
+// GET - Obtener detalle de post
+GET /api/blog/posts/{id}
+Response: BlogPostData
+```
+
+### 5.3 Integración con Componentes:
+```
+useEffect() → [PENDIENTE] Cargar datos de blog/mini posts
+BlogCarousel → Renderiza mini posts en carrusel
+BlogMiniCard → Renderiza cada mini post
+```
+
+## 6. DEPENDENCIAS Y TECNOLOGÍAS
+
+### 6.1 Stack Tecnológico:
+```
+Frontend Framework: Next.js 15.1.0 (App Router)
+UI Library: Material-UI 6.2.0
+Language: TypeScript 5.x
+State Management: None (componente estático)
+Layout: MUI Container + Box
+```
+
+### 6.2 Dependencias Específicas Utilizadas:
+```typescript
+@mui/material: Box, Container
+@/components/blog: BlogPost, BlogMiniCard, BlogCarousel
+React: React (import básico)
+```
+
+### 6.3 Patrones de Diseño Implementados:
+- **Blog Main Pattern**: Post principal destacado
+- **Carousel Pattern**: Carrusel horizontal de mini posts
+- **Card List Pattern**: Visualización de mini posts en tarjetas
+
+## 7. FUNCIONALIDADES ESPECIALES
+
+### 7.1 Post Principal Destacado:
+- Imagen, título, resumen y contenido
+- Diseño atractivo y legible
+
+### 7.2 Carrusel de Mini Posts:
+- Scroll horizontal manual
+- Mini cards con imagen y título
+- Oculta scrollbar para UX limpia
+
+### 7.3 Integración de Componentes Reutilizables:
+- BlogPost, BlogMiniCard y BlogCarousel
+- Modularidad para futuras extensiones
+
+## 8. REQUISITOS FUNCIONALES
+
+### RF-BL-001: Visualización de Post Principal
+**Descripción**: Mostrar post principal destacado
+**Criterios de Aceptación**:
+- Imagen, título, resumen y contenido visibles
+- Diseño responsivo y atractivo
+
+### RF-BL-002: Carrusel de Mini Posts
+**Descripción**: Mostrar mini posts en carrusel horizontal
+**Criterios de Aceptación**:
+- Scroll horizontal manual
+- Mini cards con imagen y título
+- Oculta scrollbar para mejor UX
+
+### RF-BL-003: Modularidad y Extensibilidad
+**Descripción**: Permitir agregar más posts fácilmente
+**Criterios de Aceptación**:
+- Componentes reutilizables
+- Datos desacoplados del layout
+
+## 9. REQUISITOS NO FUNCIONALES
+
+### RNF-BL-001: Rendimiento de Carga
+**Descripción**: Página debe cargar en < 2 segundos
+**Criterios**:
+- Imágenes optimizadas
+- Layout responsivo sin saltos
+
+### RNF-BL-002: Accesibilidad
+**Descripción**: Cumplimiento de estándares WCAG 2.1 AA
+**Criterios**:
+- Contraste adecuado en texto e imágenes
+- Navegación por teclado
+
+### RNF-BL-003: SEO y Discoverabilidad
+**Descripción**: Página optimizada para motores de búsqueda
+**Criterios**:
+- Meta tags descriptivos
+- Título y descripción relevantes
+- Estructura semántica clara
+
+### RNF-BL-004: Escalabilidad de Contenido
+**Descripción**: Capacidad de agregar más posts o mini posts
+**Criterios**:
+- Layout adaptable a más posts
+- Modularidad en componentes
+
+## 10. DEUDA TÉCNICA IDENTIFICADA
+
+### Crítica:
+- **Datos estáticos**: Posts y mini posts hardcodeados
+- **Sin backend**: No hay APIs para blog ni posts
+- **Sin navegación a detalle**: Mini posts no llevan a detalle
+
+### Media:
+- **Sin paginación**: No hay carga incremental de posts
+- **Sin loading states**: No hay indicadores de carga
+- **Sin edición**: No editable desde UI
+
+### Baja:
+- **Sin testing**: No hay tests para la sección
+- **Sin analytics**: No hay tracking de visualizaciones
+- **Sin internacionalización**: Solo en español
+
+## 11. ROADMAP DE DESARROLLO SUGERIDO
+
+### Fase 1 (Alta Prioridad - Funcionalidad Core):
+1. Implementar APIs de backend para blog y posts
+2. Conectar frontend con servicios de blog dinámico
+3. Agregar navegación a detalle de mini posts
+4. Mejorar accesibilidad y SEO
+
+### Fase 2 (Media Prioridad - UX y Visual):
+1. Agregar paginación y carga incremental
+2. Implementar loading states
+3. Permitir edición de posts desde UI (admin)
+4. Agregar analytics de visualización
+
+### Fase 3 (Baja Prioridad - Características Avanzadas):
+1. Desarrollar tests unitarios y de integración
+2. Implementar internacionalización
+3. Agregar secciones adicionales (categorías, autores, etc.)
+4. Permitir agregar más mini posts dinámicamente
+
+===============================================
+ANÁLISIS TÉCNICO PARA DESARROLLO - PROYECTO PROPIEDADES
+RUTA: app/userApp/contact
+===============================================
+
+## 1. OBJETIVO PRINCIPAL DE LA SECCIÓN
+
+### Propósito Funcional:
+La ruta `/userApp/contact` implementa la página de contacto público del portal inmobiliario, permitiendo a los usuarios enviar consultas, mensajes o solicitudes de información a través de un formulario simple y accesible.
+
+### Alcance del Módulo:
+- Formulario de contacto con campos básicos (nombre, email, mensaje)
+- Validación mínima de campos requeridos
+- Diseño responsivo y accesible
+- Integración visual con el resto del portal
+
+## 2. COMPONENTES CLAVE Y ARQUITECTURA
+
+### 2.1 Componente Principal: ContactFormPage
+```
+Tipo: React Functional Component (Client-side)
+Ubicación: /app/userApp/contact/page.tsx
+Patrón: Simple Form + Controlled Components
+Responsabilidad: Renderizado y gestión de formulario de contacto
+```
+
+### 2.2 Estructura de Componentes UI:
+```
+ContactFormPage
+├── Box (Container externo)
+│   ├── Typography (Título y subtítulo)
+│   └── Box (formulario)
+│       └── Grid (column layout)
+│           ├── TextField (Name)
+│           ├── TextField (Email)
+│           ├── TextField (Message)
+│           └── Button (Enviar)
+```
+
+### 2.3 Modelo de Datos de Formulario:
+```typescript
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
+```
+
+## 3. LÓGICA DE NEGOCIO Y FLUJOS CONDICIONALES
+
+### 3.1 Estados del Sistema:
+```typescript
+formData: ContactFormData // Estado local controlado
+```
+
+### 3.2 Flujos Condicionales Implementados:
+
+#### Flujo A: Manejo de Cambios en el Formulario
+```
+onChange → setFormData({ ...formData, [name]: value })
+```
+
+#### Flujo B: Envío del Formulario
+```
+onSubmit → preventDefault → console.log(formData)
+// [PENDIENTE] Envío real a backend/API
+```
+
+### 3.3 Validaciones y Características:
+- Todos los campos requeridos
+- Validación de email por tipo="email"
+- Mensaje multilinea
+
+### 3.4 Limitaciones Actuales:
+- Sin integración real con backend (solo console.log)
+- Sin feedback visual de éxito/error
+- Sin validación avanzada de email
+- Sin captcha ni protección anti-spam
+
+## 4. GESTIÓN DEL ESTADO
+
+### 4.1 Patrón de Estado Utilizado:
+```
+Hook: useState (React Local State)
+Scope: Component-level
+Persistencia: None (solo en memoria)
+Complexity: Baja (1 estado principal)
+```
+
+### 4.2 Estructura de Estado:
+```typescript
+interface ComponentState {
+  formData: ContactFormData;
+}
+```
+
+### 4.3 Flujo de Estado:
+```
+Inicialización: formData vacío
+↓
+onChange: Actualiza campo correspondiente
+↓
+onSubmit: Lee formData y lo envía (simulado)
+↓
+No hay persistencia ni feedback visual
+```
+
+### 4.4 Limitaciones de Estado Actual:
+- Sin persistencia ni feedback
+- Sin loading ni error states
+
+## 5. APIS E INTERACCIONES EXTERNAS
+
+### 5.1 Estado Actual de APIs:
+```
+❌ NO IMPLEMENTADAS - API de contacto
+❌ NO IMPLEMENTADAS - Integración con backend/email
+```
+
+### 5.2 APIs Requeridas para Funcionalidad Completa:
+
+#### API 1: Envío de Mensaje de Contacto
+```typescript
+// POST - Enviar mensaje de contacto
+POST /api/contact
+Body: ContactFormData
+Response: { success: boolean, message: string }
+```
+
+### 5.3 Integración con Componentes:
+```
+onSubmit → [PENDIENTE] Llamada a API de contacto
+```
+
+## 6. DEPENDENCIAS Y TECNOLOGÍAS
+
+### 6.1 Stack Tecnológico:
+```
+Frontend Framework: Next.js 15.1.0 (App Router)
+UI Library: Material-UI 6.2.0
+Language: TypeScript 5.x
+State Management: React useState hooks
+Form Management: Controlled components
+```
+
+### 6.2 Dependencias Específicas Utilizadas:
+```typescript
+@mui/material: Box, Grid, TextField, Button, Typography
+React: useState, React (import básico)
+```
+
+### 6.3 Patrones de Diseño Implementados:
+- **Simple Form Pattern**: Formulario controlado básico
+- **Column Layout Pattern**: Grid vertical para campos
+
+## 7. FUNCIONALIDADES ESPECIALES
+
+### 7.1 Formulario Simple y Accesible:
+- Campos requeridos y validados
+- Diseño responsivo y claro
+
+### 7.2 Integración Visual con el Portal:
+- Tipografía y espaciado consistente
+- Botón destacado para envío
+
+## 8. REQUISITOS FUNCIONALES
+
+### RF-CT-001: Envío de Mensaje de Contacto
+**Descripción**: Permitir a usuarios enviar mensajes de contacto
+**Criterios de Aceptación**:
+- Todos los campos requeridos
+- Validación mínima de email
+- Mensaje multilinea
+- Botón de envío visible y accesible
+
+## 9. REQUISITOS NO FUNCIONALES
+
+### RNF-CT-001: Rendimiento de Carga
+**Descripción**: Página debe cargar en < 2 segundos
+**Criterios**:
+- Formulario visible inmediatamente
+- Sin bloqueos de UI
+
+### RNF-CT-002: Accesibilidad
+**Descripción**: Cumplimiento de estándares WCAG 2.1 AA
+**Criterios**:
+- Campos etiquetados correctamente
+- Navegación por teclado
+
+### RNF-CT-003: SEO y Discoverabilidad
+**Descripción**: Página optimizada para motores de búsqueda
+**Criterios**:
+- Meta tags descriptivos
+- Título y descripción relevantes
+- Estructura semántica clara
+
+## 10. DEUDA TÉCNICA IDENTIFICADA
+
+### Crítica:
+- **Sin backend**: No hay API real de contacto
+- **Sin feedback**: No hay confirmación de éxito/error
+- **Sin validación avanzada**: Email y mensaje no validados a fondo
+
+### Media:
+- **Sin loading states**: No hay indicador de envío
+- **Sin protección anti-spam**: No hay captcha
+- **Sin persistencia**: Mensajes no se guardan
+
+### Baja:
+- **Sin testing**: No hay tests para el formulario
+- **Sin analytics**: No hay tracking de envíos
+- **Sin internacionalización**: Solo en inglés
+
+## 11. ROADMAP DE DESARROLLO SUGERIDO
+
+### Fase 1 (Alta Prioridad - Funcionalidad Core):
+1. Implementar API de backend para contacto
+2. Conectar formulario con API real
+3. Agregar feedback visual de éxito/error
+4. Mejorar validación de email y mensaje
+
+### Fase 2 (Media Prioridad - UX y Seguridad):
+1. Agregar loading states
+2. Implementar captcha o protección anti-spam
+3. Permitir persistencia de mensajes
+4. Agregar analytics de envíos
+
+### Fase 3 (Baja Prioridad - Características Avanzadas):
+1. Desarrollar tests unitarios y de integración
+2. Implementar internacionalización
+3. Agregar campos opcionales (teléfono, asunto)
+4. Permitir adjuntar archivos
+
+===============================================
+ANÁLISIS TÉCNICO PARA DESARROLLO - PROYECTO PROPIEDADES
+RUTA: app/userApp/testimonials
+===============================================
+
+## 1. OBJETIVO PRINCIPAL DE LA SECCIÓN
+
+### Propósito Funcional:
+La ruta `/userApp/testimonials` implementa la sección pública de testimonios de clientes, mostrando experiencias y opiniones de usuarios satisfechos para fortalecer la confianza y credibilidad de la inmobiliaria.
+
+### Alcance del Módulo:
+- Visualización de testimonios en tarjetas
+- Presentación de imagen, mensaje, nombre y fecha
+- Diseño responsivo y atractivo
+- Integración visual con el portal público
+
+## 2. COMPONENTES CLAVE Y ARQUITECTURA
+
+### 2.1 Componente Principal: TestimonialCard
+```
+Tipo: React Functional Component (Client-side)
+Ubicación: /components/TestimonialCard.tsx
+Patrón: Testimonial Card + Dialog
+Responsabilidad: Renderizado de testimonio y visualización ampliada
+```
+
+### 2.2 Estructura de Componentes UI:
+```
+TestimonialCard
+├── Box (Tarjeta principal)
+│   ├── Avatar (Imagen del cliente)
+│   ├── Typography (Mensaje, nombre, fecha)
+│   └── Imagen lateral (decorativa)
+└── Dialog (Imagen ampliada al hacer click)
+```
+
+### 2.3 Modelo de Datos de Testimonio:
+```typescript
+interface Testimonial {
+  image: string;
+  message: string;
+  name: string;
+  date: string;
+}
+```
+
+## 3. LÓGICA DE NEGOCIO Y FLUJOS CONDICIONALES
+
+### 3.1 Estados del Sistema:
+```typescript
+open: boolean // Estado de apertura del Dialog
+```
+
+### 3.2 Flujos Condicionales Implementados:
+
+#### Flujo A: Renderizado de Testimonios
+```
+TestimonialCard recibe props y renderiza tarjeta
+```
+
+#### Flujo B: Visualización Ampliada
+```
+onClick en tarjeta → setOpen(true) → Dialog con imagen ampliada
+onClose → setOpen(false)
+```
+
+### 3.3 Características de los Datos Mock:
+- 2 testimonios con imagen, mensaje, nombre y fecha
+- Imágenes externas de clientes
+
+### 3.4 Limitaciones Actuales:
+- Datos estáticos: testimonios hardcodeados
+- Sin integración con backend ni carga dinámica
+- Sin paginación ni scroll
+- Sin feedback de envío de nuevos testimonios
+
+## 4. GESTIÓN DEL ESTADO
+
+### 4.1 Patrón de Estado Utilizado:
+```
+Hook: useState (React Local State)
+Scope: Component-level (por tarjeta)
+Persistencia: None (solo en memoria)
+Complexity: Baja
+```
+
+### 4.2 Estructura de Estado:
+```typescript
+interface ComponentState {
+  open: boolean;
+}
+```
+
+### 4.3 Flujo de Estado:
+```
+Inicialización: open = false
+↓
+onClick: open = true (Dialog visible)
+↓
+onClose: open = false
+```
+
+### 4.4 Limitaciones de Estado Actual:
+- Sin persistencia ni feedback
+- Sin loading ni error states
+- Sin integración con datos reales
+
+## 5. APIS E INTERACCIONES EXTERNAS
+
+### 5.1 Estado Actual de APIs:
+```
+❌ NO IMPLEMENTADAS - API de testimonios
+❌ NO IMPLEMENTADAS - Integración con backend
+```
+
+### 5.2 APIs Requeridas para Funcionalidad Completa:
+
+#### API 1: Gestión de Testimonios
+```typescript
+// GET - Obtener testimonios
+GET /api/testimonials
+Response: { testimonials: Testimonial[] }
+
+// POST - Enviar nuevo testimonio
+POST /api/testimonials
+Body: Testimonial
+Response: { success: boolean, testimonial: Testimonial }
+```
+
+### 5.3 Integración con Componentes:
+```
+TestimonialCard → Renderiza cada testimonio
+onClick → Abre Dialog con imagen ampliada
+```
+
+## 6. DEPENDENCIAS Y TECNOLOGÍAS
+
+### 6.1 Stack Tecnológico:
+```
+Frontend Framework: Next.js 15.1.0 (App Router)
+UI Library: Material-UI 6.2.0
+Language: TypeScript 5.x
+State Management: useState
+```
+
+### 6.2 Dependencias Específicas Utilizadas:
+```typescript
+@mui/material: Container, Grid, Box, Typography, Avatar, Dialog
+React: useState, React (import básico)
+```
+
+### 6.3 Patrones de Diseño Implementados:
+- **Testimonial Card Pattern**: Tarjeta de testimonio
+- **Dialog Pattern**: Visualización ampliada de imagen
+
+## 7. FUNCIONALIDADES ESPECIALES
+
+### 7.1 Tarjetas de Testimonios:
+- Imagen, mensaje, nombre y fecha
+- Diseño atractivo y responsivo
+
+### 7.2 Visualización Ampliada:
+- Dialog con imagen grande al hacer click
+
+## 8. REQUISITOS FUNCIONALES
+
+### RF-TM-001: Visualización de Testimonios
+**Descripción**: Mostrar testimonios de clientes
+**Criterios de Aceptación**:
+- Imagen, mensaje, nombre y fecha visibles
+- Diseño responsivo
+
+## 9. REQUISITOS NO FUNCIONALES
+
+### RNF-TM-001: Rendimiento de Carga
+**Descripción**: Página debe cargar en < 2 segundos
+**Criterios**:
+- Testimonios visibles inmediatamente
+- Sin bloqueos de UI
+
+### RNF-TM-002: Accesibilidad
+**Descripción**: Cumplimiento de estándares WCAG 2.1 AA
+**Criterios**:
+- Tarjetas accesibles y navegables
+
+### RNF-TM-003: SEO y Discoverabilidad
+**Descripción**: Página optimizada para motores de búsqueda
+**Criterios**:
+- Meta tags descriptivos
+- Título y descripción relevantes
+- Estructura semántica clara
+
+## 10. DEUDA TÉCNICA IDENTIFICADA
+
+### Crítica:
+- **Datos estáticos**: Testimonios hardcodeados
+- **Sin backend**: No hay API real de testimonios
+- **Sin feedback de envío**: No se pueden agregar testimonios
+
+### Media:
+- **Sin paginación**: No hay scroll ni carga incremental
+- **Sin loading states**: No hay indicadores de carga
+- **Sin edición**: No editable desde UI
+
+### Baja:
+- **Sin testing**: No hay tests para la sección
+- **Sin analytics**: No hay tracking de visualizaciones
+- **Sin internacionalización**: Solo en español
+
+## 11. ROADMAP DE DESARROLLO SUGERIDO
+
+### Fase 1 (Alta Prioridad - Funcionalidad Core):
+1. Implementar API de backend para testimonios
+2. Conectar frontend con servicios de testimonios dinámicos
+3. Permitir envío de nuevos testimonios
+4. Mejorar accesibilidad y SEO
+
+### Fase 2 (Media Prioridad - UX y Visual):
+1. Agregar paginación y carga incremental
+2. Implementar loading states
+3. Permitir edición de testimonios desde UI (admin)
+4. Agregar analytics de visualización
+
+### Fase 3 (Baja Prioridad - Características Avanzadas):
+1. Desarrollar tests unitarios y de integración
+2. Implementar internacionalización
+3. Agregar secciones adicionales (video, rating, etc.)
+4. Permitir agregar más testimonios dinámicamente
+
+===============================================
+ANÁLISIS TÉCNICO PARA DESARROLLO - PROYECTO PROPIEDADES
+RUTA: app/userApp/sell
+===============================================
+
+## 1. OBJETIVO PRINCIPAL DE LA SECCIÓN
+
+### Propósito Funcional:
+La ruta `/userApp/sell` implementa el formulario público para que usuarios puedan solicitar la publicación de propiedades en venta, capturando información relevante del inmueble y del propietario para su posterior gestión por parte de la inmobiliaria.
+
+### Alcance del Módulo:
+- Formulario de venta con campos de propiedad y propietario
+- Validación mínima de campos requeridos
+- Diseño responsivo y claro
+- Integración visual con el portal público
+
+## 2. COMPONENTES CLAVE Y ARQUITECTURA
+
+### 2.1 Componente Principal: SellRentPropertyForm
+```
+Tipo: React Functional Component (Client-side)
+Ubicación: /components/property/SellRentPropertyForm.tsx
+Patrón: Property Submission Form
+Responsabilidad: Renderizado y gestión de formulario de venta
+```
+
+### 2.2 Estructura de Componentes UI:
+```
+SellRentPropertyForm
+├── Grid (Container principal, direction column)
+│   ├── Typography (Título y secciones)
+│   ├── FormControl + Select (Categoría)
+│   ├── TextField (builtArea, landArea, baños, habitaciones, estacionamientos)
+│   ├── TextField (dirección, Google Maps)
+│   ├── TextField (descripción)
+│   ├── TextField (nombre, rut, teléfono, email)
+│   └── Button (Solicitar contacto)
+```
+
+### 2.3 Modelo de Datos de Formulario:
+```typescript
+interface SellPropertyFormData {
+  type: 0;
+  category: string;
+  builtArea: number;
+  landArea: number;
+  bathrooms: number;
+  bedrooms: number;
+  parkingSpaces: number;
+  address: string;
+  googleMapLink: string;
+  description: string;
+  name: string;
+  rut: string;
+  phone: string;
+  email: string;
+}
+```
+
+## 3. LÓGICA DE NEGOCIO Y FLUJOS CONDICIONALES
+
+### 3.1 Estados del Sistema:
+```typescript
+propertyData: SellPropertyFormData // Estado local controlado
+```
+
+### 3.2 Flujos Condicionales Implementados:
+
+#### Flujo A: Manejo de Cambios en el Formulario
+```
+onChange → setPropertyData({ ...propertyData, [name]: value })
+```
+
+#### Flujo B: Envío del Formulario
+```
+onClick (Solicitar contacto) → [PENDIENTE] Envío real a backend/API
+```
+
+### 3.3 Validaciones y Características:
+- Todos los campos requeridos
+- Validación mínima (solo required, sin validación avanzada)
+- Campos numéricos y de texto
+
+### 3.4 Limitaciones Actuales:
+- Sin integración real con backend (solo estado local)
+- Sin feedback visual de éxito/error
+- Sin validación avanzada de datos
+- Sin captcha ni protección anti-spam
+
+## 4. GESTIÓN DEL ESTADO
+
+### 4.1 Patrón de Estado Utilizado:
+```
+Hook: useState (React Local State)
+Scope: Component-level
+Persistencia: None (solo en memoria)
+Complexity: Media (varios campos)
+```
+
+### 4.2 Estructura de Estado:
+```typescript
+interface ComponentState {
+  propertyData: SellPropertyFormData;
+}
+```
+
+### 4.3 Flujo de Estado:
+```
+Inicialización: propertyData con valores por defecto
+↓
+onChange: Actualiza campo correspondiente
+↓
+onClick: Lee propertyData y lo enviaría (simulado)
+↓
+No hay persistencia ni feedback visual
+```
+
+### 4.4 Limitaciones de Estado Actual:
+- Sin persistencia ni feedback
+- Sin loading ni error states
+
+## 5. APIS E INTERACCIONES EXTERNAS
+
+### 5.1 Estado Actual de APIs:
+```
+❌ NO IMPLEMENTADAS - API de publicación de venta
+❌ NO IMPLEMENTADAS - Integración con backend/email
+```
+
+### 5.2 APIs Requeridas para Funcionalidad Completa:
+
+#### API 1: Publicación de Propiedad en Venta
+```typescript
+// POST - Publicar propiedad en venta
+POST /api/properties/sell
+Body: SellPropertyFormData
+Response: { success: boolean, message: string }
+```
+
+### 5.3 Integración con Componentes:
+```
+onClick (Solicitar contacto) → [PENDIENTE] Llamada a API de publicación
+```
+
+## 6. DEPENDENCIAS Y TECNOLOGÍAS
+
+### 6.1 Stack Tecnológico:
+```
+Frontend Framework: Next.js 15.1.0 (App Router)
+UI Library: Material-UI 6.2.0
+Language: TypeScript 5.x
+State Management: useState
+Form Management: Controlled components
+```
+
+### 6.2 Dependencias Específicas Utilizadas:
+```typescript
+@mui/material: Grid, Typography, TextField, FormControl, Select, MenuItem, InputLabel, Button
+React: useState, React (import básico)
+```
+
+### 6.3 Patrones de Diseño Implementados:
+- **Property Submission Pattern**: Formulario de alta de propiedad
+- **Sectioned Form Pattern**: Secciones claras para datos
+
+## 7. FUNCIONALIDADES ESPECIALES
+
+### 7.1 Formulario Completo de Propiedad:
+- Captura todos los datos relevantes
+- Campos numéricos y de texto
+
+### 7.2 Integración Visual con el Portal:
+- Tipografía y espaciado consistente
+- Botón destacado para envío
+
+## 8. REQUISITOS FUNCIONALES
+
+### RF-SELL-001: Publicación de Propiedad en Venta
+**Descripción**: Permitir a usuarios solicitar publicación de venta
+**Criterios de Aceptación**:
+- Todos los campos requeridos
+- Validación mínima
+- Botón de envío visible y accesible
+
+## 9. REQUISITOS NO FUNCIONALES
+
+### RNF-SELL-001: Rendimiento de Carga
+**Descripción**: Página debe cargar en < 2 segundos
+**Criterios**:
+- Formulario visible inmediatamente
+- Sin bloqueos de UI
+
+### RNF-SELL-002: Accesibilidad
+**Descripción**: Cumplimiento de estándares WCAG 2.1 AA
+**Criterios**:
+- Campos etiquetados correctamente
+- Navegación por teclado
+
+### RNF-SELL-003: SEO y Discoverabilidad
+**Descripción**: Página optimizada para motores de búsqueda
+**Criterios**:
+- Meta tags descriptivos
+- Título y descripción relevantes
+- Estructura semántica clara
+
+## 10. DEUDA TÉCNICA IDENTIFICADA
+
+### Crítica:
+- **Sin backend**: No hay API real de publicación
+- **Sin feedback**: No hay confirmación de éxito/error
+- **Sin validación avanzada**: Datos no validados a fondo
+
+### Media:
+- **Sin loading states**: No hay indicador de envío
+- **Sin protección anti-spam**: No hay captcha
+- **Sin persistencia**: Datos no se guardan
+
+### Baja:
+- **Sin testing**: No hay tests para el formulario
+- **Sin analytics**: No hay tracking de envíos
+- **Sin internacionalización**: Solo en español
+
+## 11. ROADMAP DE DESARROLLO SUGERIDO
+
+### Fase 1 (Alta Prioridad - Funcionalidad Core):
+1. Implementar API de backend para publicación de venta
+2. Conectar formulario con API real
+3. Agregar feedback visual de éxito/error
+4. Mejorar validación de datos
+
+### Fase 2 (Media Prioridad - UX y Seguridad):
+1. Agregar loading states
+2. Implementar captcha o protección anti-spam
+3. Permitir persistencia de datos
+4. Agregar analytics de envíos
+
+### Fase 3 (Baja Prioridad - Características Avanzadas):
+1. Desarrollar tests unitarios y de integración
+2. Implementar internacionalización
+3. Agregar campos opcionales (fotos, video)
+4. Permitir adjuntar archivos
+
+===============================================
+ANÁLISIS TÉCNICO PARA DESARROLLO - PROYECTO PROPIEDADES
+RUTA: app/userApp/properties
+===============================================
+
+## 1. OBJETIVO PRINCIPAL DE LA SECCIÓN
+
+### Propósito Funcional:
+La ruta `/userApp/properties` implementa el catálogo público de propiedades del portal inmobiliario, permitiendo a los usuarios explorar, filtrar y visualizar propiedades disponibles en formato grid, con información relevante y acceso a detalles multimedia.
+
+### Alcance del Módulo:
+- Visualización de propiedades en grid responsivo
+- Sistema de filtrado integrado (Filter component)
+- Presentación de tarjetas de propiedad (PropertyUserCard)
+- Datos mock de propiedades con información completa
+- Integración visual con el portal público
+
+## 2. COMPONENTES CLAVE Y ARQUITECTURA
+
+### 2.1 Componente Principal: PropertiesPage
+```
+Tipo: React Functional Component (Client-side)
+Ubicación: /app/userApp/properties/page.tsx
+Patrón: Catalog Grid + Filtering Pattern
+Responsabilidad: Renderizado de catálogo y filtrado de propiedades
+```
+
+### 2.2 Estructura de Componentes UI:
+```
+PropertiesPage
+├── Grid (Container principal)
+│   ├── Grid (xs=12, marginTop=4) → Filter
+│   └── Grid (xs=12, sm=6, md=4) → PropertyUserCard (por propiedad)
+```
+
+### 2.3 Modelo de Datos de Propiedad:
+```typescript
+interface Property {
+  type: 0 | 1;
+  featured?: boolean;
+  image: string;
+  category: string;
+  builtArea: number;
+  landArea: number;
+  bathrooms: number;
+  bedrooms: number;
+  parkingSpaces: number;
+  price: number;
+  uf: number;
+  address: string;
+  googleMapLink: string;
+  youtubeLink: string;
+  ticToLink: string;
+}
+```
+
+## 3. LÓGICA DE NEGOCIO Y FLUJOS CONDICIONALES
+
+### 3.1 Estados del Sistema:
+```typescript
+// No hay estados locales - Componente completamente estático
+propertiesList: Property[] // Array estático de propiedades mock
+```
+
+### 3.2 Flujos Condicionales Implementados:
+
+#### Flujo A: Renderizado de Catálogo
+```
+propertiesList.map() → Renderiza PropertyUserCard por cada propiedad
+Grid responsivo: xs=12, sm=6, md=4
+```
+
+#### Flujo B: Integración de Filtros
+```
+Filter component renderizado en la parte superior
+[PENDIENTE] Integración real de filtrado
+```
+
+### 3.3 Características de los Datos Mock:
+- 10+ propiedades con datos completos
+- Tipos: House y Apartment
+- Precios en CLP y UF
+- Imágenes externas de alta calidad
+- Links a Google Maps, YouTube y TikTok
+
+### 3.4 Limitaciones Actuales:
+- Datos estáticos: propiedades hardcodeadas
+- Sin integración real de filtrado (Filter aislado)
+- Sin paginación ni carga incremental
+- Sin navegación a detalle de propiedad
+
+## 4. GESTIÓN DEL ESTADO
+
+### 4.1 Patrón de Estado Utilizado:
+```
+Hook: Ninguno (Stateless Component)
+Scope: N/A
+Persistencia: Static data only
+Complexity: None (completamente estático)
+```
+
+### 4.2 Estructura de Estado:
+```typescript
+// No hay estado local - Componente funcional puro
+interface ComponentState {
+  // Sin estados - componente completamente estático
+}
+```
+
+### 4.3 Flujo de Estado:
+```
+Inicialización: Datos de propiedades cargados
+↓
+Render: Grid de propiedades y filtro
+↓
+No hay interacciones que cambien estado
+↓
+Re-render: Solo si props/parent cambian
+```
+
+### 4.4 Limitaciones de Estado Actual:
+- Sin state management
+- Sin loading states ni error handling
+- Sin data fetching
+
+## 5. APIS E INTERACCIONES EXTERNAS
+
+### 5.1 Estado Actual de APIs:
+```
+❌ NO IMPLEMENTADAS - APIs de Backend
+❌ NO IMPLEMENTADAS - Servicios de propiedades
+❌ NO IMPLEMENTADAS - APIs de filtrado
+```
+
+### 5.2 APIs Requeridas para Funcionalidad Completa:
+
+#### API 1: Catálogo de Propiedades
+```typescript
+// GET - Obtener propiedades públicas
+GET /api/properties/public
+Response: { properties: Property[], total: number }
+```
+
+#### API 2: Filtrado de Propiedades
+```typescript
+// POST - Filtrar propiedades
+POST /api/properties/search
+Body: { filters: PropertyFilters }
+Response: { properties: Property[] }
+```
+
+### 5.3 Integración con Componentes:
+```
+Filter → [PENDIENTE] Comunicación con parent para filtrar
+PropertyUserCard → Renderiza cada propiedad
+```
+
+## 6. DEPENDENCIAS Y TECNOLOGÍAS
+
+### 6.1 Stack Tecnológico:
+```
+Frontend Framework: Next.js 15.1.0 (App Router)
+UI Library: Material-UI 6.2.0
+Language: TypeScript 5.x
+State Management: None (componente estático)
+Layout: MUI Grid
+```
+
+### 6.2 Dependencias Específicas Utilizadas:
+```typescript
+@mui/material: Grid
+@/components/property: Filter, PropertyUserCard
+React: React (import básico)
+```
+
+### 6.3 Patrones de Diseño Implementados:
+- **Catalog Grid Pattern**: Grid responsivo de propiedades
+- **Filter Pattern**: Filtro en la parte superior
+- **Card Pattern**: Tarjetas de propiedad reutilizables
+
+## 7. FUNCIONALIDADES ESPECIALES
+
+### 7.1 Grid Responsivo de Propiedades:
+- Breakpoints xs=12, sm=6, md=4
+- Espaciado y márgenes consistentes
+
+### 7.2 Integración de Filtros:
+- Filter component visible y preparado para integración
+
+### 7.3 Datos Mock Ricos:
+- Propiedades con imágenes, precios, links y detalles
+
+## 8. REQUISITOS FUNCIONALES
+
+### RF-PR-001: Visualización de Catálogo
+**Descripción**: Mostrar propiedades en grid responsivo
+**Criterios de Aceptación**:
+- Información completa visible
+- Layout adaptativo
+- Tarjetas reutilizables
+
+### RF-PR-002: Sistema de Filtrado
+**Descripción**: Permitir filtrado de propiedades
+**Criterios de Aceptación**:
+- Filtro visible y funcional
+- Resultados actualizados en tiempo real
+
+### RF-PR-003: Integración Multimedia
+**Descripción**: Mostrar links a mapas y videos
+**Criterios de Aceptación**:
+- Links funcionales a Google Maps, YouTube, TikTok
+
+## 9. REQUISITOS NO FUNCIONALES
+
+### RNF-PR-001: Rendimiento de Carga
+**Descripción**: Página debe cargar en < 2 segundos
+**Criterios**:
+- Grid visible inmediatamente
+- Sin bloqueos de UI
+
+### RNF-PR-002: Accesibilidad
+**Descripción**: Cumplimiento de estándares WCAG 2.1 AA
+**Criterios**:
+- Tarjetas accesibles y navegables
+
+### RNF-PR-003: SEO y Discoverabilidad
+**Descripción**: Página optimizada para motores de búsqueda
+**Criterios**:
+- Meta tags descriptivos
+- Título y descripción relevantes
+- Estructura semántica clara
+
+## 10. DEUDA TÉCNICA IDENTIFICADA
+
+### Crítica:
+- **Datos estáticos**: Propiedades hardcodeadas
+- **Sin filtrado funcional**: Filter no conectado
+- **Sin navegación a detalle**: No hay página de detalle
+
+### Media:
+- **Sin paginación**: No hay carga incremental
+- **Sin loading states**: No hay indicadores de carga
+- **Sin edición**: No editable desde UI
+
+### Baja:
+- **Sin testing**: No hay tests para el catálogo
+- **Sin analytics**: No hay tracking de visualizaciones
+- **Sin internacionalización**: Solo en español
+
+## 11. ROADMAP DE DESARROLLO SUGERIDO
+
+### Fase 1 (Alta Prioridad - Funcionalidad Core):
+1. Implementar APIs de backend para catálogo
+2. Conectar filtro con estado real
+3. Agregar navegación a detalle de propiedad
+4. Mejorar accesibilidad y SEO
+
+### Fase 2 (Media Prioridad - UX y Visual):
+1. Agregar paginación y carga incremental
+2. Implementar loading states
+3. Permitir edición de propiedades desde UI (admin)
+4. Agregar analytics de visualización
+
+### Fase 3 (Baja Prioridad - Características Avanzadas):
+1. Desarrollar tests unitarios y de integración
+2. Implementar internacionalización
+3. Agregar secciones adicionales (categorías, zonas, etc.)
+4. Permitir agregar más propiedades dinámicamente
+
+===============================================
+ANÁLISIS TÉCNICO PARA DESARROLLO - PROYECTO PROPIEDADES
+RUTA: app/userApp/properties/property
+===============================================
+
+## 1. OBJETIVO PRINCIPAL DE LA SECCIÓN
+
+### Propósito Funcional:
+La ruta `/userApp/properties/property` implementa la página de detalle de propiedad, permitiendo a los usuarios visualizar información completa, galería de imágenes, características, ubicación en mapa, datos de contacto del agente y opciones de compartir en redes sociales.
+
+### Alcance del Módulo:
+- Visualización detallada de una propiedad
+- Galería de imágenes y características físicas
+- Mapa embebido de ubicación
+- Formulario de contacto y agendamiento de visita
+- Botones de compartir en redes sociales
+- Integración visual con el portal público
+
+## 2. COMPONENTES CLAVE Y ARQUITECTURA
+
+### 2.1 Componente Principal: PropertyPage
+```
+Tipo: React Functional Component (Client-side)
+Ubicación: /components/property/PropertyPage.tsx
+Patrón: Property Detail + Contact + Social Sharing
+Responsabilidad: Renderizado de detalle de propiedad y contacto
+```
+
+### 2.2 Estructura de Componentes UI:
+```
+PropertyPage
+├── Box (Layout principal: flex row/column)
+│   ├── Box (Galería de imágenes)
+│   ├── Typography (Título y tipo)
+│   ├── Grid (Características: baños, dormitorios, etc.)
+│   ├── Box (Mapa embebido)
+│   └── Box (Contacto y formulario, solo desktop)
+│       ├── Avatar (Agente)
+│       ├── Typography (Datos de contacto)
+│       ├── TextField (Formulario de contacto)
+│       └── Botones de compartir (Facebook, Twitter, WhatsApp, LinkedIn)
+```
+
+### 2.3 Modelo de Datos de Propiedad:
+```typescript
+interface PropertyDetail {
+  builtArea: number;
+  landArea: number;
+  bathrooms: number;
+  bedrooms: number;
+  parkingSpaces: number;
+  category: string;
+  type: 0 | 1;
+  // ...otros campos posibles
+}
+```
+
+## 3. LÓGICA DE NEGOCIO Y FLUJOS CONDICIONALES
+
+### 3.1 Estados del Sistema:
+```typescript
+url: string // URL actual para compartir
+// Resto de datos: props o valores por defecto
+```
+
+### 3.2 Flujos Condicionales Implementados:
+
+#### Flujo A: Renderizado de Detalle
+```
+Render inicial → Muestra galería, características, mapa y contacto
+```
+
+#### Flujo B: Compartir en Redes Sociales
+```
+useEffect → setUrl(window.location.href)
+Botones de compartir usan url
+```
+
+#### Flujo C: Formulario de Contacto
+```
+Formulario visible solo en desktop
+Campos: nombre, correo, teléfono, mensaje
+Botón: Agendar Visita
+```
+
+### 3.3 Características de los Datos Mock:
+- Imágenes por defecto (3)
+- Datos de agente hardcodeados
+- Ubicación fija en mapa (OpenStreetMap)
+
+### 3.4 Limitaciones Actuales:
+- Datos estáticos: sin integración con backend
+- Sin navegación dinámica por id de propiedad
+- Sin feedback de envío de formulario
+- Sin validación avanzada de contacto
+
+## 4. GESTIÓN DEL ESTADO
+
+### 4.1 Patrón de Estado Utilizado:
+```
+Hook: useState (React Local State)
+Scope: Component-level (solo url)
+Persistencia: None (solo en memoria)
+Complexity: Baja
+```
+
+### 4.2 Estructura de Estado:
+```typescript
+interface ComponentState {
+  url: string;
+}
+```
+
+### 4.3 Flujo de Estado:
+```
+Inicialización: url vacío
+↓
+useEffect: setUrl(window.location.href)
+↓
+Render: Usa url para botones de compartir
+```
+
+### 4.4 Limitaciones de Estado Actual:
+- Sin persistencia ni feedback
+- Sin loading ni error states
+- Sin integración con datos reales
+
+## 5. APIS E INTERACCIONES EXTERNAS
+
+### 5.1 Estado Actual de APIs:
+```
+❌ NO IMPLEMENTADAS - API de propiedades
+❌ NO IMPLEMENTADAS - API de contacto/agendamiento
+```
+
+### 5.2 APIs Requeridas para Funcionalidad Completa:
+
+#### API 1: Detalle de Propiedad
+```typescript
+// GET - Obtener detalle de propiedad
+GET /api/properties/{id}
+Response: PropertyDetail
+```
+
+#### API 2: Agendamiento de Visita
+```typescript
+// POST - Agendar visita
+POST /api/properties/{id}/visit
+Body: { nombre, correo, telefono, mensaje }
+Response: { success: boolean, message: string }
+```
+
+### 5.3 Integración con Componentes:
+```
+PropertyPage → Renderiza detalle y contacto
+Botones de compartir usan url
+```
+
+## 6. DEPENDENCIAS Y TECNOLOGÍAS
+
+### 6.1 Stack Tecnológico:
+```
+Frontend Framework: Next.js 15.1.0 (App Router)
+UI Library: Material-UI 6.2.0
+Language: TypeScript 5.x
+State Management: useState, useEffect
+Social Sharing: react-share
+```
+
+### 6.2 Dependencias Específicas Utilizadas:
+```typescript
+@mui/material: Box, Button, Grid, IconButton, Typography, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Avatar
+@mui/icons-material: PeopleAlt, Bathtub, KingBed, Garage, Home, Terrain
+react-share: FacebookShareButton, TwitterShareButton, WhatsappShareButton, LinkedinShareButton, FacebookIcon, TwitterIcon, WhatsappIcon, LinkedinIcon
+React: useState, useEffect, React (import básico)
+```
+
+### 6.3 Patrones de Diseño Implementados:
+- **Property Detail Pattern**: Página de detalle con galería y características
+- **Contact Pattern**: Formulario de contacto lateral
+- **Social Sharing Pattern**: Botones de compartir
+
+## 7. FUNCIONALIDADES ESPECIALES
+
+### 7.1 Galería de Imágenes y Características:
+- 3 imágenes principales
+- Iconos para baños, dormitorios, áreas, estacionamientos
+
+### 7.2 Mapa Embebido:
+- OpenStreetMap integrado
+- Ubicación fija (mock)
+
+### 7.3 Formulario de Contacto y Agendamiento:
+- Campos básicos y mensaje prellenado
+- Botón destacado para agendar visita
+
+### 7.4 Social Sharing:
+- Botones para Facebook, Twitter, WhatsApp, LinkedIn
+- Uso de url actual
+
+## 8. REQUISITOS FUNCIONALES
+
+### RF-PP-001: Visualización de Detalle
+**Descripción**: Mostrar información completa de la propiedad
+**Criterios de Aceptación**:
+- Galería, características, mapa y contacto visibles
+
+### RF-PP-002: Formulario de Contacto
+**Descripción**: Permitir agendar visita/contactar agente
+**Criterios de Aceptación**:
+- Campos requeridos y botón de envío
+
+### RF-PP-003: Social Sharing
+**Descripción**: Permitir compartir propiedad en redes sociales
+**Criterios de Aceptación**:
+- Botones funcionales para compartir
+
+## 9. REQUISITOS NO FUNCIONALES
+
+### RNF-PP-001: Rendimiento de Carga
+**Descripción**: Página debe cargar en < 2 segundos
+**Criterios**:
+- Detalle visible inmediatamente
+- Sin bloqueos de UI
+
+### RNF-PP-002: Accesibilidad
+**Descripción**: Cumplimiento de estándares WCAG 2.1 AA
+**Criterios**:
+- Elementos accesibles y navegables
+
+### RNF-PP-003: SEO y Discoverabilidad
+**Descripción**: Página optimizada para motores de búsqueda
+**Criterios**:
+- Meta tags descriptivos
+- Título y descripción relevantes
+- Estructura semántica clara
+
+## 10. DEUDA TÉCNICA IDENTIFICADA
+
+### Crítica:
+- **Datos estáticos**: Sin integración con backend
+- **Sin navegación dinámica**: No hay detalle por id
+- **Sin feedback de formulario**: No hay confirmación de envío
+
+### Media:
+- **Sin loading states**: No hay indicadores de carga
+- **Sin validación avanzada**: Email/teléfono no validados
+- **Sin edición**: No editable desde UI
+
+### Baja:
+- **Sin testing**: No hay tests para la página
+- **Sin analytics**: No hay tracking de visualizaciones
+- **Sin internacionalización**: Solo en español
+
+## 11. ROADMAP DE DESARROLLO SUGERIDO
+
+### Fase 1 (Alta Prioridad - Funcionalidad Core):
+1. Implementar API de backend para detalle de propiedad
+2. Conectar formulario de contacto con API real
+3. Agregar navegación dinámica por id
+4. Mejorar accesibilidad y SEO
+
+### Fase 2 (Media Prioridad - UX y Visual):
+1. Agregar loading states
+2. Implementar feedback visual de formulario
+3. Permitir edición de propiedades desde UI (admin)
+4. Agregar analytics de visualización
+
+### Fase 3 (Baja Prioridad - Características Avanzadas):
+1. Desarrollar tests unitarios y de integración
+2. Implementar internacionalización
+3. Agregar secciones adicionales (historial, documentos, etc.)
+4. Permitir agregar más imágenes dinámicamente
+
+===============================================
+ANÁLISIS TÉCNICO PARA DESARROLLO - PROYECTO PROPIEDADES
+RUTA: app/userApp/rent
+===============================================
+
+## 1. OBJETIVO PRINCIPAL DE LA SECCIÓN
+
+### Propósito Funcional:
+La ruta `/userApp/rent` implementa el formulario público para que usuarios puedan solicitar la publicación de propiedades en arriendo, capturando información relevante del inmueble y del propietario para su posterior gestión por parte de la inmobiliaria.
+
+### Alcance del Módulo:
+- Formulario de arriendo con campos de propiedad y propietario
+- Validación mínima de campos requeridos
+- Diseño responsivo y claro
+- Integración visual con el portal público
+
+## 2. COMPONENTES CLAVE Y ARQUITECTURA
+
+### 2.1 Componente Principal: SellRentPropertyForm
+```
+Tipo: React Functional Component (Client-side)
+Ubicación: /components/property/SellRentPropertyForm.tsx
+Patrón: Property Submission Form
+Responsabilidad: Renderizado y gestión de formulario de arriendo
+```
+
+### 2.2 Estructura de Componentes UI:
+```
+SellRentPropertyForm
+├── Grid (Container principal, direction column)
+│   ├── Typography (Título y secciones)
+│   ├── FormControl + Select (Categoría)
+│   ├── TextField (builtArea, landArea, baños, habitaciones, estacionamientos)
+│   ├── TextField (dirección, Google Maps)
+│   ├── TextField (descripción)
+│   ├── TextField (nombre, rut, teléfono, email)
+│   └── Button (Solicitar contacto)
+```
+
+### 2.3 Modelo de Datos de Formulario:
+```typescript
+interface RentPropertyFormData {
+  type: 1;
+  category: string;
+  builtArea: number;
+  landArea: number;
+  bathrooms: number;
+  bedrooms: number;
+  parkingSpaces: number;
+  address: string;
+  googleMapLink: string;
+  description: string;
+  name: string;
+  rut: string;
+  phone: string;
+  email: string;
+}
+```
+
+## 3. LÓGICA DE NEGOCIO Y FLUJOS CONDICIONALES
+
+### 3.1 Estados del Sistema:
+```typescript
+propertyData: RentPropertyFormData // Estado local controlado
+```
+
+### 3.2 Flujos Condicionales Implementados:
+
+#### Flujo A: Manejo de Cambios en el Formulario
+```
+onChange → setPropertyData({ ...propertyData, [name]: value })
+```
+
+#### Flujo B: Envío del Formulario
+```
+onClick (Solicitar contacto) → [PENDIENTE] Envío real a backend/API
+```
+
+### 3.3 Validaciones y Características:
+- Todos los campos requeridos
+- Validación mínima (solo required, sin validación avanzada)
+- Campos numéricos y de texto
+
+### 3.4 Limitaciones Actuales:
+- Sin integración real con backend (solo estado local)
+- Sin feedback visual de éxito/error
+- Sin validación avanzada de datos
+- Sin captcha ni protección anti-spam
+
+## 4. GESTIÓN DEL ESTADO
+
+### 4.1 Patrón de Estado Utilizado:
+```
+Hook: useState (React Local State)
+Scope: Component-level
+Persistencia: None (solo en memoria)
+Complexity: Media (varios campos)
+```
+
+### 4.2 Estructura de Estado:
+```typescript
+interface ComponentState {
+  propertyData: RentPropertyFormData;
+}
+```
+
+### 4.3 Flujo de Estado:
+```
+Inicialización: propertyData con valores por defecto
+↓
+onChange: Actualiza campo correspondiente
+↓
+onClick: Lee propertyData y lo enviaría (simulado)
+↓
+No hay persistencia ni feedback visual
+```
+
+### 4.4 Limitaciones de Estado Actual:
+- Sin persistencia ni feedback
+- Sin loading ni error states
+
+## 5. APIS E INTERACCIONES EXTERNAS
+
+### 5.1 Estado Actual de APIs:
+```
+❌ NO IMPLEMENTADAS - API de publicación de arriendo
+❌ NO IMPLEMENTADAS - Integración con backend/email
+```
+
+### 5.2 APIs Requeridas para Funcionalidad Completa:
+
+#### API 1: Publicación de Propiedad en Arriendo
+```typescript
+// POST - Publicar propiedad en arriendo
+POST /api/properties/rent
+Body: RentPropertyFormData
+Response: { success: boolean, message: string }
+```
+
+### 5.3 Integración con Componentes:
+```
+onClick (Solicitar contacto) → [PENDIENTE] Llamada a API de publicación
+```
+
+## 6. DEPENDENCIAS Y TECNOLOGÍAS
+
+### 6.1 Stack Tecnológico:
+```
+Frontend Framework: Next.js 15.1.0 (App Router)
+UI Library: Material-UI 6.2.0
+Language: TypeScript 5.x
+State Management: useState
+Form Management: Controlled components
+```
+
+### 6.2 Dependencias Específicas Utilizadas:
+```typescript
+@mui/material: Grid, Typography, TextField, FormControl, Select, MenuItem, InputLabel, Button
+React: useState, React (import básico)
+```
+
+### 6.3 Patrones de Diseño Implementados:
+- **Property Submission Pattern**: Formulario de alta de propiedad
+- **Sectioned Form Pattern**: Secciones claras para datos
+
+## 7. FUNCIONALIDADES ESPECIALES
+
+### 7.1 Formulario Completo de Propiedad:
+- Captura todos los datos relevantes
+- Campos numéricos y de texto
+
+### 7.2 Integración Visual con el Portal:
+- Tipografía y espaciado consistente
+- Botón destacado para envío
+
+## 8. REQUISITOS FUNCIONALES
+
+### RF-RENT-001: Publicación de Propiedad en Arriendo
+**Descripción**: Permitir a usuarios solicitar publicación de arriendo
+**Criterios de Aceptación**:
+- Todos los campos requeridos
+- Validación mínima
+- Botón de envío visible y accesible
+
+## 9. REQUISITOS NO FUNCIONALES
+
+### RNF-RENT-001: Rendimiento de Carga
+**Descripción**: Página debe cargar en < 2 segundos
+**Criterios**:
+- Formulario visible inmediatamente
+- Sin bloqueos de UI
+
+### RNF-RENT-002: Accesibilidad
+**Descripción**: Cumplimiento de estándares WCAG 2.1 AA
+**Criterios**:
+- Campos etiquetados correctamente
+- Navegación por teclado
+
+### RNF-RENT-003: SEO y Discoverabilidad
+**Descripción**: Página optimizada para motores de búsqueda
+**Criterios**:
+- Meta tags descriptivos
+- Título y descripción relevantes
+- Estructura semántica clara
+
+## 10. DEUDA TÉCNICA IDENTIFICADA
+
+### Crítica:
+- **Sin backend**: No hay API real de publicación
+- **Sin feedback**: No hay confirmación de éxito/error
+- **Sin validación avanzada**: Datos no validados a fondo
+
+### Media:
+- **Sin loading states**: No hay indicador de envío
+- **Sin protección anti-spam**: No hay captcha
+- **Sin persistencia**: Datos no se guardan
+
+### Baja:
+- **Sin testing**: No hay tests para el formulario
+- **Sin analytics**: No hay tracking de envíos
+- **Sin internacionalización**: Solo en español
+
+## 11. ROADMAP DE DESARROLLO SUGERIDO
+
+### Fase 1 (Alta Prioridad - Funcionalidad Core):
+1. Implementar API de backend para publicación de arriendo
+2. Conectar formulario con API real
+3. Agregar feedback visual de éxito/error
+4. Mejorar validación de datos
+
+### Fase 2 (Media Prioridad - UX y Seguridad):
+1. Agregar loading states
+2. Implementar captcha o protección anti-spam
+3. Permitir persistencia de datos
+4. Agregar analytics de envíos
+
+### Fase 3 (Baja Prioridad - Características Avanzadas):
+1. Desarrollar tests unitarios y de integración
+2. Implementar internacionalización
+3. Agregar campos opcionales (fotos, video)
+4. Permitir adjuntar archivos
