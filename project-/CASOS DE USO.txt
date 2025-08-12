@@ -1,0 +1,133 @@
+CASOS DE USO
+
+
+ID
+Nombre
+Descripción
+Actores
+Precondiciones
+Flujo básico
+Resultado esperado
+CU-ADM-01
+Gestionar Propiedades
+Crear, editar, aprobar o eliminar propiedades
+Administrador
+Usuario autenticado con rol Admin
+1. Ingresa a Backoffice
+2. Selecciona "Propiedades"
+3. Edita o crea nueva
+4. Guarda cambios
+Propiedad creada o modificada
+CU-ADM-02
+Gestionar Usuarios dministrador
+Crear, modificar, activar/desactivar cuentas
+Administrador
+Usuario autenticado con rol Admin
+1. Ingresa a "Usuarios"2. Filtra o busca3. Edita datos o cambia estado
+Usuario actualizado
+
+Gestionar Usuarios 
+agentes
+
+
+
+
+
+CU-ADM-03
+Revisar Solicitudes de Publicación
+Aprobar o rechazar solicitudes
+Administrador
+Solicitudes pendientes en sistema
+1. Lista solicitudes2. Evalúa información3. Marca como Aprobada/Rechazada
+Solicitud procesada
+CU-ADM-04
+Configurar Contenido CMS
+Modificar sliders, textos institucionales, blog
+Administrador
+Usuario autenticado con rol Admin
+1. Ingresa a "CMS"2. Edita contenido3. Guarda cambios
+Contenido actualizado en portal
+CU-ADM-05
+Generar Reportes
+Filtrar y exportar datos
+Administrador
+Usuario autenticado con rol Admin
+1. Ingresa a "Reportes"2. Aplica filtros3. Exporta a PDF/Excel
+Archivo generado
+
+
+ID
+Nombre
+Descripción
+Actores
+Precondiciones
+Flujo básico
+Resultado esperado
+CU-AGE-01
+Gestionar Propiedades Asignadas
+Editar propiedades asignadas
+Agente
+Usuario autenticado con rol Agente
+1. Ingresa a Backoffice2. Filtra propiedades asignadas3. Edita información4. Guarda cambios
+Propiedad actualizada
+CU-AGE-02
+Atender Solicitudes de Publicación
+Revisar y completar datos
+Agente
+Solicitudes asignadas en sistema
+1. Abre solicitud2. Completa datos faltantes3. Envía a aprobación
+Solicitud lista para revisión
+CU-AGE-03
+Gestionar Contratos
+Crear y administrar contratos de propiedades
+Agente
+Propiedad asignada al agente
+1. Abre ficha propiedad2. Crea contrato3. Adjunta documentos
+Contrato registrado
+
+
+
+
+ID
+Nombre
+Descripción
+Actores
+Precondiciones
+Flujo básico
+Resultado esperado
+CU-USR-01
+Publicar Propiedad
+Registrar nueva propiedad para venta/arriendo
+Usuario Comunidad
+Usuario autenticado
+1. Ingresa a "Publica tu propiedad"2. Completa formulario3. Sube multimedia4. Envía solicitud
+Solicitud creada en estado Pendiente
+CU-USR-02
+Solicitar Valoración
+Pedir tasación de propiedad
+Usuario Comunidad
+Usuario autenticado
+1. Ingresa a "Valora tu propiedad"2. Completa datos3. Envía solicitud
+Valoración registrada
+CU-USR-03
+Gestionar Propiedades Publicadas
+Editar o dar de baja propiedades propias
+Usuario Comunidad
+Propiedad publicada a su nombre
+1. Ingresa a "Mis propiedades"2. Edita datos o cambia estado
+Propiedad actualizada o desactivada
+CU-USR-04
+Favoritos
+Guardar propiedades de interés
+Usuario Comunidad
+Usuario autenticado
+1. Abre propiedad2. Marca como favorita
+Propiedad guardada en lista de favoritos
+CU-USR-05
+Contactar con Agente
+Enviar mensaje desde ficha propiedad
+Usuario Comunidad
+Usuario autenticado
+1. Abre ficha propiedad2. Completa formulario3. Envía mensaje
+Mensaje registrado en CMR
+

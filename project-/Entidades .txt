@@ -1,0 +1,225 @@
+NO ESTA PERFECTA
+
+Entidad
+Descripción
+Campos principales
+Relaciones
+Usuario
+Representa cualquier persona que interactúa con el sistema, ya sea administrador, agente o usuario de la comunidad
+ID_Usuario (PK), 
+Nombre_usuario, 
+Correo, 
+Contraseña_hash, 
+Nombre_real, RUT, 
+Dirección, 
+Teléfono, Estado (Activo/Inactivo/Vacaciones/etc.), 
+Rol (Administrador, Agente, Comunidad, Invitado, etc.), 
+Verificado (boolean)
+
+Propiedad
+Inmueble gestionado en el portal y Backoffice
+ID_Propiedad (PK), 
+Título, 
+Descripción, 
+Tipo_operación: ENUN[ VENTA/ARRIENDO])
+Estado : ENUM[
+SOLICITUD
+PREAPROBADA
+PUBLICADA
+CERRADA
+
+]
+Precio CLP, INTERGER
+PRECIO UF, FLOAT
+Latitud, 
+Longitud, 
+FECHA PUBLICACIÓN
+FECHA CIERRE
+SEO_Título, 
+SEO_Descripción, 
+USUARIO RESPONSABLE
+IMGENES [ JSON]
+HISTORIAL DE CAMBIOS JSON [
+ADTUALIZACIONES
+]
+ROL
+
+
+Tipo de Propiedad
+Clasificación de propiedades
+ID_TipoPropiedad (PK), 
+Nombre, 
+Descripción, 
+Estado: ENUN[ HABILITADO – NO HABILITADO]
+BAÑOS
+HABITACIONES
+METROS CONTRUIDOS
+METROS TERRENO
+ESTACIONAMIENTO
+CONEXIÓN LUZ
+POSO
+
+
+Tiene muchas Propiedades
+Solicitud de Publicación
+Petición para publicar una propiedad
+ID_Solicitud (PK),
+Origen, 
+Estado: ENUM[
+PENDIENTE
+ASIGNADA
+PREAPROBADA
+APROBADA
+]
+Tiopo de usuario
+Fecha_solicitud, 
+TIPO USUARIO: ENUN[VISITANTE: REGISTRADO]
+ID_Usuario_solicitante (FK), 
+ID_Usuario_asignado (FK), 
+ID_PROPIEDAD
+ORIGEN [PUBLICACIÓN/VALORCIÓN]
+Fecha publicación
+
+
+Genera una Propiedad, 
+Valoración
+Avalúo solicitado por usuario
+ID_Valoración (PK), 
+Datos de propiedad JSON[ DATOS PROPIEDAD]
+Valor ESTIMDO, 
+CORREO SOLICITANTE
+NOMBRE SOLICITANTE
+TELEFONO
+
+Puede generar Solicitud de Publicación
+Contrato
+Acuerdo de arriendo o venta
+ID_Contrato (PK), 
+Tipo: ENUM[VENTA/ARRIENDO]
+Estado: ENUM[
+EN  PROCESO
+CERRADO
+]
+Fecha_inicio
+Fecha_fin
+MONTO
+%COMISIÓN
+ ID_Propiedad (FK)
+Documentos [
+json: 
+tipo, 
+id documento si esta subido, 
+estAdo [PENDIENTE/CARGADO]
+Personas json [
+personaID – 
+rol:[ARRENDATARIO-
+ARRENDANTE?
+VENDEDOR
+COMPRADOR
+]
+Tiene Personas, Documentos, Pagos
+TIPOS DOCUMENTO
+
+ID
+NOMBRE
+DESCRIPION
+TIPO DE CONTRATO: ENUN[VENTA ARRIENDO]
+
+Persona
+Individuo relacionado a un contrato (puede o no ser usuario del sistema)
+ID_Persona (PK), 
+Nombre, 
+RUT, 
+Dirección, 
+Teléfono, 
+Correo, 
+ Imagen cedula front
+Imgen cedula rear
+
+Documento
+Archivo asociado a persona o contrato
+ID_Documento (PK), 
+Tipo, 
+Formato [PDF, PNG, JPG], 
+URL_archivo, 
+Fecha_subida
+Asociado a Contrato o Persona
+Mensaje de Contacto (CMR)
+Comunicación de usuario a staff
+ID_Mensaje (PK), 
+Nombre, Correo, 
+Teléfono, 
+Mensaje, 
+Estado [RESUELTO]
+Fecha_envío
+Enviado por un Usuario
+Multimedia
+Imágenes y videos del sistema
+ID_Multimedia (PK), 
+Tipo: ENUM[IMG/VIDEO] 
+URL, 
+SEO_Título, 
+SEO_Descripción, 
+Peso_archivo, 
+Resolución, 
+Fecha_subida
+Asociado a Propiedad, Solicitud, Valoración, Slider
+CMS - Slider
+Elemento visual en la home
+ID_Slider, 
+Imagen/video, 
+Fechas INICIO
+FECHA FIN
+SEO, 
+Duración, 
+Métricas
+Configurado por Usuario (rol Admin)
+CMS - Sobre Nosotros
+Información institucional
+Texto, 
+Video, 
+Equipo JSON[
+NOMBRE,
+CARGO,
+HISTORIA
+CORREO,
+TELEFONO
+]
+Gestionado por Usuario (rol Admin)
+CMS - Blog
+Artículos del blog
+ID_Articulo, 
+Título, 
+BAJADA
+CUERPO
+Destacado: BOOLEAN
+ACTIVO: BOOL
+Gestionado por Usuario (rol Admin), visible en portal
+Reporte
+Salida de datos filtrados
+ ¿??
+
+
+
+
+Auditoría
+Registro de actividad
+ID_Log (PK), 
+ID_Usuario (FK), 
+SISTEMA
+Acción, 
+Fecha, 
+Datos_previos JSON[]
+Datos_nuevos JSON[]
+LISTA DE ACCIONES A AUDITAR
+	•	NOTIFICACIONES
+Notificación
+Aviso al usuario
+ID_Notificación (PK), 
+Tipo, 
+ID_Usuario_destinatario (FK), 
+Mensaje, 
+Estado: ENUN[CLOSE/OPEN]
+Fecha_envío
+Enviada a Usuario
+

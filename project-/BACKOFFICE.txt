@@ -1,0 +1,140 @@
+
+
+1. Secciones del Backoffice
+1.1. Mapa del Sitio - BackOffice (Usuarios Staff)
+	•	Dashboard
+	•	Propiedades:
+	•	Arriendo
+	•	Venta
+	•	Tipos de propiedad
+	•	Solicitudes de publicación
+	•	Valoraciones
+	•	Contratos:
+	•	Contratos
+	•	Personas
+	•	Documentos (tipos de documento por contrato y persona – PDF o imagen)
+	•	Usuarios Staff:
+	•	Agentes
+	•	Administradores
+	•	CMR (Usuarios comunidad – mensajes de contacto)
+	•	CMS:
+	•	Slider
+	•	Sobre nosotros
+	•	Blog
+	•	Propiedades en Home
+	•	Footer
+	•	Identidad (Logo y nombre principal)
+	•	Reportes
+	•	Auditoría
+	•	Notificaciones
+
+2. Requisitos Funcionales por Sección
+2.1. Dashboard (DAS)
+	•	RF-BCK-DAS-001: Mostrar una visión general del estado de la plataforma y los principales KPIs.
+	•	RF-BCK-DAS-002: Presentar las ventas totales en dinero y en cantidad, con un icono y porcentaje de comparación respecto al mes anterior.
+	•	RF-BCK-DAS-003: Mostrar el número de nuevos miembros de la comunidad, con un icono y porcentaje de comparación respecto al mes anterior.
+	•	RF-BCK-DAS-004: Indicar el número de propiedades activas.
+	•	RF-BCK-DAS-005: Calcular y mostrar el tiempo promedio de venta o arriendo (desde la publicación hasta el cierre).
+	•	RF-BCK-DAS-006: Presentar el ranking de los top agentes del mes.
+	•	RF-BCK-DAS-007: Mostrar un gráfico de distribución por tipo de propiedad, con colores asociados a la sección de definición de tipos de propiedad.
+	•	RF-BCK-DAS-008: Visualizar un gráfico de ingresos por mes del último año.
+	•	RF-BCK-DAS-009: Permitir la comparación de ingresos con el año anterior.
+2.2. Propiedades (PRO)
+	•	RF-BCK-PRO-010: Implementar un CRUD completo de propiedades (crear, ver, editar, eliminar).
+	•	RF-BCK-PRO-011: Las propiedades deben tener los siguientes estados: Evaluación, Pre-aprobada, Publicada, Vendida, Inactiva, Arrendada.
+	•	RF-BCK-PRO-012: Permitir la asignación de un agente a una propiedad (solo para administradores).
+	•	RF-BCK-PRO-013: El agente solo puede ver las propiedades que le han sido asignadas.
+	•	RF-BCK-PRO-014: El administrador puede ver todas las propiedades.
+	•	RF-BCK-PRO-015: Solo el administrador puede aprobar propiedades. El agente puede cambiarlas a estado "Pre-aprobada".
+	•	RF-BCK-PRO-016: Cuando una propiedad cambia a estado "Pre-aprobada", se debe enviar una notificación y un correo a los administradores.
+	•	RF-BCK-PRO-017: Las propiedades deben tener campos de latitud y longitud para la geolocalización.
+	•	RF-BCK-PRO-018: La gestión multimedia (fotos y videos) debe incluir edición avanzada.
+	•	RF-BCK-PRO-019: Permitir definir metadatos SEO para el título y la descripción de la propiedad.
+	•	RF-BCK-PRO-020: Permitir definir metadatos SEO para las fotografías.
+	•	RF-BCK-PRO-021: Mostrar un historial de cambios de la propiedad, tipo Trello.
+	•	RF-BCK-PRO-022: Un agente puede dejar una propiedad en "Pre-aprobada". Si el solicitante es un miembro de la comunidad, se le envía una notificación y un correo. Si no está registrado, el agente debe gestionar la publicación.
+	•	RF-BCK-PRO-023: El valor de la propiedad se puede definir solo en pesos o en UF.
+2.3. Gestión de Tipos de Propiedad (TIP)
+	•	RF-BCK-TIP-024: Implementar un CRUD de tipos de propiedad (crear, ver, editar, eliminar).
+	•	RF-BCK-TIP-025: Los campos requeridos para los tipos de propiedad son: Nombre y una descripción breve.
+	•	RF-BCK-TIP-026: Permitir la activación o desactivación de un tipo de propiedad.
+	•	RF-BCK-TIP-027: Si un tipo de propiedad está desactivado, no se debe mostrar en el stepper del formulario de publicación del portal.
+	•	RF-BCK-TIP-028: Permitir habilitar o deshabilitar campos como metros cuadrados, baños, metros construidos, estacionamientos y habitaciones, dependiendo del tipo de propiedad.
+	•	RF-BCK-TIP-029: Mostrar la visualización de los tipos de propiedad en tarjetas que incluyan: nombre, descripción, estado y número total de propiedades asociadas.
+2.4. Solicitudes de Publicación (SOL)
+	•	RF-BCK-SOL-030: Visualizar las solicitudes en una grilla con filtros.
+	•	RF-BCK-SOL-031: El administrador puede aprobar o rechazar solicitudes.
+	•	RF-BCK-SOL-032: Cuando se crea una solicitud, se crea automáticamente una propiedad con el estado "Proceso de publicación".
+	•	RF-BCK-SOL-033: Cuando se aprueba una solicitud, el estado de la propiedad cambia a "Publicada".
+	•	RF-BCK-SOL-034: Al aprobar una solicitud, se envía un correo y una notificación al solicitante.
+	•	RF-BCK-SOL-035: Si el solicitante no es un usuario de la comunidad, solo se le envía un correo invitándolo a registrarse con un enlace al formulario.
+	•	RF-BCK-SOL-036: Mostrar el tipo de solicitud en la grilla (independiente o derivada de una valoración).
+	•	RF-BCK-SOL-037: Una solicitud puede ser asignada a un agente o a un administrador para su gestión.
+	•	RF-BCK-SOL-038: La solicitud debe tener al menos una foto subida.
+	•	RF-BCK-SOL-039: Restringir el tamaño de los videos y fotos subidos.
+	•	RF-BCK-SOL-040: El administrador puede definir la propiedad como destacada.
+	•	RF-BCK-SOL-041: El administrador puede definir la propiedad como visible en la página de inicio del portal.
+2.5. Valoraciones (VAL)
+	•	RF-BCK-VAL-042: Mostrar un dashboard para valoraciones con métricas como: Solicitudes totales, promedio de valoración y comparación.
+	•	RF-BCK-VAL-043: Listar las valoraciones en una grilla que muestre el correo del solicitante y si también solicitó la publicación.
+	•	RF-BCK-VAL-044: Permitir la gestión de solicitudes de valorización de propiedades.
+2.6. Contratos (CON)
+	•	RF-BCK-CON-045: Implementar un CRUD de contratos de arriendo y venta.
+	•	RF-BCK-CON-046: Listar los contratos en una grilla.
+	•	RF-BCK-CON-047: Gestionar documentos asociados al contrato, permitiendo definir tipos de documento por contrato y por persona.
+	•	RF-BCK-CON-048: Permitir la subida de documentos en formato PDF o imagen.
+	•	RF-BCK-CON-049: Gestionar las personas relacionadas al contrato.
+	•	RF-BCK-CON-050: Gestionar los pagos de arriendo. Cuando se cierra un contrato de arriendo, se deben generar automáticamente los meses a pagar según la duración.
+2.7. Usuarios Staff - Administradores (ADM)
+	•	RF-BCK-ADM-051: Implementar un CRUD de administradores (crear, ver, editar, eliminar).
+	•	RF-BCK-ADM-052: Los administradores también actúan como agentes, por lo que se les pueden asignar propiedades y solicitudes.
+	•	RF-BCK-ADM-053: Visualizar los administradores en tarjetas con: foto de perfil, datos de contacto (correo, teléfono) y estado (activo, vacaciones, inactivo, licencia).
+	•	RF-BCK-ADM-054: Gestionar roles y permisos en el Backoffice.
+	•	RF-BCK-ADM-055: Asignar propiedades y solicitudes a agentes.
+2.8. Usuarios Staff - Agentes (AGE)
+	•	RF-BCK-AGE-056: Implementar un CRUD de agentes (crear, ver, editar, eliminar).
+	•	RF-BCK-AGE-057: Visualizar los agentes en tarjetas con: foto de perfil, datos de contacto (correo, teléfono), experiencia profesional y estado (activo, vacaciones, inactivo, licencia).
+	•	RF-BCK-AGE-058: Mostrar indicadores de rendimiento como: propiedades asignadas vs. propiedades vendidas o arrendadas y tasa de cierre de operaciones.
+	•	RF-BCK-AGE-059: Los agentes tienen acceso a las propiedades que les han sido asignadas y a los clientes interesados en ellas.
+2.9. CMR - Mensajes de Contacto (CMR)
+	•	RF-BCK-CMR-060: Implementar un CRUD de mensajes de contacto.
+	•	RF-BCK-CMR-061: Listar los mensajes en una grilla.
+	•	RF-BCK-CMR-062: Los mensajes deben tener estados como: pendiente, leído y respondido.
+2.10. CMS - Slider (SLI)
+	•	RF-BCK-SLI-063: Implementar un CRUD para sliders (imagen/video).
+	•	RF-BCK-SLI-064: Programar la duración de cada imagen o video.
+	•	RF-BCK-SLI-065: Definir fechas de inicio y fin para la actividad de cada slider.
+	•	RF-BCK-SLI-066: Permitir definir SEO y visualizar métricas de clics.
+	•	RF-BCK-SLI-067: Mostrar los sliders en tarjetas.
+2.11. CMS - Sobre Nosotros (AU)
+	•	RF-BCK-AU-068: Gestionar la descripción de la empresa a través de un editor de contenido.
+	•	RF-BCK-AU-069: Definir los metadatos SEO para esta sección.
+	•	RF-BCK-AU-070: Gestionar el video corporativo.
+	•	RF-BCK-AU-071: Permitir desactivar el video corporativo.
+	•	RF-BCK-AU-072: Gestionar el equipo humano.
+2.12. CMS - Blog (BLG)
+	•	RF-BCK-BLG-073: Implementar un CRUD para los artículos del blog.
+	•	RF-BCK-BLG-074: Permitir definir categorías y estados para los artículos.
+	•	RF-BCK-BLG-075: Mostrar una grilla con el listado de artículos.
+	•	RF-BCK-BLG-076: Permitir ver el detalle de un artículo.
+	•	RF-BCK-BLG-077: Mostrar un dashboard con métricas del blog.
+2.13. CMS - Otros (CMS)
+	•	RF-BCK-CMS-078: Gestionar las propiedades destacadas que se muestran en la página de inicio.
+	•	RF-BCK-CMS-079: Configurar el pie de página (footer).
+	•	RF-BCK-CMS-080: Gestionar la identidad del portal (logo y nombre principal).
+2.14. Reportes (REP)
+	•	RF-BCK-REP-081: Generar reportes con filtros.
+	•	RF-BCK-REP-082: Permitir la vista previa del reporte.
+	•	RF-BCK-REP-083: Permitir la impresión y descarga de los reportes.
+2.15. Auditoría (AUD)
+	•	RF-BCK-AUD-084: Registrar la actividad y los logs de las acciones de los usuarios.
+	•	RF-BCK-AUD-085: Visualizar los logs en una grilla y permitir ver el detalle de cada acción.
+2.16. Notificaciones (NOT)
+	•	RF-BCK-NOT-086: Gestionar los correos automatizados y las notificaciones.
+	•	
+2.17. Requisitos Generales y Otros (GEN)
+	•	RF-BCK-GEN-089: Estandarizar las grillas con: filtro de búsqueda global, paginación, filtro por columna, exportación a Excel y botones de funciones por fila.
+	•	RF-BCK-GEN-090: Implementar un sistema de gestión de imágenes que registre el nombre del archivo en el repositorio y la URL en la base de datos respectiva.
+	•	RF-BCK-GEN-091: Generar un sitemap para el portal para fines de SEO.
+	•	RF-BCK-GEN-092: Crear un archivo robots.txt que excluya el Backoffice de los motores de búsqueda.
+

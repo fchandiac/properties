@@ -1,0 +1,107 @@
+
+1. Secciones del Portal
+1.1. Mapa del Sitio
+	•	Usuarios: Miembros de la comunidad y visitantes.
+	•	Secciones del portal:
+	•	Home: Topbar, Slider, Menú de Navegación, Footer (Información institucional, formulario de contacto), Propiedades destacadas.
+	•	Publica tu propiedad: Formulario para solicitar la publicación de una propiedad.
+	•	Valoriza tu propiedad: Formulario para avalúo de una propiedad en línea, con opción de publicación.
+	•	Propiedades: Listado de propiedades con filtros que llevan al detalle de cada una.
+	•	Testimonios: Listado de testimonios de clientes.
+	•	Blog: Artículos de interés.
+	•	Mi Cuenta: Acceso para usuarios miembros de la comunidad.
+	•	Mis Datos
+	•	Mis Publicaciones
+	•	Mis Favoritos
+	•	Estado de Pagos
+	•	Mis Contratos
+
+
+2. Requisitos Funcionales
+2.1. Home - Topbar del Portal (TBR)
+	•	RF-PRTL-HM-TBR-01: Mostrar el logo de la empresa a la derecha.
+	•	RF-PRTL-HM-TBR-02: Mostrar el valor de la UF del día.
+	•	RF-PRTL-HM-TBR-03: Mostrar un botón "Login" que dirige a un formulario de inicio de sesión.
+	•	RF-PRTL-HM-TBR-04: Mostrar un botón "Regístrate" a la izquierda del menú, que dirige a un formulario de registro.
+	•	RF-PRTL-HM-TBR-05: Para usuarios de la comunidad que han iniciado sesión, mostrar un icono de menú (sidebar).
+2.2. Formulario de Login (LOG)
+	•	RF-PRTL-LOG-06: El formulario de inicio de sesión debe incluir la opción "¿Olvidaste tu contraseña?".
+	•	RF-PRTL-LOG-07: Al seleccionar "¿Olvidaste tu contraseña?", se debe enviar un correo electrónico automático para la recuperación.
+2.3. Formulario de Registro (RGT)
+	•	RF-PRTL-RGT-08: El formulario de registro solicita nombre de usuario, correo y contraseña.
+	•	RF-PRTL-RGT-09: Se debe enviar un correo electrónico automático para validar el correo del usuario.
+	•	RF-PRTL-RGT-10: Se debe mostrar un pop-up en la página de inicio que invite al usuario visitante a registrarse, indicando los beneficios de hacerlo (guardar propiedades favoritas, ver estado de publicaciones, gestionar contratos de arriendo, etc.).
+2.4. Home - Barra de Navegación (NAV)
+	•	RF-PRTL-HM-NAV-11: En la página de inicio, se debe mostrar una barra de navegación debajo del Topbar que incluya enlaces a: Home (con icono de casa), Publica, Valoriza, Propiedades, Testimonios y Blog.
+2.5. Home - Sidebar de Usuario (SBR)
+	•	RF-PRTL-HM-SBR-12: El sidebar debe mostrar enlaces a las secciones: Mis Datos, Mis Publicaciones, Mis Favoritos, Estados de Pago y Mis Contratos.
+2.6. Home - Slider del Portal (SLD)
+	•	RF-PRTL-HM-SLD-13: El slider debe mostrar imágenes y videos definidos por el administrador en el CMS del Backoffice.
+	•	RF-PRTL-HM-SLD-14: El slider debe tener botones para avanzar y retroceder.
+	•	RF-PRTL-HM-SLD-15: Deben mostrarse botones pequeños en la parte inferior derecha que indiquen la posición actual del slider y permitan un cambio directo a otro.
+2.7. Home - Sobre Nosotros (SBN)
+	•	RF-PRTL-HM-SBN-16: Mostrar una descripción de la empresa definida en el CMS del Backoffice.
+	•	RF-PRTL-HM-SBN-17: Mostrar un video institucional, definido en el Backoffice.
+	•	RF-PRTL-HM-SBN-18: Mostrar el equipo de la empresa, definido en el Backoffice, en tarjetas (cards).
+	•	RF-PRTL-HM-SBN-19: La descripción de la empresa y el video corporativo deben compartir un espacio en la parte superior.
+	•	RF-PRTL-HM-SBN-20: Si el video corporativo está desactivado, la descripción de la empresa debe centrarse.
+	•	RF-PRTL-HM-SBN-21: La subsección "Nuestro Equipo" debe mostrar el logo de la empresa definido en el Backoffice en el centro.
+	•	RF-PRTL-HM-SBN-22: Las tarjetas del equipo deben mostrar el cargo, contacto, teléfono y correo, siempre que estos datos no estén en blanco en el Backoffice.
+2.8. Home - Publica tu propiedad (PUB)
+	•	RF-PRTL-PUB-23: Mostrar un stepper (formulario por pasos) para la solicitud de publicación de una propiedad.
+	•	RF-PRTL-PUB-24: El formulario debe incluir campos para: Tipo de operación (Arriendo/Venta), Tipo de propiedad, región, comuna, número de baños, estacionamientos, habitaciones, descripción, metros de terreno, metros construidos, correo, teléfono y nombre.
+	•	RF-PRTL-PUB-25: Si en el Backoffice un tipo de propiedad no tiene habilitado alguno de los campos (número de baños, estacionamientos, habitaciones, descripción, metros de terreno, metros construidos), estos no serán visibles en el formulario después de seleccionar el tipo de propiedad.
+	•	RF-PRTL-PUB-26: El formulario debe permitir subir imágenes y videos.
+	•	RF-PRTL-PUB-27: El usuario debe seleccionar la ubicación de la propiedad en un mapa para otorgar la geolocalización.
+2.9. Home - Valoriza tu propiedad (VLP)
+	•	RF-PRTL-VLP-28: Mostrar un stepper (formulario por pasos) para el avalúo de una propiedad automatizado en línea.
+	•	RF-PRTL-VLP-29: El formulario debe incluir campos para: Tipo de operación (Arriendo/Venta), Tipo de propiedad, región, comuna, número de baños, estacionamientos, habitaciones, descripción, metros de terreno, metros construidos, correo, teléfono y nombre.
+	•	RF-PRTL-VLP-30: Dar la opción de publicar la propiedad.
+	•	RF-PRTL-VLP-31: Si el usuario elige publicar la propiedad, debe poder agregar fotos o videos.
+	•	RF-PRTL-VLP-32: Si el usuario elige publicar la propiedad, se debe enviar una solicitud de publicación con un origen de tipo "valoración".
+2.10. Home - Propiedades (PRP)
+	•	RF-PRTL-PRP-33: Mostrar un filtro de propiedades que incluya: Tipo de operación (Venta o Arriendo), Tipo de propiedad, Región, Comuna y rango de valor.
+	•	RF-PRTL-PRP-34: Las propiedades deben mostrarse en un listado con formato de tarjetas (cards).
+	•	RF-PRTL-PRP-35: Las tarjetas de propiedad deben tener iconos para baños, habitaciones, metros construidos, metros de terreno y estacionamientos.
+	•	RF-PRTL-PRP-36: Se debe mostrar el valor en UF o en pesos según la definición del administrador en el Backoffice.
+	•	RF-PRTL-PRP-37: La tarjeta debe tener una opción para marcar como favorita, visible solo si el usuario está registrado como miembro de la comunidad.
+2.11. Home - Detalle de Propiedad (DPR)
+	•	RF-PRTL-DPR-38: La aplicación debe proveer una URL única para el detalle de cada propiedad publicada.
+	•	RF-PRTL-DPR-39: Si una propiedad existe en el sistema pero no está en estado "publicada", el usuario será redirigido a la sección de propiedades.
+	•	RF-PRTL-DPR-40: Se deben visualizar las imágenes de la propiedad.
+	•	RF-PRTL-DPR-41: Se debe visualizar el video de la propiedad si está disponible.
+	•	RF-PRTL-DPR-42: Se deben mostrar los iconos y valores de los atributos de la propiedad (baños, metros construidos, etc.).
+	•	RF-PRTL-DPR-43: Se debe mostrar la descripción de la propiedad.
+	•	RF-PRTL-DPR-44: Se debe mostrar la ubicación de la propiedad en un mapa.
+	•	RF-PRTL-DPR-45: Se debe mostrar la información del agente responsable de la propiedad, con un formulario de contacto y un botón de envío con el texto "Me interesa".
+2.12. Home - Testimonios (TTM)
+	•	RF-PRTL-TTM-46: Listar los testimonios en tarjetas (cards).
+	•	RF-PRTL-TTM-47: Cada tarjeta debe mostrar el texto del testimonio, la fecha de publicación/redacción y el nombre de usuario.
+	•	RF-PRTL-TTM-48: Los testimonios creados por un usuario miembro de la comunidad deben ser autorizados por los administradores.
+	•	RF-PRTL-TTM-49: En la tarjeta se debe mostrar una imagen asociada al testimonio.
+2.13. Home - Blog (BLG)
+	•	RF-PRTL-BLG-50: Listar artículos creados por el administrador en formato de tarjetas (cards).
+	•	RF-PRTL-BLG-51: Cada tarjeta de artículo debe mostrar el título, la bajada y el texto del cuerpo.
+	•	RF-PRTL-BLG-52: Debajo de los artículos se debe mostrar una banda de artículos destacados en tarjetas, que muestren la imagen y el título de los artículos definidos como destacados por el administrador.
+2.14. Home - Bottom Bar Redes Sociales (RSC)
+	•	RF-PRTL-HM-RSC-53: El sitio debe mostrar de forma fija una barra inferior con iconos de redes sociales, con enlaces definidos por el administrador en el Backoffice.
+2.15. USUARIO COMUNIDAD - Mis Datos (DAT)
+	•	RF-PRTL-DAT-54: Permitir al usuario editar su información personal (dirección, teléfono, correo, nombre real, RUT, nombre de usuario) con un botón independiente para guardar cada concepto.
+	•	RF-PRTL-DAT-55: El usuario puede subir fotos de su cédula por ambos lados.
+	•	RF-PRTL-DAT-56: El sistema debe guardar al usuario como persona verificada si completa los campos opcionales (nombre real, RUT, dirección, teléfono) y sube las fotos de la cédula.
+2.16. USUARIO COMUNIDAD - Mis Publicaciones (MPB)
+	•	RF-PRTL-MPB-57: Mostrar las propiedades que el usuario ha publicado, junto con el estado de cada una.
+	•	RF-PRTL-MPB-58: Mostrar la cantidad de visitas a cada propiedad y cuántos usuarios la han guardado como favorita.
+2.17. USUARIO COMUNIDAD - Mis Favoritos (MFA)
+	•	RF-PRTL-MFA-59: La sección debe mostrar las propiedades que el usuario ha marcado como favoritas.
+	•	RF-PRTL-MFA-60: El usuario puede desmarcar una propiedad para que deje de ser favorita.
+	•	RF-PRTL-MFA-61: El sistema debe mostrar la misma tarjeta de la sección "Propiedades" y permitir el acceso al detalle de la misma.
+2.18. USUARIO COMUNIDAD - Estados de Pago de Arriendo (EPA)
+	•	RF-PRTL-EPA-62: Permitir al usuario arrendatario visualizar el estado de sus pagos (meses de arriendo).
+	•	RF-PRTL-EPA-63: Los usuarios pueden subir una imagen del comprobante de pago.
+	•	RF-PRTL-EPA-64: Se debe enviar una notificación y un correo electrónico al agente de la propiedad sobre el comprobante de pago.
+	•	RF-PRTL-EPA-65: El usuario puede descargar un reporte de sus estados de pago.
+2.19. USUARIO COMUNIDAD - Mis Contratos (MCT)
+	•	RF-PRTL-MCT-66: La sección debe mostrar el estado de los contratos del usuario.
+	•	RF-PRTL-MCT-67: Si el usuario es arrendatario, se deben listar los estados de pago asociados al contrato.
+

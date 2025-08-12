@@ -1,0 +1,127 @@
+flujos.
+ La información que me diste es bastante detallada y cubre dos grandes ámbitos:
+	•	Backoffice (usuarios staff) → gestión interna
+	•	Portal (usuarios comunidad y visitantes) → interfaz pública
+Te voy a estructurar la respuesta así:
+	•	Identificación de procesos
+	•	Separación por tipo (Backoffice vs Portal)
+	•	Flujo general de cada proceso (en pasos)
+
+1. Procesos Backoffice
+1.1. Gestión de Propiedades
+Flujos:
+	•	Creación / Carga inicial
+	•	Administrador o agente ingresa datos de la propiedad (lat/long, fotos, videos, precio en pesos o UF, SEO, etc.).
+	•	Asignación de agente (solo administrador).
+	•	Aprobación
+	•	Agente puede pasar de "Evaluación" a "Pre-aprobada".
+	•	Notificación automática a administradores.
+	•	Administrador cambia a "Publicada".
+	•	Actualización
+	•	Modificación de datos, multimedia, SEO.
+	•	Registro en historial tipo Trello.
+	•	Cierre
+	•	Cambio a "Vendida" o "Arrendada".
+	•	Actualización de métricas y reportes.
+
+1.2. Gestión de Tipos de Propiedad
+Flujos:
+	•	Alta/edición de tipo (nombre, descripción, campos habilitados/deshabilitados).
+	•	Activación/desactivación.
+	•	Actualización de conteo de propiedades asociadas.
+	•	Impacto automático en formularios del portal.
+
+1.3. Solicitudes de Publicación
+Flujos:
+	•	Recepción de solicitud desde el portal (independiente o derivada de valoración).
+	•	Creación automática de propiedad en estado "Proceso de publicación".
+	•	Validación y revisión (fotos, datos).
+	•	Aprobación/rechazo:
+	•	Si aprueba → estado "Publicada", envío de notificación/correo.
+	•	Si no es usuario comunidad → invitación a registrarse.
+	•	Asignación a agente o administrador.
+
+1.4. Valoraciones
+Flujos:
+	•	Recepción de solicitud desde portal.
+	•	Registro en dashboard de valoraciones.
+	•	Gestión por administrador/agente.
+	•	Posible conversión a solicitud de publicación.
+
+1.5. Contratos
+Flujos:
+	•	Creación de contrato (arriendo o venta).
+	•	Asignación de personas relacionadas.
+	•	Subida de documentos (PDF/imagen).
+	•	Para arriendo → generación automática de calendario de pagos.
+	•	Seguimiento y cierre.
+
+1.6. Gestión de Usuarios Staff
+Flujos:
+	•	Administradores: CRUD, asignación de propiedades y solicitudes, gestión de permisos.
+	•	Agentes: CRUD, asignación de propiedades y solicitudes, seguimiento de rendimiento.
+
+1.7. CMS
+Flujos:
+	•	Slider: creación, fechas de vigencia, SEO, métricas de clics.
+	•	Sobre Nosotros: texto, video, equipo.
+	•	Blog: CRUD artículos, categorías, métricas.
+	•	Propiedades destacadas: selección para home.
+	•	Footer e identidad: logo, nombre.
+
+1.8. Reportes, Auditoría y Notificaciones
+Flujos:
+	•	Reportes: filtros, vista previa, descarga/impresión.
+	•	Auditoría: registro de acciones, visualización por grilla/detalle.
+	•	Notificaciones: configuración y envío de correos automáticos.
+
+2. Procesos Portal
+2.1. Home y Navegación
+Flujos:
+	•	Carga de topbar (logo, UF, login/registro).
+	•	Menú de navegación (Home, Publica, Valoriza, Propiedades, Testimonios, Blog).
+	•	Slider y secciones administradas desde CMS.
+
+2.2. Publicación de Propiedad
+Flujos:
+	•	Usuario ingresa al formulario (stepper).
+	•	Selección de tipo de operación y tipo de propiedad (carga dinámica de campos habilitados).
+	•	Carga de fotos/videos.
+	•	Geolocalización en mapa.
+	•	Envío → genera solicitud en Backoffice.
+
+2.3. Valoración de Propiedad
+Flujos:
+	•	Usuario completa formulario (igual que publicación).
+	•	Sistema calcula avalúo (puede ser manual o integrado con servicio).
+	•	Opción de publicar → genera solicitud con origen "valoración".
+
+2.4. Navegación y Búsqueda de Propiedades
+Flujos:
+	•	Usuario filtra propiedades (tipo, operación, región, valor).
+	•	Visualiza en tarjetas (iconos de atributos, valor en UF/pesos).
+	•	Puede marcar como favorita (si está registrado).
+	•	Acceso a detalle (URL única, galería, mapa, contacto agente).
+
+2.5. Cuenta Usuario Comunidad
+Flujos:
+	•	Mis Datos: edición por campos, verificación con cédula.
+	•	Mis Publicaciones: listado con estado, métricas de visitas/favoritos.
+	•	Mis Favoritos: listado, opción de quitar favoritos.
+	•	Estados de Pago: ver mensualidades, subir comprobante, descarga reporte.
+	•	Mis Contratos: seguimiento de estados y pagos asociados.
+
+3. Ejemplo de Flujo Completo – Publicación desde Portal
+	•	Usuario ingresa a "Publica tu propiedad".
+	•	Completa stepper con datos requeridos.
+	•	Sube fotos/videos.
+	•	Ubica propiedad en mapa.
+	•	Envía formulario.
+	•	Sistema crea solicitud en Backoffice.
+	•	Administrador revisa:
+	•	Si falta info → solicita actualización.
+	•	Si aprueba → propiedad pasa a "Publicada".
+	•	Portal actualiza el listado de propiedades públicas.
+
+Si quieres, puedo pasarte esto en formato diagrama de flujo BPMN, para que visualicemos claramente cómo se conectan los procesos entre Backoffice y Portal. Así no queda solo como texto, sino como un mapa visual de interacciones.
+

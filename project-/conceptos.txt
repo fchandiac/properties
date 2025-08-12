@@ -1,0 +1,30 @@
+Los requisitos funcionales de alto nivel son descripciones generales y amplias de las capacidades esenciales que un sistema debe ofrecer, enfocadas en qué debe hacer para satisfacer las necesidades del usuario o de la organización, sin entrar en detalles de implementación, y que sirven para guiar el desarrollo y delimitar el alcance del proyecto.
+
+Los requisitos funcionales son especificaciones claras y detalladas de las funciones, comportamientos o servicios que un sistema debe realizar para cumplir con las necesidades del usuario o de la organización, describiendo qué debe hacer el sistema y las condiciones bajo las cuales debe hacerlo, sin definir la forma exacta de su implementación técnica.
+
+Un caso de uso es una descripción estructurada de cómo un actor (usuario u otro sistema) interactúa con el sistema para lograr un objetivo específico, definiendo el flujo de acciones, las condiciones necesarias y los resultados esperados.
+Los criterios de aceptación en formato Gherkin son descripciones estructuradas que definen cuándo un requisito o funcionalidad se considera correctamente implementado, usando una sintaxis sencilla y estandarizada para que negocio, QA y desarrollo hablen el mismo idioma.
+En Gherkin, cada escenario se describe normalmente con:
+	•	Given (Dado): el contexto o estado inicial.
+	•	When (Cuando): la acción que realiza el usuario o el sistema.
+	•	Then (Entonces): el resultado esperado tras esa acción.
+
+
+________________________________
+
+CRM significa Customer Relationship Management o Gestión de Relaciones con Clientes.
+En desarrollo de software, se refiere tanto a:
+	•	La estrategia de negocio
+	•	Conjunto de prácticas, procesos y políticas para gestionar las interacciones con clientes y prospectos, con el fin de mejorar la relación, aumentar la retención y optimizar ventas/servicios.
+	•	La herramienta o sistema
+	•	Software que centraliza y organiza la información de clientes, permitiendo:
+	•	Registrar datos de contacto.
+	•	Segmentar clientes por criterios (ej.: tipo de cliente, historial de compra).
+	•	Llevar un historial de interacciones (llamadas, emails, reuniones).
+	•	Gestionar oportunidades de negocio y seguimiento de ventas.
+	•	Automatizar campañas de marketing y recordatorios.
+📌 Ejemplo en la plataforma inmobiliaria:
+	•	Un módulo CRM permitiría registrar compradores, vendedores, arrendadores y arrendatarios.
+	•	Guardar su historial de contacto, propiedades de interés, visitas realizadas y contratos firmados.
+	•	Programar recordatorios para seguimiento de clientes interesados en una propiedad.
+

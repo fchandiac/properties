@@ -1,0 +1,523 @@
+Desarrollar una plataforma web inmobiliaria responsiva, con enfoque mobile first, que permita a 
+
+Acceden al portal 
+visitantes buscar, interactuar, solicitar la publicación y valorización de propiedades,
+--- Interactuar (comentar,  favorito, poner nota a las publiciones de propiedades y blog )
+
+
+usuarios miembros de la comunidad ademas de las opcione de los visitantes 
+ --- gestionar el proceso de su contrato (subir documentación, ver su documentacion tener acceso a su contrato,  visualiazar ducumentación,)
+--- visualizar el estado de su pagos
+
+	Acceden al BackOffice
+y a usuarios del staff  (administrdores y gentes)
+gestionar propiedades (creación, estado, imágenes y videos, opción de definicion tags de SEO), contratos de arriendo o venta, Su docuemntación (con opcione de definir por el adminstardor los  tipos de documentación requerida para contrato de arriendo o  venta) y personas relacionas con los contratos (arrendaatario, arrendador, vendedor, comporador, las personas perteneceiemtes un contratop pueden ser uuarios miembros de la comunidad o no), aprobar solicitudes de publicación, y solicirudes de  publicación derivada de una vlorización de propiedad, Visulización de metricas de vlorización de propiedaes ( sean realizdas por usuarios miembre de la comunidado o no)… las propìedades vlorizadss se crean como propidiedad pero no se publican.. 
+CMS  para la gestion del Slider del Portal (con imágenes y videos), Publicación articulos en Blog del portal, creacion de testimonios y aprobación de testimiomos gestions de testimonios.. 
+Definicion de propiedes destacadas  y activas en el home del portal,  
+
+
+
+incorporando técnicas de SEO 
+
+
+
+  Implementar un catálogo inmobiliario que permita a los usuarios buscar propiedades usando filtros básicos y avanzados, incluyendo vista en mapa y listaCot-93-ABP (2).
+  Habilitar la solicitud de publicación de propiedades mediante un formulario que envíe la información al administrador para revisión y aprobaciónCot-93-ABP (2).
+  Proporcionar a los usuarios la posibilidad de gestionar favoritos, guardando y organizando propiedades de interésCot-93-ABP (2).
+  Crear un módulo de blog para publicar, editar y administrar contenido relevante, con posibilidad de interacción (likes, comentarios, compartir)Cot-93-ABP (2)Cot-93-ABP (2).
+  Permitir a los administradores gestionar propiedades, incluyendo creación, edición, publicación/ocultamiento y cambio de estado (vendida/arrendada)Cot-93-ABP (2).
+  Gestionar contratos de arriendo y pagos asociados, vinculándolos con las personas involucradasCot-93-ABP (2).
+  Administrar el slider principal y otros elementos visuales desde el backofficeCot-93-ABP (2).
+  Integrar SEO técnico y de contenido para optimizar la visibilidad de propiedades, blogs y secciones públicas en buscadoresCot-93-ABP (2).
+  Implementar autenticación y control de acceso para diferenciar la experiencia de usuario básico y administradorCot-93-ABP (2).
+  Desarrollar la aplicación bajo arquitectura de microservicios con backend en NestJS, frontend en Next.js y comunicación mediante RabbitMQ, asegurando escalabilidad y mantenibilidadCot-93-ABP (2)Cot-93-ABP (2)
+
+
+Nº
+Requisito funcional adicional
+Descripción resumida
+1
+Gestión de testimonios
+Agregar y editar fotos en los testimonios publicados.
+2
+Tipo de operación en propiedades
+Campo que indique si la propiedad es de arriendo o venta.
+3
+Filtros avanzados en propiedades
+Filtrar por precio, fecha, tipo de operación, ubicación, superficie en hectáreas, etc.
+4
+Blog con métricas de popularidad
+Mostrar artículos más populares por vistas, tiempo de permanencia y comentarios.
+5
+Carga masiva de propiedades
+Herramienta para subir varias propiedades a la vez, con tipo de operación.
+6
+Gestión avanzada de fotos
+Ver detalles y gestionar fotos (agregar, editar, eliminar) en propiedades.
+7
+Historial de cambios en propiedades
+Registro de modificaciones (precio, estado) con vista tipo tablero Trello.
+8
+Gestión documental en contratos
+Cargar, ver y administrar documentos asociados (títulos, planos, escrituras).
+9
+Asignación de propiedades y consultas a agentes
+Asignar a agentes y enviar notificación por correo electrónico.
+10
+Reporte de propiedades por tipo
+Número total de propiedades en venta y arriendo, con filtros.
+11
+Reporte de tiempos de cierre
+Calcular tiempo promedio desde publicación hasta venta/arriendo.
+12
+Sección "Sobre Nosotros"
+Editor de texto enriquecido y carga/reemplazo de video institucional.
+13
+Formulario de contacto
+Recibir mensajes con gestión de estado (pendiente, respondido, cerrado).
+14
+Gestión de cuentas de usuarios finales
+Listar usuarios registrados, datos de contacto, actividad y envío de mensajes.
+15
+Reporte de propiedades favoritas
+Estadísticas de propiedades marcadas como favoritas por los usuarios.
+16
+Comparación de propiedades
+Función de comparar propiedades y generar reportes.
+17
+Módulo de valorización de propiedades
+Solicitudes, gestión de estado e historial, con opción de modelo automatizado.
+18
+Gestión de pagos de arriendo
+Administrar pagos, estados y notificaciones al arrendador.
+20
+Roles y permisos en el backoffice
+Definir y administrar roles con diferentes niveles de acceso.
+21
+Medidas de seguridad avanzadas
+logs de actividad 
+22
+Diseño responsivo
+Adaptar la plataforma a computadoras, tablets y móviles.
+23
+24
+25
+Registro de eventos en propiedades (estado definir según contexto)
+
+
+
+
+
+Requisitos funcionales de alto nivel
+RF-HL-01 – Estructura de la solución El sistema debe contar con dos secciones principales:
+	•	Plataforma Pública: área visible para visitantes y clientes, que presenta la oferta inmobiliaria, contenidos corporativos y herramientas de contacto.
+	•	BackOffice: área privada y segura para administradores y agentes, destinada a la gestión de usuarios, propiedades, contenidos y procesos internos.
+RF-HL Autenticación y acceso
+	•	El sistema debe permitir registro, inicio/cierre de sesión y recuperación de contraseña.
+	•	Debe soportar roles (admin, agente y cliente) y control de permisos por módulo/acción.
+RF-HL Gestión de usuarios y perfiles
+	•	Los administradores deben poder crear, editar, desactivar usuarios y asignar roles.
+	•	Cada usuario debe poder actualizar su perfil y preferencias básicas.
+RF-HL Gestión de personas (CRM básico)
+	•	Crear y administrar personas naturales/jurídicas con roles inmobiliarios (comprador, vendedor, arrendatario, arrendador) las personas pueden o no estar asociadas a un  usuario.
+	•	Validar RUT y evitar duplicados; asociar documentos y contratos.
+RF-HL-05 Inventario de propiedades
+	•	CRUD de propiedades (venta/arriendo) con datos físicos, financieros (CLP/UF), ubicación y estado (activa, vendida, pendiente, inactiva).
+	•	Gestión de fotos/galería y asignación de agente responsable.
+RF-HL-06 Búsqueda y filtros de propiedades
+	•	Buscar por texto y filtrar por operación, tipo, precio, ubicación, fechas y estado.
+	•	Soportar ordenamiento y paginación.
+RF-HL-07 Solicitudes de publicación
+	•	Recibir, listar y revisar solicitudes de propietarios.
+	•	Aprobar/Rechazar con observaciones y (si procede) crear la propiedad a partir de la solicitud.
+RF-HL-08 Contenido corporativo (About Us)
+	•	Ver y editar la descripción institucional y el video corporativo mostrados en el sitio público.
+RF-HL-09 Blog / CMS
+	•	Crear, editar, programar, publicar y archivar artículos con categorías/tags e imagen destacada.
+	•	Buscar/filtrar por estado, categoría y autor; mostrar métricas básicas (vistas, likes, comentarios).
+RF-HL-10 Slider del home
+	•	Crear/editar slides con imagen, título, descripción y enlace (interno/externo).
+	•	Activar/desactivar y definir orden y vigencia (inicio/fin).
+RF-HL-11 Testimonios
+	•	Ingresar, moderar (aprobar/rechazar) y destacar testimonios con rating.
+	•	Asociar testimonios a agentes/propiedades.
+RF-HL-12 Reportes y analítica
+	•	Dashboard ejecutivo con KPIs (ventas, inventario, tiempo promedio, performance de agentes).
+	•	Rankings y distribuciones (por tipo de propiedad, zona, estado).
+RF-HL-13 Notificaciones
+	•	Enviar notificaciones/alertas internas por eventos clave (nueva solicitud, cambio de estado, publicación programada).
+	•	Enviar comunicaciones al propietario al aprobar/rechazar solicitudes.
+RF-HL-14 Gestión de documentos
+	•	Subir, listar, descargar y eliminar documentos asociados a personas/propiedades/solicitudes.
+RF-HL-15 Historial y auditoría
+	•	Registrar cambios relevantes en entidades críticas (propiedades, solicitudes, contenidos) con quién/cuándo/qué cambió.
+	•	Consultar historial por entidad.
+RF-HL-16 Publicación al sitio web
+	•	Exponer propiedades “activas” y contenido (blog, slider, about, testimonios) al frontend público.
+	•	Sincronizar cambios del backoffice con el sitio público.
+RF-HL-17 Configuración
+	•	Mantener catálogos y parámetros: tipos de propiedades, estados, rangos, categorías de blog/tags, límites de media.
+	•	Configurar formato de moneda/UF y zona horaria.
+RF-HL-18 Internacionalización básica
+	•	Definir soporte inicial de idioma (ES) y estructura para agregar i18n en contenidos visibles al público.
+RF-HL-19 Importación/Exportación
+	•	Exportar listados (personas, agentes, propiedades, solicitudes) a CSV/Excel.
+	•	Importación controlada de contactos y/o propiedades (plantilla).
+RF-HL-20 Seguridad y privacidad (funcional)
+	•	Acceso a datos personales solo según rol/permisos.
+	•	Mecanismo de anonimización en reportes/exportaciones cuando aplique.
+
+
+
+
+Exacto, sería algo así:
+	•	Community Member → equivalente a Usuario público (todos los que interactúan en la parte pública, con o sin registro, pero sin acceso al backoffice).
+	•	Staff → todos los roles internos que operan el sistema desde el backoffice (administradores, agentes, personal de soporte).
+📌 En tu documentación y base de datos podrías incluso manejarlo como UserType: "community" | "staff", y luego dentro de staff tener subroles como admin, agent, etc.
+
+
+CRM significa Customer Relationship Management o Gestión de Relaciones con Clientes.
+En desarrollo de software, se refiere tanto a:
+	•	La estrategia de negocio
+	•	Conjunto de prácticas, procesos y políticas para gestionar las interacciones con clientes y prospectos, con el fin de mejorar la relación, aumentar la retención y optimizar ventas/servicios.
+	•	La herramienta o sistema
+	•	Software que centraliza y organiza la información de clientes, permitiendo:
+	•	Registrar datos de contacto.
+	•	Segmentar clientes por criterios (ej.: tipo de cliente, historial de compra).
+	•	Llevar un historial de interacciones (llamadas, emails, reuniones).
+	•	Gestionar oportunidades de negocio y seguimiento de ventas.
+	•	Automatizar campañas de marketing y recordatorios.
+📌 Ejemplo en la plataforma inmobiliaria:
+	•	Un módulo CRM permitiría registrar compradores, vendedores, arrendadores y arrendatarios.
+	•	Guardar su historial de contacto, propiedades de interés, visitas realizadas y contratos firmados.
+	•	Programar recordatorios para seguimiento de clientes interesados en una propiedad.
+
+
+
+________________________________________
+
+
+CMS (Content Management System) integrado.
+📌 Definición breve: Un CMS es un conjunto de funcionalidades que permite crear, editar, organizar y publicar contenido en un sitio web sin necesidad de modificar el código fuente.
+En el contexto de tu plataforma inmobiliaria, sería:
+	•	Gestionar el slider de inicio.
+	•	Publicar/editar artículos del blog.
+	•	Actualizar la sección “About Us”.
+	•	Administrar testimonios.
+	•	Definir propiedades destacadas para mostrar en portada.
+-________________________________
+
+
+
+Meta título
+➖ No
+✅ Sí
+Ayudar al SEO y aparecer en resultados
+
+Meta descripción
+➖ No
+✅ Sí
+Mejorar el CTR (que más gente haga clic)
+
+
+2. Atributos para buscadores (SEO de imágenes)
+Son datos que no siempre ve el usuario, pero que Google y otros buscadores sí leen:
+a) Texto alternativo (alt)
+	•	Propósito:
+	•	Ayudar a buscadores a entender qué muestra la imagen.
+	•	Ser leído por lectores de pantalla (accesibilidad).
+	•	Mostrarse si la imagen no carga.
+	•	Ejemplo para una propiedad:
+html
+CopiarEditar
+<img src="departamento-providencia.jpg" alt="Departamento de 2 dormitorios en Providencia, Santiago">
+b) Título de imagen (title)
+	•	Propósito:
+	•	Mostrar un tooltip cuando el usuario pasa el mouse sobre la imagen.
+	•	No es tan importante para SEO como el alt, pero aporta contexto.
+	•	Ejemplo:
+html
+CopiarEditar
+<img src="departamento-providencia.jpg" alt="Departamento de 2 dormitorios en Providencia" title="Departamento con vista al Parque Inés de Suárez">
+
+
+
+SEO y contenidos: ¿Estructura de URLs, metadatos, schema.org, sitemap/robots, blog con editor (Markdown/WYSIWYG)?
+
+
+schema.org es un estándar abierto creado por Google, Bing, Yahoo y Yandex para definir marcado de datos estructurados en sitios web.
+📌 Qué hace: Permite agregar información extra, en un formato que los motores de búsqueda entienden, para describir de forma precisa el contenido de tu página. Esto mejora el SEO y puede generar rich snippets (resultados enriquecidos) en Google.
+
+Ejemplo para tu plataforma inmobiliaria
+En una ficha de propiedad, sin datos estructurados, Google solo ve texto y fotos. Con schema.org puedes decirle explícitamente:
+	•	Esto es una Casa (schema.org/House)
+	•	Está en venta o en arriendo (schema.org/Offer)
+	•	Tiene precio, dirección, número de habitaciones, etc.
+Sitemap
+El sitemap (o mapa del sitio) es un archivo, generalmente en formato XML, que lista las URLs importantes de un sitio web para ayudar a los motores de búsqueda a encontrar e indexar el contenido de forma más eficiente.
+	•	Incluye datos como la fecha de última modificación, la frecuencia de actualización y la prioridad de cada página.
+	•	Facilita que Google, Bing y otros indexen rápidamente páginas nuevas o actualizadas.
+📌 Ejemplo de uso en tu plataforma inmobiliaria: listar todas las propiedades, artículos del blog y páginas informativas que quieras que aparezcan en buscadores.
+
+Robots.txt
+El robots.txt es un archivo de texto simple ubicado en la raíz del sitio web, que indica a los motores de búsqueda qué partes del sitio pueden o no pueden rastrear.
+	•	Usa directivas como Allow y Disallow para dar instrucciones a los web crawlers.
+	•	No impide el acceso si una URL es pública, pero sí indica que no debe ser rastreada ni indexada.
+📌 Ejemplo de uso en tu plataforma inmobiliaria: bloquear el acceso a las URLs del backoffice y permitir el rastreo de la sección pública.
+
+___________________________________________________
+
+
+1. Acceso al portal
+
+SECCIONES PORTAL 
+HOME - TOPBAR, SLIDER, MENU DE NAVEGACIÓN, FOOTER ( INFORMACION INTITUCIONL … CONTACT FORM) , PROPUEDDES DESTACADAS. 
+
+PUBLICA TU PROPIEDAD,
+VALORIZA TU PROPIEDAD, 
+PROPDIEDADES (FILTROS Y LLEVA A DETALLE DE PROPIEDAD)
+TESTIMONIOS
+BLOG
+MI CUENTA ( USUARIOS MIEMBROS DE LA COMUNIDAD)
+
+
+Visitantes
+	•	Buscar, interactuar, solicitar la publicación y valorización de propiedades.
+	•	Interactuar:
+	•	Comentar.
+	•	Marcar como favorito.
+	•	Poner nota a las publicaciones de propiedades y blog.
+Usuarios miembros de la comunidad
+(Además de las opciones disponibles para los visitantes)
+	•	Gestionar el proceso de su contrato:
+	•	Subir documentación.
+	•	Ver su documentación.
+	•	Tener acceso a su contrato.
+	•	Visualizar documentación.
+	•	Visualizar el estado de sus pagos.
+Usuarios del staff (administradores y agentes)
+
+Secciones
+Dashboard
+Propiedades (ARRIENDO – VENTA – TIPOS DE PROPIEDAD)
+Solicitudes publicación
+Valoraciones
+Contratos - (contratos- personas – DOCUMENTOS (TYPOS DE DOCUENTO SPOR CONTRATO Y PERONA (PDF O IMAGEN ))
+Usuarios staf (agentes – administradores)
+CMR (PARA USUARIOS DE LA OMUNIDAD, MENSAJES DE CONTACTO)
+CMS (SLIDER, SOBRE NOSOTROS, BLOG, PROPIEDADES EN HOME, FOOTER, LOGO Y NOMBRE PRINCIPAL)
+REPORTES
+AUDITORIA
+
+
+
+Gestión de propiedades
+	•	Creación.
+	•	Estado.
+	•	Imágenes y videos.
+	•	Opción de definición de tags de SEO.
+	•	Tipo de operación en propiedades (indicar si es de arriendo o venta).
+	•	Filtros avanzados en propiedades (precio, fecha, tipo de operación, ubicación, superficie en hectáreas, etc.).
+	•	Carga masiva de propiedades, con tipo de operación.
+	•	Gestión avanzada de fotos (ver detalles y gestionar fotos: agregar, editar, eliminar).
+	•	Historial de cambios en propiedades (registro de modificaciones como precio o estado, con vista tipo tablero Trello).
+	•	Comparación de propiedades y generación de reportes.
+	•	Registro de eventos en propiedades (estado definido según contexto).
+
+Gestión de contratos de arriendo o venta
+	•	Documentación (con opción para que el administrador defina los tipos de documentación requerida para contrato de arriendo o venta).
+	•	Gestión documental en contratos: cargar, ver y administrar documentos asociados (títulos, planos, escrituras).
+	•	Personas relacionadas con los contratos (arrendatario, arrendador, vendedor, comprador).
+	•	Las personas pertenecientes a un contrato pueden ser usuarios miembros de la comunidad o no.
+	•	Gestión de pagos de arriendo: administrar pagos, estados y notificaciones al arrendador.
+
+Otras funciones administrativas
+	•	Asignación de propiedades y consultas a agentes, con notificación por correo electrónico.
+	•	Aprobar solicitudes de publicación y solicitudes derivadas de una valorización de propiedad.
+	•	Módulo de valorización de propiedades: solicitudes, gestión de estado e historial, con opción de modelo automatizado.
+	•	Visualización de métricas de valorización de propiedades (realizadas por usuarios miembros de la comunidad o no).
+	•	Las propiedades valorizadas se crean como propiedad pero no se publican.
+	•	Reportes:
+	•	Número total de propiedades en venta y arriendo, con filtros.
+	•	Tiempos de cierre (promedio desde publicación hasta venta/arriendo).
+	•	Propiedades favoritas (estadísticas de propiedades marcadas como favoritas).
+
+3. CMS (Gestión de contenido)
+	•	Gestión del slider del portal (con imágenes y videos).
+	•	Publicación de artículos en el blog del portal.
+	•	Blog con métricas de popularidad (artículos más populares por vistas, tiempo de permanencia y comentarios).
+	•	Creación de testimonios y aprobación de testimonios.
+	•	Gestión de testimonios con posibilidad de agregar y editar fotos en los testimonios publicados.
+	•	Definición de propiedades destacadas y activas en el home del portal.
+	•	Sección "Sobre Nosotros" con editor de texto enriquecido y carga/reemplazo de video institucional.
+	•	Formulario de contacto con gestión de estado (pendiente, respondido, cerrado).
+
+4. Administración y seguridad
+	•	Gestión de cuentas de usuarios finales: listar usuarios registrados, datos de contacto, actividad y envío de mensajes.
+	•	Roles y permisos en el backoffice USUARIOS STAFF: definir y administrar roles con diferentes niveles de acceso.
+	•	Medidas de seguridad avanzadas: logs de actividad.
+	•	Diseño responsivo: adaptación a computadoras, tablets y móviles.
+
+
+
+===============================================
+RESUMEN Y REQUISITOS FUNCIONALES - SECCIÓN ABOUTUS - BACKOFFICE
+===============================================
+
+## RESUMEN EJECUTIVO
+
+### Descripción General:
+CMR permite modificar AboutUs en Portal
+
+## REQUISITOS FUNCIONALES IDENTIFICADOS
+
+### MÓDULO: GESTIÓN DE CONTENIDO INSTITUCIONAL
+
+#### RF-AU-001: Editor de Contenido Institucional
+**Prioridad**: Alta
+**Descripción**: Implementar editor de texto enriquecido para modificar misión, visión y descripción de la empresa
+**Criterios de Aceptación**:
+- Editor WYSIWYG con formato de texto (negrita, cursiva, listas, etc.)
+- Previsualización en tiempo real
+- Guardado automático y manual
+- Validación de contenido mínimo
+- Historial de cambios
+
+#### RF-AU-002: Gestión de Video Corporativo
+**Prioridad**: Alta
+**Descripción**: Permitir carga, reemplazo y gestión del video institucional
+**Criterios de Aceptación**:
+- Subida de archivos de video (MP4, WebM)
+- Validación de formato y tamaño máximo
+- Previsualización antes de publicar
+- Opción de URL externa (YouTube, Vimeo)
+- Configuración de autoplay/loop/mute
+
+#### RF-AU-003: Gestión de Equipo Humano
+**Prioridad**: Media
+**Descripción**: Administrar miembros del equipo con fotos, nombres y cargos
+**Criterios de Aceptación**:
+- CRUD completo de miembros (Crear, Leer, Actualizar, Eliminar)
+- Subida de fotos de perfil
+- Campos: nombre, cargo, biografía breve, email (opcional, orden )
+- Ordenamiento de miembros
+- Estado activo/inactivo
+
+#### RF-AU-008: SEO y Meta-datos
+**Prioridad**: Baja
+**Descripción**: Gestión de meta-información para SEO
+**Criterios de Aceptación**:
+- Edición de meta title y description
+- Open Graph tags para redes sociales
+- Schema markup para empresas
+- Sitemap automático
+
+## DEPENDENCIAS EXTERNAS
+- Librería de editor de texto (ej: TinyMCE, Quill, Draft.js) ??
+
+
+===============================================
+RESUMEN Y REQUISITOS FUNCIONALES - SECCIÓN PROPIEDADES – BACK OFICE
+===============================================
+
+## RESUMEN EJECUTIVO
+
+### Descripción General:
+La sección de propiedades es el núcleo del sistema back-office, implementando un sistema integral de gestión inmobiliaria con operaciones CRUD completas, filtros avanzados, gestión multimedia, y seguimiento de historial. Maneja tanto operaciones de venta como arriendo con estados múltiples y asignación de agentes.
+
+### Estado Actual:
+- ✅ Sistema CRUD básico
+- ✅ Filtros múltiples  VISULIAZAIÓN EN GRILLA
+- ✅ Gestión de multimedia (fotos)
+- TAB AREIENDO - VENTA
+- ✅ Estados de propiedades (PULICADA, Vendida, Pendiente, Inactiva, ARRENDADA)
+- ✅ Historial de cambios básico
+- ✅ Vista detallada de propiedades
+ASINAR PROPIEDAD A AGENTE
+
+===============================================
+RESUMEN Y REQUISITOS FUNCIONALES - SECCIÓN TESTIMONIOS BACK OFFICE
+===============================================
+
+- ✅ Sistema CRUD 
+- ✅ Dashboard de estadísticas (aprobados, pendientes)
+- ✅ Sistema de búsqueda multi-campo VISULIZACIÓN EN GRILLA
+- ✅ Workflow de moderación (aprobar/rechazar)
+- ✅ Gestión básica de imágenes con preview
+- METADATA SEO
+
+
+===============================================
+RESUMEN Y REQUISITOS FUNCIONALES - SECCIÓN BLOG BACKEND
+===============================================
+
+## RESUMEN EJECUTIVO
+
+### Descripción General:
+La sección de blog implementa un sistema completo de gestión de contenido (CMS) para el blog inmobiliario, permitiendo a los administradores crear, editar, publicar y analizar artículos relacionados con el sector inmobiliario. Incluye dashboard de estadísticas, gestión de estados de publicación, y analytics básico.
+
+
+- ✅ Sistema CRUD básico  
+- ✅ Dashboard de estadísticas (publicados, borradores)
+- ✅ Sistema de búsqueda multi-campo
+- ✅ Gestión de estados de publicación (Borrador, Programado, Publicado, Archivado)
+- ✅ Sistema de categorización (Compra, Venta, Mercado, Inversión)
+- ✅ Analytics básico (vistas, likes, comentarios)
+- ✅ Funcionalidad de artículos destacados
+
+
+===============================================
+RESUMEN Y REQUISITOS FUNCIONALES - SECCIÓN F MENSAJES DE CONTACTO
+===============================================
+
+
+### Estado Actual:
+- ✅ Formulario básico (nombre, email, mensaje)
+- ✅ ESTADO (LEIDO, RESPONDIDO, PNDIENTE )
+VISUALIZCIÓN ENGRILL FILTROS 
+
+===============================================
+RESUMEN Y REQUISITOS FUNCIONALES - SECCIÓN AGENTES===============================================
+
+
+VISUALIXAION EN CARDS CON COBRE… CORREO EXPRIENCIA, ESTADO ACTIVO EN VACIONES, INATIVO,   LINCENCIA RENDIMIEIENTO PORIPIEDADES ASIGNADAS VS (VENDIDAS O ARRENDADAS) CORREO  TELEDONO 
+
+===============================================
+RESUMEN Y REQUISITOS FUNCIONALES - SECCIÓN DMINSTRADORES===============================================
+ 
+SIMILR A AGENTES 
+
+===============================================
+RESUMEN Y REQUISITOS FUNCIONALES - SECCIÓN AUDITORIA===============================================
+
+===============================================
+RESUMEN Y REQUISITOS FUNCIONALES - SECCIÓN SLIDER===============================================
+
+NUEVO SLAIDER
+DASHBOARD (TOTAL SLIDER, ACTIBOS, CLICK TOTLES)
+ VISUALIZACIONE EN CARDS
+SEO
+NOMBEE
+ IMAGEN / VIDEO
+DESCRIPCION 
+LINK
+SISTEMA DE PROGRAMCION PAR ETAR ACTIVO
+
+===============================================
+RESUMEN Y REQUISITOS FUNCIONALES - SECCIÓN TIPOS DE PROPIEDAD===============================================
+
+NOMBRE DECSIPCOM 
+VIALUZCION EN CARD
+ACTIVAR. DESACTIVAR – ELIMNIAR
+CUENT TOTL DE PROPIEDDES SEGÚN TIPO
+
+
+===============================================
+RESUMEN Y REQUISITOS FUNCIONALES - SECCIÓN TIPOS DE REPORTES===============================================
+
+FILTROS A LA IZQUERD 
+PRIVIALOZION DE REPORTE DERECJA 
+IMPRIMII DESCARGAR
+
+
+

@@ -1,0 +1,265 @@
+Perfecto, aquí tienes la lista consolidada de acciones inferidas de los requisitos que enviaste, separadas por contexto (Portal / BackOffice) y sin mencionar el tipo de usuario:
+
+📌 BackOffice
+	•	Mostrar KPIs generales de la plataforma
+	•	Mostrar ventas totales y variación respecto al mes anterior
+	•	Mostrar nuevos miembros y variación respecto al mes anterior
+	•	Mostrar número de propiedades activas ( publicadas)
+	•	Calcular tiempo promedio de venta/arriendo
+	•	Mostrar ranking de agentes del mes
+	•	Mostrar gráfico de distribución por tipo de propiedad
+	•	Mostrar gráfico de ingresos por mes del último año
+	•	Comparar ingresos con el año anterior
+______________________________________________
+	•	Crear propiedad 
+	•	La propiedad se  en seccion propiedad opcion nuevo propiedad backOffice (solo admin)
+	•	La propiedad se crea por sistema cuando se reliza una solicitud de de publicación.
+	•	Editar propiedad
+	•	Ver listdao de propiedades
+	•	Back en grid
+	•	Portal cards
+	•	Admin ve todas
+	•	Agente solo das de el
+	•	Portal solo ve publicadas
+	•	Eliminar propiedad
+	•	Solo la puede eliminar dministrador
+	•	Ver  detalle propiedad
+	•	Cambiar estado de propiedad 
+	•	Evaluación, agemte - admin
+	•	Pre-aprobada,  agemte - admin
+	•	Publicada:  solo admin (este estado implica visibilidd en portal, todos los demas estado no esta visible en portal)
+	•	Vendida, agemte - admin
+	•	Inactiva, 
+	•	Arrendada agemte - admin
+	•	Asignar propiedad a un agente
+	•	Solo hace dminitrdor
+	•	Aprobar publicción de pripiedad propiedad
+	•	Solo adminitrsdor
+
+	•	Enviar notificación (usuario) /correo( usuario e invitdo) a al cambiar a Pre-aprobada (sistem)
+	•	
+	•	Definir ubicación (latitud/longitud) de propiedad
+	•	 en Portal – usuario – en stteper
+	•	Back Nueva propiedad – solo admin
+	•	Subir y editar fotos/videos de propiedad
+	•	en Portal – usuario – en stteper
+	•	Back Nueva propiedad – solo admin
+	•	Definir metadatos SEO de propiedad y fotos
+	•	Back Nueva propiedad – admin agente
+	•	Mostrar historial de cambios de propiedad
+	•	En detalles grilla back
+
+	•	Notificar al solicitante sobre el cambio de estado de propiedad
+	•	Sistema 
+	•	En preparobada
+	•	En arreendada
+	•	En vendida
+	•	Definir valor de propiedad en pesos o UF
+	•	Parte de editar propiedad
+	•	Sec refiere al valor pubicado
+	•	Solo puede en pesos o en uf no ambos
+_________________________________
+	•	Crear tipo de propiedad (casa, departamento, sitio, estcionameinto, local)
+	•	Solo admin
+	•	Solo admin
+	•	
+	•	Editar tipo de propiedad
+	•	En card
+	•	Solo admin
+	•	
+	•	Eliminar tipo de propiedad
+	•	En card
+	•	Solo admin
+	•	
+	•	Activar/desactivar tipo de propiedad
+	•	En card
+	•	Solo admin
+	•	
+	•	
+	•	Configurar campos habilitados por tipo de propiedad
+	•	Dialog depende de card
+	•	Solo admin
+	•	Visualizar tipos de propiedad con estadísticas
+	•	Mini dashboard arriba de cards total de propiedades según tipo
+
+	•	Visualizar solicitudes de publicación con filtros
+	•	Listdo en grid
+	•	Admin ve todas
+	•	Aegente solo  asignadas
+	•	Asignar solicitud a agente o administrador
+	•	 En grid con dialog
+	•	Aprobar solicitud de publicación
+	•	Solo admin
+	•	Rechazar solicitud de publicación
+	•	Solo dmin
+	•	Crear propiedad desde solicitud
+	•	Sistema se hce automtico dessoliictar ublicación o dese valorizar propiedad con solicitud de publicación 
+	•	Cambiar estado de propiedad a Publicada desde solicitud aprobada
+	•	Eso psa automaticmente cuando se apruba… pero le proceso lo hace el admin
+	•	Enviar notificación/correo al solicitante de publicación
+	•	Notificción y correo al mienbro de platforma
+	•	Solo correo usaruio anonmio
+	•	Marcar propiedad como destacada
+	•	Solo admin
+	•	Marcar propiedad como visible en home
+	•	 Solo admin
+	•	
+	•	Mostrar dashboard de valoraciones
+	•	Sobre la grilllad de valoracions 
+	•	Listar valoraciones
+	•	Solo las viuiliza admin
+	•	Se vilizliza en grid
+
+	•	Crear contrato
+	•	Admin puede crear culauier tipo de contrto
+	•	Editar contrato
+	•	Eliminar contrato
+	•	Listar contratos
+	•	Dmin visuliza todos
+	•	Agente solo visluza dlo de de propiedsdees asignadas
+	•	Gestionar documentos por contrato/persona
+	•	SUBIR DOUMENTO
+	•	ELIMINAR DOCUMENTO
+	•	SI LO SUBE EL USURIO MIENBRO COMUNIDAD
+	•	Subir documentos PDF o imagen
+	•	
+	•	Gestionar personas relacionadas a un contrato
+	•	AGREGAR PERSONAS 
+	•	ASGINAR LO EN CONTRTO
+	•	Gestionar pagos de arriendo (generar cuotas)
+	•	CUNDO SE CREA CONTRATO TIPO ARRIENDO SE  SEPREGUNTA INCIO Y CANTIDAD DE MESES ESO DEFNIE LOS PAGOS Y SE DEBN DINIR LAS FECHAS DE PAGO
+	•	LUEGO EN LA FECHA REPONDABLE DE LA PROPIEDAD
+	•	DEBE ACTUALIZSR LOS PAGOS
+:______________
+	•	Crear administrador
+	•	SOLO DMIN
+	•	Editar administrador
+	•	SOLO ADMIN
+	•	Eliminar administrador
+	•	SOLO ADMIN
+	•	Visualizar administradores en tarjetas
+	•	SOLO DMIN
+
+	•	Asignar propiedades a agentes
+	•	LO HEC ADMIN EN SECCION PROPIEDDADES
+	•	Asignar solicitudes a agentes
+	•	POR DEFCTO L SOLICITUF SE ASIGA A QUIEN TENGA  ASIGANDA LA PROPIEDAD… PERO EL ADMIN LO PUEDE CAMBIAR
+	•	Crear agente
+	•	ADMIN
+	•	Editar agente
+	•	ADMIN
+	•	Eliminar agente
+	•	ADMIN
+	•	Visualizar agentes en tarjetas
+	•	SOLO ADMIN
+
+	•	Mostrar indicadores de rendimiento de agentes
+	•	
+	•	Listar mensajes de contacto
+	•	 EN GRID
+	•	Cambiar estado de mensaje (pendiente, leído, respondido)
+________________
+	•	Crear slide
+	•	SOLO DMIN
+	•	Editar slider
+	•	SOLO DMIN
+	•	Eliminar slider
+	•	SOLO DMIN
+	•	Configurar duración de slider
+	•	SOLO DMIN
+	•	Configurar fechas de inicio/fin de slider
+	•	SOLO DMIN
+	•	Definir metadatos SEO de slider
+	•	
+	•	Visualizar métricas de clics de slider
+_____________________________
+	•	Editar descripción de empresa
+	•	Definir metadatos SEO de "Sobre nosotros"
+	•	Gestionar video corporativo (activar/desactivar)
+	•	Gestionar equipo humano
+	•	Crear artículo de blog
+	•	Editar artículo de blog
+	•	Eliminar artículo de blog
+	•	Definir categorías y estados para artículos
+	•	Listar artículos en grilla
+	•	Ver detalle de artículo
+	•	Mostrar métricas del blog
+	•	Gestionar propiedades destacadas en home
+	•	Configurar footer
+	•	Gestionar identidad del portal (logo y nombre)
+	•	Generar reporte con filtros
+	•	Vista previa de reporte
+	•	Imprimir reporte
+	•	Descargar reporte
+	•	Registrar logs de acciones de usuario
+	•	Visualizar logs en grilla
+	•	Ver detalle de logs
+	•	Gestionar correos automatizados y notificaciones
+	•	Exportar grillas a Excel
+	•	Filtrar y paginar grillas
+	•	Generar sitemap
+	•	Crear archivo robots.txt
+	•	Gestionar repositorio de imágenes
+
+📌 Portal
+	•	Mostrar logo de empresa en topbar
+	•	Mostrar valor de UF del día
+	•	Mostrar botón de login
+	•	Mostrar botón de registro
+	•	Mostrar icono de menú para usuario logueado
+	•	Iniciar sesión
+	•	Recuperar contraseña
+	•	Registrar nuevo usuario
+	•	Validar correo de usuario
+	•	Mostrar pop-up de invitación a registro
+	•	Mostrar barra de navegación con enlaces
+	•	Mostrar sidebar con enlaces de cuenta
+	•	Mostrar slider (imágenes/videos)
+	•	Avanzar/retroceder slider
+	•	Cambiar slide desde indicadores
+	•	Mostrar descripción de empresa
+	•	Mostrar video institucional
+	•	Mostrar equipo de empresa
+	•	Centrar descripción si video está desactivado
+	•	Mostrar logo en sección “Nuestro equipo”
+	•	Mostrar tarjetas del equipo con datos de contacto
+	•	Completar formulario de publicación de propiedad
+	•	Subir fotos/videos en publicación
+	•	Seleccionar ubicación en mapa
+	•	Completar formulario de valoración de propiedad
+	•	Publicar propiedad desde valoración
+	•	Enviar solicitud de publicación desde valoración
+	•	Filtrar propiedades por operación, tipo, región, comuna y precio
+	•	Listar propiedades en formato tarjeta
+	•	Mostrar iconos de atributos en tarjetas
+	•	Mostrar valor en UF o pesos
+	•	Marcar propiedad como favorita
+	•	Generar URL única para detalle de propiedad
+	•	Redirigir si propiedad no está publicada
+	•	Ver imágenes de propiedad
+	•	Ver video de propiedad
+	•	Ver atributos de propiedad
+	•	Ver descripción de propiedad
+	•	Ver ubicación en mapa
+	•	Enviar formulario de contacto a agente con botón “Me interesa”
+	•	Listar testimonios
+	•	Aprobar testimonios de usuarios
+	•	Mostrar imagen en testimonios
+	•	Listar artículos de blog
+	•	Mostrar artículos destacados
+	•	Mostrar barra fija de redes sociales
+	•	Editar datos personales
+	•	Subir fotos de cédula
+	•	Marcar usuario como verificado
+	•	Ver publicaciones propias
+	•	Ver visitas y favoritos de publicaciones propias
+	•	Ver propiedades favoritas
+	•	Quitar propiedad de favoritos
+	•	Descargar estados de pago
+	•	Subir comprobante de pago
+	•	Notificar agente sobre comprobante de pago
+	•	Ver contratos propios
+	•	Ver estados de pago de contratos
+
+Si quieres, puedo también depurarte esta lista y unificar acciones repetidas para que quede un catálogo único más compacto y sin redundancias. ¿Quieres que lo haga así para que sea más legible?
+
