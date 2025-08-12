@@ -1,0 +1,19 @@
+Usuario
+Persona
+
+Propiedad
+Contrato
+
+
+Propiedad: 
+la creación de la propiedad se puede hacer desde el back Office o de forma automtica mediante el proceso de solicitud de publicación o el proceso de avaluo (valoriza tu propiedad). 
+la propiedad  tiene un Rol, usuario cliente asociado y un usuario 
+
+
+Usuario: 
+puede ser Cliente [vendedor, comprador, arrendatario, arrendador], agente, administrador
+solo agente y dministrador acceden a backoffice
+
+
+Persona: 
+usuario de la plataforma con identidad verificada habilitada para consignar contratos en la plataforma

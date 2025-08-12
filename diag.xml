@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemap>
+  <page name="Home">
+    <subpage name="Topbar" />
+    <subpage name="Slider" />
+    <subpage name="Menú de Navegación" />
+    <subpage name="Footer">
+      <description>Información institucional, formulario de contacto</description>
+    </subpage>
+    <subpage name="Propiedades destacadas" />
+  </page>
+  <page name="Publica tu propiedad">
+    <description>Formulario para solicitar la publicación de una propiedad.</description>
+  </page>
+  <page name="Valoriza tu propiedad" />
+  <page name="Propiedades">
+    <description>Listado de propiedades con filtros que llevan al detalle de cada una.</description>
+  </page>
+  <page name="Testimonios">
+    <description>Listado de testimonios de clientes.</description>
+  </page>
+  <page name="Blog">
+    <description>Artículos de interés.</description>
+  </page>
+  <page name="Mi Cuenta">
+    <description>Acceso para usuarios miembros de la comunidad.</description>
+    <subpage name="Mis Datos" />
+    <subpage name="Mis Publicaciones" />
+    <subpage name="Mis Favoritos" />
+    <subpage name="Estado de Pagos" />
+    <subpage name="Mis Contratos" />
+  </page>
+</sitemap>

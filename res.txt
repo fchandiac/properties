@@ -1,0 +1,139 @@
+╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                    ESQUEMA DE BASE DE DATOS - SISTEMA INMOBILIARIO                                                  ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────┬────────────────────────────────────────────┬────────────────────────────────────────────┬─────────────────────────────────────────┐
+│         ENTIDAD         │                DESCRIPCIÓN                 │              CAMPOS PRINCIPALES             │               RELACIONES                │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ Usuario                 │ Representa cualquier persona que           │ • ID_Usuario (PK)                          │ • Tiene muchas Propiedades             │
+│                         │ interactúa con el sistema (admin,         │ • Nombre_usuario                           │ • Crea Solicitudes de Publicación      │
+│                         │ agente, usuario comunidad)                │ • Correo                                   │ • Realiza Valoraciones                 │
+│                         │                                            │ • Contraseña_hash                          │ • Envía Mensajes de Contacto           │
+│                         │                                            │ • Nombre_real, RUT                         │ • Recibe Notificaciones                │
+│                         │                                            │ • Dirección, Teléfono                     │ • Genera logs de Auditoría             │
+│                         │                                            │ • Estado: ENUM[ACTIVO/INACTIVO/VACACIONES] │                                         │
+│                         │                                            │ • Rol: ENUM[ADMIN/AGENTE/COMUNIDAD/...]   │                                         │
+│                         │                                            │ • Verificado (boolean)                     │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ Propiedad               │ Inmueble gestionado en el portal          │ • ID_Propiedad (PK)                        │ • Pertenece a Tipo de Propiedad        │
+│                         │ y Backoffice                               │ • Título, Descripción                     │ • Tiene Usuario Responsable            │
+│                         │                                            │ • Tipo_operación: ENUM[VENTA/ARRIENDO]    │ • Genera Contratos                     │
+│                         │                                            │ • Estado: ENUM[SOLICITUD/PREAPROBADA/     │ • Tiene múltiples Multimedia           │
+│                         │                                            │   PUBLICADA/CERRADA]                      │ • Aparece en Solicitudes               │
+│                         │                                            │ • Precio_CLP (INTEGER)                    │                                         │
+│                         │                                            │ • Precio_UF (FLOAT)                       │                                         │
+│                         │                                            │ • Latitud, Longitud                       │                                         │
+│                         │                                            │ • Fecha_publicación, Fecha_cierre         │                                         │
+│                         │                                            │ • SEO_Título, SEO_Descripción             │                                         │
+│                         │                                            │ • Imágenes (JSON)                         │                                         │
+│                         │                                            │ • Historial_cambios (JSON)                │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ Tipo de Propiedad       │ Clasificación y características           │ • ID_TipoPropiedad (PK)                    │ • Tiene muchas Propiedades             │
+│                         │ de propiedades                            │ • Nombre, Descripción                     │                                         │
+│                         │                                            │ • Estado: ENUM[HABILITADO/NO_HABILITADO]  │                                         │
+│                         │                                            │ • Baños, Habitaciones                     │                                         │
+│                         │                                            │ • Metros_construidos, Metros_terreno      │                                         │
+│                         │                                            │ • Estacionamiento                         │                                         │
+│                         │                                            │ • Conexión_luz, Pozo                      │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ Solicitud Publicación   │ Petición para publicar una propiedad      │ • ID_Solicitud (PK)                       │ • Genera una Propiedad                 │
+│                         │                                            │ • Origen                                   │ • Tiene Usuario_solicitante (FK)       │
+│                         │                                            │ • Estado: ENUM[PENDIENTE/ASIGNADA/        │ • Tiene Usuario_asignado (FK)          │
+│                         │                                            │   PREAPROBADA/APROBADA]                   │ • Relaciona con ID_Propiedad           │
+│                         │                                            │ • Fecha_solicitud                         │                                         │
+│                         │                                            │ • Tipo_usuario: ENUM[VISITANTE/REGISTRADO]│                                         │
+│                         │                                            │ • Origen: ENUM[PUBLICACIÓN/VALORACIÓN]    │                                         │
+│                         │                                            │ • Fecha_publicación                       │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ Valoración              │ Avalúo solicitado por usuario             │ • ID_Valoración (PK)                       │ • Puede generar Solicitud Publicación  │
+│                         │                                            │ • Datos_propiedad (JSON)                  │                                         │
+│                         │                                            │ • Valor_estimado                          │                                         │
+│                         │                                            │ • Correo_solicitante                      │                                         │
+│                         │                                            │ • Nombre_solicitante                      │                                         │
+│                         │                                            │ • Teléfono                                │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ Contrato                │ Acuerdo de arriendo o venta               │ • ID_Contrato (PK)                         │ • Relaciona con Propiedad (FK)         │
+│                         │                                            │ • Tipo: ENUM[VENTA/ARRIENDO]              │ • Tiene múltiples Personas             │
+│                         │                                            │ • Estado: ENUM[EN_PROCESO/CERRADO]        │ • Tiene múltiples Documentos           │
+│                         │                                            │ • Fecha_inicio, Fecha_fin                 │ • Genera Pagos                         │
+│                         │                                            │ • Monto, Porcentaje_comisión              │                                         │
+│                         │                                            │ • Documentos (JSON): tipo, id_documento,  │                                         │
+│                         │                                            │   estado[PENDIENTE/CARGADO]               │                                         │
+│                         │                                            │ • Personas (JSON): personaID, rol         │                                         │
+│                         │                                            │   [ARRENDATARIO/ARRENDANTE/VENDEDOR/      │                                         │
+│                         │                                            │    COMPRADOR]                             │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ Tipos Documento         │ Catalogación de documentos                │ • ID (PK)                                  │ • Usado en Contratos                   │
+│                         │ contractuales                             │ • Nombre, Descripción                     │                                         │
+│                         │                                            │ • Tipo_contrato: ENUM[VENTA/ARRIENDO]     │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ Persona                 │ Individuo relacionado a contrato          │ • ID_Persona (PK)                          │ • Participa en Contratos               │
+│                         │ (puede o no ser usuario del sistema)      │ • Nombre, RUT                             │                                         │
+│                         │                                            │ • Dirección, Teléfono, Correo            │                                         │
+│                         │                                            │ • Imagen_cedula_front                     │                                         │
+│                         │                                            │ • Imagen_cedula_rear                      │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ Documento               │ Archivo asociado a persona o contrato     │ • ID_Documento (PK)                        │ • Asociado a Contrato                  │
+│                         │                                            │ • Tipo                                     │ • Asociado a Persona                   │
+│                         │                                            │ • Formato: ENUM[PDF/PNG/JPG]              │                                         │
+│                         │                                            │ • URL_archivo                             │                                         │
+│                         │                                            │ • Fecha_subida                            │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ Mensaje Contacto (CRM)  │ Comunicación de usuario a staff           │ • ID_Mensaje (PK)                          │ • Enviado por Usuario                  │
+│                         │                                            │ • Nombre, Correo, Teléfono               │                                         │
+│                         │                                            │ • Mensaje                                  │                                         │
+│                         │                                            │ • Estado: ENUM[PENDIENTE/RESPONDIDO/      │                                         │
+│                         │                                            │   CERRADO/RESUELTO]                       │                                         │
+│                         │                                            │ • Fecha_envío                             │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ Multimedia              │ Imágenes y videos del sistema             │ • ID_Multimedia (PK)                       │ • Asociado a Propiedad                 │
+│                         │                                            │ • Tipo: ENUM[IMG/VIDEO]                   │ • Asociado a Solicitud                 │
+│                         │                                            │ • URL                                      │ • Asociado a Valoración                │
+│                         │                                            │ • SEO_Título, SEO_Descripción             │ • Asociado a Slider                    │
+│                         │                                            │ • Peso_archivo, Resolución                │                                         │
+│                         │                                            │ • Fecha_subida                            │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ CMS - Slider            │ Elemento visual en la home                │ • ID_Slider (PK)                           │ • Configurado por Usuario (Admin)      │
+│                         │                                            │ • Imagen/Video                            │ • Usa Multimedia                       │
+│                         │                                            │ • Fecha_inicio, Fecha_fin                 │                                         │
+│                         │                                            │ • SEO, Duración                           │                                         │
+│                         │                                            │ • Métricas                                │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ CMS - Sobre Nosotros    │ Información institucional                 │ • Texto                                    │ • Gestionado por Usuario (Admin)       │
+│                         │                                            │ • Video                                    │                                         │
+│                         │                                            │ • Equipo (JSON): NOMBRE, CARGO, HISTORIA, │                                         │
+│                         │                                            │   CORREO, TELEFONO                        │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ CMS - Blog              │ Artículos del blog                        │ • ID_Articulo (PK)                         │ • Gestionado por Usuario (Admin)       │
+│                         │                                            │ • Título, Bajada, Cuerpo                  │ • Visible en portal                    │
+│                         │                                            │ • Destacado (BOOLEAN)                     │ • Tiene Analytics                      │
+│                         │                                            │ • Activo (BOOLEAN)                        │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ Reporte                 │ Salida de datos filtrados                 │ • TBD - Campos por definir                │ • Generado por Sistema                 │
+│                         │                                            │                                            │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ Auditoría               │ Registro de actividad del sistema         │ • ID_Log (PK)                              │ • Relacionado con Usuario              │
+│                         │                                            │ • ID_Usuario (FK)                          │ • Acciones por definir                 │
+│                         │                                            │ • Acción                                   │                                         │
+│                         │                                            │ • Fecha                                    │                                         │
+│                         │                                            │ • Datos_previos (JSON)                    │                                         │
+│                         │                                            │ • Datos_nuevos (JSON)                     │                                         │
+├─────────────────────────┼────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────────┤
+│ Notificación            │ Aviso al usuario                          │ • ID_Notificación (PK)                     │ • Enviada a Usuario                    │
+│                         │                                            │ • Tipo                                     │                                         │
+│                         │                                            │ • ID_Usuario_destinatario (FK)            │                                         │
+│                         │                                            │ • Mensaje                                  │                                         │
+│                         │                                            │ • Estado: ENUM[CLOSE/OPEN]                │                                         │
+│                         │                                            │ • Fecha_envío                             │                                         │
+└─────────────────────────┴────────────────────────────────────────────┴────────────────────────────────────────────┴─────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                              NOTAS Y OBSERVACIONES                                                                      ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣
+║ • PK = Primary Key (Clave Primaria)                                                                                                     ║
+║ • FK = Foreign Key (Clave Foránea)                                                                                                      ║
+║ • ENUM = Enumeración de valores predefinidos                                                                                            ║
+║ • JSON = Campos que almacenan datos en formato JSON                                                                                     ║
+║ • TBD = To Be Defined (Por definir)                                                                                                     ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+
